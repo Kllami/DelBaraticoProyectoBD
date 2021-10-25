@@ -1,4 +1,4 @@
--- Entregable 2, proyecto, grupo 04
+-- Entregable 3, proyecto, grupo 04
 -- Integrantes: 
 	-- Marlon Freer Acevedo 117190458 
 	-- Diana Fallas Méndez 117770654
@@ -186,7 +186,6 @@ begin
 		values(user,'area',accion,sysdate);
 end auditoria_area_trig;
 /
-show error
 
 create or replace trigger auditoria_produc_trig 
 after insert or update or delete on system.producto
@@ -206,8 +205,6 @@ begin
 		values(user,'producto',accion,sysdate);
 end auditoria_produc_trig;
 /
-show error
-
 create or replace trigger auditoria_fac_trig 
 after insert or update or delete on system.factura
 for each row
@@ -226,7 +223,6 @@ begin
 		values(user,'factura',accion,sysdate);
 end auditoria_fac_trig;
 /
-show error
 
 create or replace trigger auditoria_det_trig 
 after insert or update or delete on system.detalle
@@ -246,7 +242,6 @@ begin
 		values(user,'detalle',accion,sysdate);
 end auditoria_det_trig;
 /
-show error
 
 
 PROMPT LA AUDITORIA DE LOS SELECT SE HARA POR MEDIO DEL COMANDO AUDIT, ESTO PORQUE NO SE PUEDE CREAR UN TRIGGER DEL SELECT.
@@ -269,7 +264,11 @@ after insert on system.factura
 for each row
 declare
 	num_caj int;
+	us varchar2(50);
 begin
+	
+	select user into us from dual;
+
 	IF us = 'maria_fallas_mendez' THEN 
 		num_caj:=1;            
 	ELSIF us = 'johnny_chacon_gairaud' THEN 
@@ -282,9 +281,8 @@ begin
 		values(user,num_caj,:new.id_factura,sysdate);
 end auditoria_vent_trig;
 /
-show error
 
--- Entregable 2, proyecto, grupo 04
+-- Entregable 3, proyecto, grupo 04
 -- Integrantes: 
 	-- Marlon Freer Acevedo 117190458 
 	-- Diana Fallas Méndez 117770654
