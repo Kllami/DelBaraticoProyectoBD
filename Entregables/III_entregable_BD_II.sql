@@ -8,24 +8,69 @@
 conn system/system as sysdba
 alter session set "_oracle_script"=true;
 
+drop user maria_fallas_mendez cascade;
+drop user johnny_chacon_gairaud cascade;
+drop user jose_perez_zamora cascade;
+drop user giancarlo_alvarado_sanchez cascade;
+drop user juan_hernandez_ramirez cascade;
+drop user samantha_arroyo_arrieta cascade;
+drop user marlon_freer_acevedo cascade;
+drop user alex_soto_moreira cascade;
+drop user david_camacho_melendez cascade;
+drop user diana_quiros_ugalde cascade;
+drop user tatiana_torres_fernandez cascade;
+
 PROMPT Crear cajeros
-create user maria_fallas_mendez identified by 1234;
-create user johnny_chacon_gairaud identified by 1234;
-create user jose_perez_zamora identified by 1234;
+create user maria_fallas_mendez identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
+create user johnny_chacon_gairaud identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
+create user jose_perez_zamora identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
 
 PROMPT Crear gerentes de area
-create user giancarlo_alvarado_sanchez identified by 1234;
-create user juan_hernandez_ramirez identified by 1234;
-create user samantha_arroyo_arrieta identified by 1234;
-create user marlon_freer_acevedo identified by 1234;
+create user giancarlo_alvarado_sanchez identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
+create user juan_hernandez_ramirez identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
+create user samantha_arroyo_arrieta identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
+create user marlon_freer_acevedo identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
 
 PROMPT Crear gerentes generales
-create user alex_soto_moreira identified by 1234;
-create user david_camacho_melendez identified by 1234;
+create user alex_soto_moreira identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
+create user david_camacho_melendez identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
 
 PROMPT Crear dos personas en el area de sistemas
-create user diana_quiros_ugalde identified by 1234;
-create user tatiana_torres_fernandez identified by 1234;
+create user diana_quiros_ugalde identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
+create user tatiana_torres_fernandez identified by 1234
+default tablespace users
+temporary tablespace temp
+quota unlimited on users;
 
 PROMPT Crear roles
 create role cajero;
