@@ -8,18 +8,6 @@
 conn system/system as sysdba
 alter session set "_oracle_script"=true;
 
-drop user maria_fallas_mendez cascade;
-drop user johnny_chacon_gairaud cascade;
-drop user jose_perez_zamora cascade;
-drop user giancarlo_alvarado_sanchez cascade;
-drop user juan_hernandez_ramirez cascade;
-drop user samantha_arroyo_arrieta cascade;
-drop user marlon_freer_acevedo cascade;
-drop user alex_soto_moreira cascade;
-drop user david_camacho_melendez cascade;
-drop user diana_quiros_ugalde cascade;
-drop user tatiana_torres_fernandez cascade;
-
 PROMPT Crear cajeros
 create user maria_fallas_mendez identified by 1234
 default tablespace users
@@ -126,18 +114,26 @@ descripcion varchar2(30) not null,
 constraint area_pk primary key(id_area)
 );
 
-create table system.producto(
-id_producto int not null,
-plu int null,
+create table system.seco(
+id_seco int not null,
 ean long null,
 descripcion varchar2(30) not null,
-peso float null,
 precio float not null,
 cantidad int null,
 area_id int not null,
-constraint producto_pk primary key(id_producto),
+constraint seco_pk primary key(id_seco),
 constraint area_fk_producto foreign key(area_id) 
 references system.area(id_area)
+);
+
+create table system.fresco(
+id_fresco int not null,
+plu int null,
+peso float null,
+ean long null,
+descripcion varchar2(30) not null,
+precio float not null,
+constraint fresco_pk primary key(id_fresco)
 );
 
 create table system.factura(
@@ -148,30 +144,52 @@ total float not null,
 constraint factura_pk primary key(id_factura)
 );
 
-create table system.detalle(
-id_detalle int not null,
+create table system.detalleSeco(
+id_detalleSeco int not null,
 cantidad int not null,
 subtotal float not null,
-producto_id int not null,
+seco_id int not null,
 factura_id int not null,
-constraint detalle_pk primary key(id_detalle),
-constraint producto_fk_detalle foreign key(producto_id) references system.producto(id_producto),
+constraint detalleseco_pk primary key(id_detalleSeco),
+constraint seco_fk_detalle foreign key(seco_id) references system.seco(id_seco),
 constraint factura_fk_detalle foreign key(factura_id)
 references system.factura(id_factura)
 );
 
+create table system.detalleFresco(
+id_detalleFresco int not null,
+peso float not null,
+subtotal float not null,
+fresco_id int not null,
+factura_id int not null,
+constraint detalleFresco_pk primary key(id_detalleFresco),
+constraint fresco_fk_detalle foreign key(fresco_id) references system.fresco(id_fresco),
+constraint facturaFresco_fk_detalle foreign key(factura_id)
+references system.factura(id_factura)
+);
+
+create table system.caja(
+id_caja int not null,
+usuario varchar2(50) null,
+constraint caja_pk primary key(id_caja)
+);
+
 PROMPT Asignacion de permisos para cajeros
-grant select on system.producto to cajero;
+grant select on system.seco to cajero;
+grant select on system.fresco to cajero;
 
 PROMPT Asignacion de permisos para gerentes generales
-grant select, update, delete, insert on system.producto to gerente_general;
+grant select, update, delete, insert on system.area to gerente_general;
+grant select, update, delete, insert on system.seco to gerente_general;
+grant select, update, delete, insert on system.fresco to gerente_general;
 
 PROMPT Asignacion de permisos para gerentes de area
 
-CREATE VIEW vista_producto_abarrotes AS SELECT id_producto, PLU, EAN, descripcion, peso, precio, cantidad, area_id FROM system.producto WHERE area_id = 1;
-CREATE VIEW vista_producto_cuidado_personal AS SELECT id_producto, PLU, EAN, descripcion, peso, precio, cantidad, area_id FROM  system.producto WHERE area_id = 2;
-CREATE VIEW vista_producto_frescos AS SELECT id_producto, PLU, EAN, descripcion, peso, precio, cantidad, area_id FROM  system.producto WHERE area_id = 3;
-CREATE VIEW vista_producto_mercancias AS SELECT id_producto, PLU, EAN, descripcion, peso, precio, cantidad, area_id FROM  system.producto WHERE area_id = 4;
+CREATE VIEW vista_producto_abarrotes AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM system.seco WHERE area_id = 1;
+CREATE VIEW vista_producto_cuidado_personal AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM  system.seco WHERE area_id = 2;
+CREATE VIEW vista_producto_mercancias AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM  system.seco WHERE area_id = 3;
+
+CREATE VIEW vista_producto_frescos AS SELECT id_fresco, PLU, EAN, descripcion, peso, precio FROM  system.fresco;
 
 GRANT select, update on vista_producto_abarrotes to gerente_abarrotes;
 GRANT select, update on vista_producto_cuidado_personal to gerente_cuidado_personal;
@@ -233,7 +251,7 @@ end auditoria_area_trig;
 /
 
 create or replace trigger auditoria_produc_trig 
-after insert or update or delete on system.producto
+after insert or update or delete on system.seco
 for each row
 declare
 	accion varchar(10);
@@ -247,9 +265,29 @@ begin
 	END IF;
 	
 	insert into system.auditoria (usuario, tabla, transaccion,fecha)
-		values(user,'producto',accion,sysdate);
+		values(user,'seco',accion,sysdate);
 end auditoria_produc_trig;
 /
+
+create or replace trigger auditoria_produc_fresco_trig 
+after insert or update or delete on system.fresco
+for each row
+declare
+	accion varchar(10);
+begin
+	IF UPDATING THEN 
+     accion:='Update';            
+	ELSIF DELETING THEN 
+        accion:='Delete';
+	ELSE
+      accion:='Insert';
+	END IF;
+	
+	insert into system.auditoria (usuario, tabla, transaccion,fecha)
+		values(user,'fresco',accion,sysdate);
+end auditoria_produc_fresco_trig;
+/
+
 create or replace trigger auditoria_fac_trig 
 after insert or update or delete on system.factura
 for each row
@@ -269,8 +307,8 @@ begin
 end auditoria_fac_trig;
 /
 
-create or replace trigger auditoria_det_trig 
-after insert or update or delete on system.detalle
+create or replace trigger auditoria_det_seco_trig 
+after insert or update or delete on system.detalleSeco
 for each row
 declare
 	accion varchar(10);
@@ -284,10 +322,28 @@ begin
 	END IF;
 	
 	insert into system.auditoria (usuario, tabla, transaccion,fecha)
-		values(user,'detalle',accion,sysdate);
-end auditoria_det_trig;
+		values(user,'detalle_seco',accion,sysdate);
+end auditoria_det_seco_trig;
 /
 
+create or replace trigger auditoria_det_fresco_trig 
+after insert or update or delete on system.detalleFresco
+for each row
+declare
+	accion varchar(10);
+begin
+	IF UPDATING THEN 
+     accion:='Update';            
+	ELSIF DELETING THEN 
+        accion:='Delete';
+	ELSE
+      accion:='Insert';
+	END IF;
+	
+	insert into system.auditoria (usuario, tabla, transaccion,fecha)
+		values(user,'detalle_fresco',accion,sysdate);
+end auditoria_det_fresco_trig;
+/
 
 PROMPT LA AUDITORIA DE LOS SELECT SE HARA POR MEDIO DEL COMANDO AUDIT, ESTO PORQUE NO SE PUEDE CREAR UN TRIGGER DEL SELECT.
 Select name, value  from v$parameter where name like 'audit_trail';
@@ -308,24 +364,18 @@ create or replace trigger auditoria_vent_trig
 after insert on system.factura
 for each row
 declare
+	v_usuario varchar2(50);
 	num_caj int;
-	us varchar2(50);
 begin
-	
-	select user into us from dual;
 
-	IF us = 'maria_fallas_mendez' THEN 
-		num_caj:=1;            
-	ELSIF us = 'johnny_chacon_gairaud' THEN 
-        num_caj:=2;
-	ELSE
-		num_caj:=3;
-	END IF;
+	select user into v_usuario from dual;
+	select id_caja into num_caj from system.caja where usuario = v_usuario;
 	
 	insert into system.venta (usuario, num_caja, factura_id,fecha)
-		values(user,num_caj,:new.id_factura,sysdate);
+		values(v_usuario,num_caj,:new.id_factura,sysdate);
 end auditoria_vent_trig;
 /
+show error
 
 -- Entregable 3, proyecto, grupo 04
 -- Integrantes: 
