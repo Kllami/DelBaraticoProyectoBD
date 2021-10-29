@@ -141,6 +141,8 @@ id_factura int not null,
 numero int not null,
 fecha date not null,
 total float not null,
+usuario varchar2(60) not null,
+num_caja int not null,
 constraint factura_pk primary key(id_factura)
 );
 
@@ -203,7 +205,7 @@ grant update any table to sistemas;
 grant insert any table to sistemas;
 grant delete any table to sistemas;
 
-PROMPT Creacion tablas auditoria
+PROMPT Creacion tabla de auditoria
 
 create table system.auditoria(
 id_auditoria NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
@@ -212,15 +214,6 @@ tabla varchar2(50) not null,
 transaccion varchar2(10) not null,
 fecha date not null,
 constraint auditoria_pk primary key(id_auditoria)
-);
-
-create table system.venta(
-id_venta NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-usuario varchar2(60) not null,
-num_caja int not null,
-factura_id int not null,
-fecha date not null,
-constraint venta_pk primary key(id_venta)
 );
 
 PROMPT asignacion de permisos de seleccion al rol de sistemas
@@ -358,24 +351,6 @@ AUDIT SELECT TABLE BY david_camacho_melendez BY ACCESS;
 AUDIT SELECT TABLE BY diana_quiros_ugalde BY ACCESS;
 AUDIT SELECT TABLE BY tatiana_torres_fernandez BY ACCESS;
 
-
-PROMPT Trigger para agregar las ventas.
-create or replace trigger auditoria_vent_trig 
-after insert on system.factura
-for each row
-declare
-	v_usuario varchar2(50);
-	num_caj int;
-begin
-
-	select user into v_usuario from dual;
-	select id_caja into num_caj from system.caja where usuario = v_usuario;
-	
-	insert into system.venta (usuario, num_caja, factura_id,fecha)
-		values(v_usuario,num_caj,:new.id_factura,sysdate);
-end auditoria_vent_trig;
-/
-show error
 
 -- Entregable 3, proyecto, grupo 04
 -- Integrantes: 
