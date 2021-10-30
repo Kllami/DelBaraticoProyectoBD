@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<RoleOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.RoleOraclev10g" name="CAJERO" directorySegmentName="seg_0" id="BE3BC81C-8993-CFC4-E516-B10A3A820BA8">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjName>CAJERO</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:31 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<permissions>
+<Permission class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PermissionsOraclev10g" name="Permissions1" id="835D3102-3A37-1A2B-F2AC-368787B32771">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:31 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<privileges>SELECT</privileges>
+<table>672182B7-B07D-54D8-A33F-4097EDB21EF2</table>
+</Permission>
+<Permission class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PermissionsOraclev10g" name="Permissions2" id="FC60D44F-AF69-B75A-349C-27A7B579755A">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:31 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<privileges>SELECT</privileges>
+<table>0EAADEBF-5DA6-4ED4-913E-6F63B2EBE6FC</table>
+</Permission>
+</permissions>
+</RoleOraclev10g>

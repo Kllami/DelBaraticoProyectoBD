@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<RoleOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.RoleOraclev10g" name="SISTEMAS" directorySegmentName="seg_0" id="8F87ABC8-2880-6096-85B2-D627113DF6F1">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjName>SISTEMAS</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:31 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<permissions>
+<Permission class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PermissionsOraclev10g" name="Permissions6" id="CC251EAD-3151-F09B-F73B-ECFA448CB617">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:31 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<privileges>SELECT</privileges>
+<table>6C0323CB-D32A-73EE-13D4-DB5033C0AA65</table>
+</Permission>
+</permissions>
+</RoleOraclev10g>
