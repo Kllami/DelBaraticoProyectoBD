@@ -5,13 +5,13 @@ import java.sql.Date;
 
 public class Auditoria {
 
-  private String idAuditoria;
+  private int idAuditoria;
   private String usuario;
   private String tabla;
   private String transaccion;
   private java.sql.Date fecha;
 
-  public Auditoria(String idAuditoria, String usuario, String tabla, String transaccion, Date fecha) {
+  public Auditoria(int idAuditoria, String usuario, String tabla, String transaccion, Date fecha) {
     this.idAuditoria = idAuditoria;
     this.usuario = usuario;
     this.tabla = tabla;
@@ -19,11 +19,11 @@ public class Auditoria {
     this.fecha = fecha;
   }
 
-  public String getIdAuditoria() {
+  public int getIdAuditoria() {
     return idAuditoria;
   }
 
-  public void setIdAuditoria(String idAuditoria) {
+  public void setIdAuditoria(int idAuditoria) {
     this.idAuditoria = idAuditoria;
   }
 
@@ -63,4 +63,14 @@ public class Auditoria {
     this.fecha = fecha;
   }
 
+  @Override
+  public String toString() {
+    return "Auditoria{" +
+            "idAuditoria='" + idAuditoria + '\'' +
+            ", usuario='" + usuario + '\'' +
+            ", tabla='" + tabla + '\'' +
+            ", transaccion='" + transaccion + '\'' +
+            ", fecha=" + fecha +
+            '}';
+  }
 }

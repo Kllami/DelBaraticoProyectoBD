@@ -3,14 +3,14 @@ package main.java.cr.una.delbaratico.model;
 
 public class Fresco {
 
-  private String idFresco;
-  private String plu;
+  private int idFresco;
+  private int plu;
   private double peso;
-  private String ean;
+  private Long ean;
   private String descripcion;
   private double precio;
 
-  public Fresco(String idFresco, String plu, double peso, String ean, String descripcion, double precio) {
+  public Fresco(int idFresco, int plu, double peso, Long ean, String descripcion, double precio) {
     this.idFresco = idFresco;
     this.plu = plu;
     this.peso = peso;
@@ -19,20 +19,20 @@ public class Fresco {
     this.precio = precio;
   }
 
-  public String getIdFresco() {
+  public int getIdFresco() {
     return idFresco;
   }
 
-  public void setIdFresco(String idFresco) {
+  public void setIdFresco(int idFresco) {
     this.idFresco = idFresco;
   }
 
 
-  public String getPlu() {
+  public int getPlu() {
     return plu;
   }
 
-  public void setPlu(String plu) {
+  public void setPlu(int plu) {
     this.plu = plu;
   }
 
@@ -46,11 +46,11 @@ public class Fresco {
   }
 
 
-  public String getEan() {
+  public Long getEan() {
     return ean;
   }
 
-  public void setEan(String ean) {
+  public void setEan(Long ean) {
     this.ean = ean;
   }
 
@@ -72,4 +72,15 @@ public class Fresco {
     this.precio = precio;
   }
 
+  @Override
+  public String toString() {
+    return "Fresco{" +
+            "idFresco='" + idFresco + '\'' +
+            ", plu='" + plu + '\'' +
+            ", peso=" + peso +
+            ", ean='" + ean + '\'' +
+            ", descripcion='" + descripcion + '\'' +
+            ", precio=" + precio +
+            '}';
+  }
 }

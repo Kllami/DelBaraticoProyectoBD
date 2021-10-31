@@ -3,14 +3,14 @@ package main.java.cr.una.delbaratico.model;
 
 public class Seco {
 
-  private String idSeco;
-  private String ean;
+  private int idSeco;
+  private Long ean;
   private String descripcion;
   private double precio;
-  private String cantidad;
-  private String areaId;
+  private int cantidad;
+  private Area areaId;
 
-  public Seco(String idSeco, String ean, String descripcion, double precio, String cantidad, String areaId) {
+  public Seco(int idSeco, Long ean, String descripcion, double precio, int cantidad, Area areaId) {
     this.idSeco = idSeco;
     this.ean = ean;
     this.descripcion = descripcion;
@@ -19,20 +19,20 @@ public class Seco {
     this.areaId = areaId;
   }
 
-  public String getIdSeco() {
+  public int getIdSeco() {
     return idSeco;
   }
 
-  public void setIdSeco(String idSeco) {
+  public void setIdSeco(int idSeco) {
     this.idSeco = idSeco;
   }
 
 
-  public String getEan() {
+  public Long getEan() {
     return ean;
   }
 
-  public void setEan(String ean) {
+  public void setEan(Long ean) {
     this.ean = ean;
   }
 
@@ -55,21 +55,31 @@ public class Seco {
   }
 
 
-  public String getCantidad() {
+  public int getCantidad() {
     return cantidad;
   }
 
-  public void setCantidad(String cantidad) {
+  public void setCantidad(int cantidad) {
     this.cantidad = cantidad;
   }
 
-
-  public String getAreaId() {
+  public Area getAreaId() {
     return areaId;
   }
 
-  public void setAreaId(String areaId) {
+  public void setAreaId(Area areaId) {
     this.areaId = areaId;
   }
 
+  @Override
+  public String toString() {
+    return "Seco{" +
+            "idSeco='" + idSeco + '\'' +
+            ", ean='" + ean + '\'' +
+            ", descripcion='" + descripcion + '\'' +
+            ", precio=" + precio +
+            ", cantidad='" + cantidad + '\'' +
+            ", areaId='" + areaId + '\'' +
+            '}';
+  }
 }

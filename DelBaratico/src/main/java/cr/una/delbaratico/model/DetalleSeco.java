@@ -3,13 +3,13 @@ package main.java.cr.una.delbaratico.model;
 
 public class DetalleSeco {
 
-  private String idDetalleSeco;
-  private String cantidad;
+  private int idDetalleSeco;
+  private int cantidad;
   private double subtotal;
-  private String secoId;
-  private String facturaId;
+  private Seco secoId;
+  private Factura facturaId;
 
-  public DetalleSeco(String idDetalleSeco, String cantidad, double subtotal, String secoId, String facturaId) {
+  public DetalleSeco(int idDetalleSeco, int cantidad, double subtotal, Seco secoId, Factura facturaId) {
     this.idDetalleSeco = idDetalleSeco;
     this.cantidad = cantidad;
     this.subtotal = subtotal;
@@ -17,20 +17,20 @@ public class DetalleSeco {
     this.facturaId = facturaId;
   }
 
-  public String getIdDetalleSeco() {
+  public int getIdDetalleSeco() {
     return idDetalleSeco;
   }
 
-  public void setIdDetalleSeco(String idDetalleSeco) {
+  public void setIdDetalleSeco(int idDetalleSeco) {
     this.idDetalleSeco = idDetalleSeco;
   }
 
 
-  public String getCantidad() {
+  public int getCantidad() {
     return cantidad;
   }
 
-  public void setCantidad(String cantidad) {
+  public void setCantidad(int cantidad) {
     this.cantidad = cantidad;
   }
 
@@ -44,21 +44,31 @@ public class DetalleSeco {
   }
 
 
-  public String getSecoId() {
+  public Seco getSecoId() {
     return secoId;
   }
 
-  public void setSecoId(String secoId) {
+  public void setSecoId(Seco secoId) {
     this.secoId = secoId;
   }
 
 
-  public String getFacturaId() {
+  public Factura getFacturaId() {
     return facturaId;
   }
 
-  public void setFacturaId(String facturaId) {
+  public void setFacturaId(Factura facturaId) {
     this.facturaId = facturaId;
   }
 
+  @Override
+  public String toString() {
+    return "DetalleSeco{" +
+            "idDetalleSeco='" + idDetalleSeco + '\'' +
+            ", cantidad='" + cantidad + '\'' +
+            ", subtotal=" + subtotal +
+            ", secoId='" + secoId + '\'' +
+            ", facturaId='" + facturaId + '\'' +
+            '}';
+  }
 }

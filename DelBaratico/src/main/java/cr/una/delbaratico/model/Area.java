@@ -3,19 +3,19 @@ package main.java.cr.una.delbaratico.model;
 
 public class Area {
 
-  private String idArea;
+  private int idArea;
   private String descripcion;
 
-  public Area(String idArea, String descripcion) {
+  public Area(int idArea, String descripcion) {
     this.idArea = idArea;
     this.descripcion = descripcion;
   }
 
-  public String getIdArea() {
+  public int getIdArea() {
     return idArea;
   }
 
-  public void setIdArea(String idArea) {
+  public void setIdArea(int idArea) {
     this.idArea = idArea;
   }
 
@@ -28,4 +28,11 @@ public class Area {
     this.descripcion = descripcion;
   }
 
+  @Override
+  public String toString() {
+    return "Area{" +
+            "idArea='" + idArea + '\'' +
+            ", descripcion='" + descripcion + '\'' +
+            '}';
+  }
 }

@@ -3,13 +3,13 @@ package main.java.cr.una.delbaratico.model;
 
 public class DetalleFresco {
 
-  private String idDetalleFresco;
+  private int idDetalleFresco;
   private double peso;
   private double subtotal;
-  private String frescoId;
-  private String facturaId;
+  private Fresco frescoId;
+  private Factura facturaId;
 
-  public DetalleFresco(String idDetalleFresco, double peso, double subtotal, String frescoId, String facturaId) {
+  public DetalleFresco(int idDetalleFresco, double peso, double subtotal, Fresco frescoId, Factura facturaId) {
     this.idDetalleFresco = idDetalleFresco;
     this.peso = peso;
     this.subtotal = subtotal;
@@ -17,11 +17,11 @@ public class DetalleFresco {
     this.facturaId = facturaId;
   }
 
-  public String getIdDetalleFresco() {
+  public int getIdDetalleFresco() {
     return idDetalleFresco;
   }
 
-  public void setIdDetalleFresco(String idDetalleFresco) {
+  public void setIdDetalleFresco(int idDetalleFresco) {
     this.idDetalleFresco = idDetalleFresco;
   }
 
@@ -44,22 +44,32 @@ public class DetalleFresco {
   }
 
 
-  public String getFrescoId() {
+  public Fresco getFrescoId() {
     return frescoId;
   }
 
-  public void setFrescoId(String frescoId) {
+  public void setFrescoId(Fresco frescoId) {
     this.frescoId = frescoId;
   }
 
 
-  public String getFacturaId() {
+  public Factura getFacturaId() {
     return facturaId;
   }
 
-  public void setFacturaId(String facturaId) {
+  public void setFacturaId(Factura facturaId) {
     this.facturaId = facturaId;
   }
 
 
+  @Override
+  public String toString() {
+    return "DetalleFresco{" +
+            "idDetalleFresco='" + idDetalleFresco + '\'' +
+            ", peso=" + peso +
+            ", subtotal=" + subtotal +
+            ", frescoId='" + frescoId + '\'' +
+            ", facturaId='" + facturaId + '\'' +
+            '}';
+  }
 }

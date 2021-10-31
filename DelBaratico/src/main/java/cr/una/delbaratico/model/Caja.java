@@ -3,19 +3,19 @@ package main.java.cr.una.delbaratico.model;
 
 public class Caja {
 
-  private String idCaja;
+  private int idCaja;
   private String usuario;
 
-  public Caja(String idCaja, String usuario) {
+  public Caja(int idCaja, String usuario) {
     this.idCaja = idCaja;
     this.usuario = usuario;
   }
 
-  public String getIdCaja() {
+  public int getIdCaja() {
     return idCaja;
   }
 
-  public void setIdCaja(String idCaja) {
+  public void setIdCaja(int idCaja) {
     this.idCaja = idCaja;
   }
 
@@ -28,4 +28,11 @@ public class Caja {
     this.usuario = usuario;
   }
 
+  @Override
+  public String toString() {
+    return "Caja{" +
+            "idCaja='" + idCaja + '\'' +
+            ", usuario='" + usuario + '\'' +
+            '}';
+  }
 }

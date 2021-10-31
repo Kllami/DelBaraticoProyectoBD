@@ -1,18 +1,17 @@
 package main.java.cr.una.delbaratico.model;
 
-
 import java.sql.Date;
 
 public class Factura {
 
-  private String idFactura;
-  private String numero;
+  private int idFactura;
+  private int numero;
   private java.sql.Date fecha;
   private double total;
   private String usuario;
-  private String numCaja;
+  private Caja numCaja;
 
-  public Factura(String idFactura, String numero, Date fecha, double total, String usuario, String numCaja) {
+  public Factura(int idFactura, int numero, Date fecha, double total, String usuario, Caja numCaja) {
     this.idFactura = idFactura;
     this.numero = numero;
     this.fecha = fecha;
@@ -21,20 +20,20 @@ public class Factura {
     this.numCaja = numCaja;
   }
 
-  public String getIdFactura() {
+  public int getIdFactura() {
     return idFactura;
   }
 
-  public void setIdFactura(String idFactura) {
+  public void setIdFactura(int idFactura) {
     this.idFactura = idFactura;
   }
 
 
-  public String getNumero() {
+  public int getNumero() {
     return numero;
   }
 
-  public void setNumero(String numero) {
+  public void setNumero(int numero) {
     this.numero = numero;
   }
 
@@ -66,12 +65,23 @@ public class Factura {
   }
 
 
-  public String getNumCaja() {
+  public Caja getNumCaja() {
     return numCaja;
   }
 
-  public void setNumCaja(String numCaja) {
+  public void setNumCaja(Caja numCaja) {
     this.numCaja = numCaja;
   }
 
+  @Override
+  public String toString() {
+    return "Factura{" +
+            "idFactura='" + idFactura + '\'' +
+            ", numero='" + numero + '\'' +
+            ", fecha=" + fecha +
+            ", total=" + total +
+            ", usuario='" + usuario + '\'' +
+            ", numCaja='" + numCaja + '\'' +
+            '}';
+  }
 }
