@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="DETALLESECO" directorySegmentName="seg_0" id="3C3646BA-7CAE-137E-A91A-A1B861657CA6">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:29 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<schemaObject>256221B8-459A-AD8C-160A-C3343756F6CF</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>BB65E0B2-F66D-7F3C-A4A2-E02CCB01CEEF</segment>
+<tableSpace>8C2E7CE1-1B1C-A4A7-5492-A596EC8B75B6</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="ID_DETALLESECO" id="164FC927-0A70-6E5E-3D32-DD64FBF22962">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CANTIDAD" id="2E6AD764-C29A-12C4-2D0E-755A2650A9C0">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SECO_ID" id="554C82D3-8CBA-0CD8-6958-FB46252836F8">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="FACTURA_ID" id="93087839-2355-9423-7FDA-4842BF8C55F0">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SUBTOTAL" id="E485FDBD-60C6-5FB7-D43C-3C1F4784A570">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="DETALLESECO_PK" id="E56E5BAB-C27B-9C49-BE11-0229431E435E">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<schemaObject>256221B8-459A-AD8C-160A-C3343756F6CF</schemaObject>
+<segment>9657969E-703D-87D1-41A9-B2CAD6677290</segment>
+<tableSpace>8C2E7CE1-1B1C-A4A7-5492-A596EC8B75B6</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SECO_FK_DETALLE" id="41E19E8B-92AD-CE11-1269-D0AB3E46567E">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FACTURA_FK_DETALLE" id="54CA4B9C-D6D6-1D27-3467-4F84D707E1F4">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="DETALLESECO_PK" id="20F01124-6A52-9CAA-D6BD-B946CA6BC63E">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<segment>9657969E-703D-87D1-41A9-B2CAD6677290</segment>
+<tableSpace>8C2E7CE1-1B1C-A4A7-5492-A596EC8B75B6</tableSpace>
+<existingIndex>E56E5BAB-C27B-9C49-BE11-0229431E435E</existingIndex>
+<indexSegment>9657969E-703D-87D1-41A9-B2CAD6677290</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

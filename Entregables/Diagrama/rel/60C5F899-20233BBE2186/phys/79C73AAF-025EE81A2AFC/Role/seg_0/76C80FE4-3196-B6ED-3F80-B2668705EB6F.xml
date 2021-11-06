@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<RoleOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.RoleOraclev10g" name="GERENTE_GENERAL" directorySegmentName="seg_0" id="76C80FE4-3196-B6ED-3F80-B2668705EB6F">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjName>GERENTE_GENERAL</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:31 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<permissions>
+<Permission class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PermissionsOraclev10g" name="Permissions3" id="70C948B0-7F78-66D0-1698-D108CDE0C552">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:31 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<privileges>DELETE, INSERT, SELECT, UPDATE</privileges>
+<table>6B79EF4D-12B1-5074-8E12-E3DA5BB4A2EE</table>
+</Permission>
+<Permission class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PermissionsOraclev10g" name="Permissions4" id="210F781F-F408-C11C-FA30-4B52E6BAA2A5">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:31 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<privileges>DELETE, INSERT, SELECT, UPDATE</privileges>
+<table>672182B7-B07D-54D8-A33F-4097EDB21EF2</table>
+</Permission>
+<Permission class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PermissionsOraclev10g" name="Permissions5" id="9EEFB631-DBE6-82AA-5D2D-82653A5710E1">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:31 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<privileges>DELETE, INSERT, SELECT, UPDATE</privileges>
+<table>0EAADEBF-5DA6-4ED4-913E-6F63B2EBE6FC</table>
+</Permission>
+</permissions>
+</RoleOraclev10g>

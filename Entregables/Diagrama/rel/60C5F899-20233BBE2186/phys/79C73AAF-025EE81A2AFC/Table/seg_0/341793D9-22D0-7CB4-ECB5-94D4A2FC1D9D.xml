@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="FACTURA" directorySegmentName="seg_0" id="341793D9-22D0-7CB4-ECB5-94D4A2FC1D9D">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:29 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<schemaObject>256221B8-459A-AD8C-160A-C3343756F6CF</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>BB65E0B2-F66D-7F3C-A4A2-E02CCB01CEEF</segment>
+<tableSpace>8C2E7CE1-1B1C-A4A7-5492-A596EC8B75B6</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="FECHA" id="31DC3D9C-32DA-B2BC-7E32-4CA18B40B760">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID_FACTURA" id="35C0E1CF-C942-B714-80C5-7F39CB2E976F">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NUMERO" id="B08AC063-8557-D80F-BB55-16D6F313E5F7">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NUM_CAJA" id="CDDF33D2-C72A-1D0D-2A8F-227381FEE800">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TOTAL" id="F3C4E8F3-980B-F8A3-214C-4B51B91CDC45">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="USUARIO" id="F802A73C-4D7F-7D39-B89B-64818B85465C">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="FACTURA_PK" id="C7691E53-D361-5BA5-63C0-28973E7D96E5">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<schemaObject>256221B8-459A-AD8C-160A-C3343756F6CF</schemaObject>
+<segment>9657969E-703D-87D1-41A9-B2CAD6677290</segment>
+<tableSpace>8C2E7CE1-1B1C-A4A7-5492-A596EC8B75B6</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="FACTURA_PK" id="52144A25-E4CA-279C-BE08-7FD07E093AC5">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<segment>9657969E-703D-87D1-41A9-B2CAD6677290</segment>
+<tableSpace>8C2E7CE1-1B1C-A4A7-5492-A596EC8B75B6</tableSpace>
+<existingIndex>C7691E53-D361-5BA5-63C0-28973E7D96E5</existingIndex>
+<indexSegment>9657969E-703D-87D1-41A9-B2CAD6677290</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

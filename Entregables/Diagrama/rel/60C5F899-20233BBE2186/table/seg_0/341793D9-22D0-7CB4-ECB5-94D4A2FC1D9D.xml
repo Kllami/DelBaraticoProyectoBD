@@ -1,0 +1,130 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="341793D9-22D0-7CB4-ECB5-94D4A2FC1D9D" schemaObject="256221B8-459A-AD8C-160A-C3343756F6CF" name="FACTURA">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>FACTURA</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:29 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_FACTURA" id="35C0E1CF-C942-B714-80C5-7F39CB2E976F">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>FACTURA</sourceObjSchema>
+<sourceObjName>ID_FACTURA</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NUMERO" id="B08AC063-8557-D80F-BB55-16D6F313E5F7">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>FACTURA</sourceObjSchema>
+<sourceObjName>NUMERO</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FECHA" id="31DC3D9C-32DA-B2BC-7E32-4CA18B40B760">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>FACTURA</sourceObjSchema>
+<sourceObjName>FECHA</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TOTAL" id="F3C4E8F3-980B-F8A3-214C-4B51B91CDC45">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>FACTURA</sourceObjSchema>
+<sourceObjName>TOTAL</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>126</dataTypePrecision>
+<ownDataTypeParameters>,126,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USUARIO" id="F802A73C-4D7F-7D39-B89B-64818B85465C">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>FACTURA</sourceObjSchema>
+<sourceObjName>USUARIO</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60 BYTE</dataTypeSize>
+<ownDataTypeParameters>60 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NUM_CAJA" id="CDDF33D2-C72A-1D0D-2A8F-227381FEE800">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>FACTURA</sourceObjSchema>
+<sourceObjName>NUM_CAJA</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="52144A25-E4CA-279C-BE08-7FD07E093AC5" name="FACTURA_PK">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>FACTURA_PK</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="35C0E1CF-C942-B714-80C5-7F39CB2E976F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C7691E53-D361-5BA5-63C0-28973E7D96E5" schemaObject="256221B8-459A-AD8C-160A-C3343756F6CF" name="FACTURA_PK">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>FACTURA_PK</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="35C0E1CF-C942-B714-80C5-7F39CB2E976F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

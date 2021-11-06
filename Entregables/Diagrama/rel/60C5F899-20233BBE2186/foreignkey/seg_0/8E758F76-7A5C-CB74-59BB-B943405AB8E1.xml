@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="8E758F76-7A5C-CB74-59BB-B943405AB8E1" containerWithKeyObject="BC0D0398-5637-E278-D410-F9971D26916F" localFKIndex="60BEC824-D78A-63B6-EBAB-72FCD7A26E61" name="FRESCO_FK_DETALLE">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>FRESCO_FK_DETALLE</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<referredTableLongName>SYSTEM.FRESCO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>672182B7-B07D-54D8-A33F-4097EDB21EF2</referredTableID>
+<keyObject>06EDFFF9-C5B6-7E50-037C-0B9B1F08AF71</keyObject>
+<referredKeyID>06EDFFF9-C5B6-7E50-037C-0B9B1F08AF71</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID_FRESCO</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="D1FC1098-69D4-84C1-5BF2-98F336A1A5FA" containerWithKeyObject="3C3646BA-7CAE-137E-A91A-A1B861657CA6" localFKIndex="41E19E8B-92AD-CE11-1269-D0AB3E46567E" name="SECO_FK_DETALLE">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>SECO_FK_DETALLE</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<referredTableLongName>SYSTEM.SECO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>0EAADEBF-5DA6-4ED4-913E-6F63B2EBE6FC</referredTableID>
+<keyObject>01008826-F09E-B72F-463A-13CA01036DB0</keyObject>
+<referredKeyID>01008826-F09E-B72F-463A-13CA01036DB0</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID_SECO</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="AUDITORIA_PRODUC_TRIG" directorySegmentName="seg_0" id="E2E9A863-40FD-172A-48E6-E99348A179C2">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>AUDITORIA_PRODUC_TRIG</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<actions>INSERT, UPDATE, DELETE</actions>
+<body><![CDATA[declare
+	accion varchar(10);
+begin
+	IF UPDATING THEN
+     accion:='Update';
+	ELSIF DELETING THEN
+        accion:='Delete';
+	ELSE
+      accion:='Insert';
+	END IF;
+
+	insert into system.auditoria (usuario, tabla, transaccion,fecha)
+		values(user,'seco',accion,sysdate);
+end auditoria_produc_trig;]]></body>
+<triggerTime>AFTER</triggerTime>
+<owner>19600426-697C-8ACD-BAA6-769E946094B1</owner>
+<table>0EAADEBF-5DA6-4ED4-913E-6F63B2EBE6FC</table>
+</TriggerOraclev10g>

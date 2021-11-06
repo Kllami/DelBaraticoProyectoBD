@@ -1,0 +1,142 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BC0D0398-5637-E278-D410-F9971D26916F" schemaObject="256221B8-459A-AD8C-160A-C3343756F6CF" name="DETALLEFRESCO">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>DETALLEFRESCO</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:29 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_DETALLEFRESCO" id="B84A13C3-7736-783F-452C-E5AAE9E77B8B">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>DETALLEFRESCO</sourceObjSchema>
+<sourceObjName>ID_DETALLEFRESCO</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PESO" id="048043CA-C219-8F3E-7FE5-9A2FBDF20A35">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>DETALLEFRESCO</sourceObjSchema>
+<sourceObjName>PESO</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>126</dataTypePrecision>
+<ownDataTypeParameters>,126,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SUBTOTAL" id="FEE169D1-44ED-570B-A686-5DE1C5105FD8">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>DETALLEFRESCO</sourceObjSchema>
+<sourceObjName>SUBTOTAL</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>126</dataTypePrecision>
+<ownDataTypeParameters>,126,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FRESCO_ID" id="251FD1BA-98FA-DCC4-B8B6-86A54D94B634">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>DETALLEFRESCO</sourceObjSchema>
+<sourceObjName>FRESCO_ID</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8E758F76-7A5C-CB74-59BB-B943405AB8E1" referredColumn="9CA23A2A-9066-6031-D06E-C3B160832C75"/>
+</associations>
+</Column>
+<Column name="FACTURA_ID" id="EBD445A1-72F6-12B2-7E7C-CFE18B07A0E5">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>DETALLEFRESCO</sourceObjSchema>
+<sourceObjName>FACTURA_ID</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6819ACB6-A9CB-1EF7-C63B-7DC22395C36B" referredColumn="35C0E1CF-C942-B714-80C5-7F39CB2E976F"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="ED31406F-6393-C001-4D77-C9E2143C8D19" name="DETALLEFRESCO_PK">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>DETALLEFRESCO_PK</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B84A13C3-7736-783F-452C-E5AAE9E77B8B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A01709AF-5265-9271-2185-C2163D61E575" schemaObject="256221B8-459A-AD8C-160A-C3343756F6CF" name="DETALLEFRESCO_PK">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>DETALLEFRESCO_PK</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B84A13C3-7736-783F-452C-E5AAE9E77B8B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D810B3FD-CB56-4248-0146-AF20BAE70A32" name="FACTURAFRESCO_FK_DETALLE">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EBD445A1-72F6-12B2-7E7C-CFE18B07A0E5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="60BEC824-D78A-63B6-EBAB-72FCD7A26E61" name="FRESCO_FK_DETALLE">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="251FD1BA-98FA-DCC4-B8B6-86A54D94B634"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

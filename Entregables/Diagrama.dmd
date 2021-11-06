@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Diagrama" id="40E808F2-46D8-054A-7C62-3D4D6CBC9EC0" version="3.5">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:56:33 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>40E808F2-46D8-054A-7C62-3D4D6CBC9EC0</designId>
+</OSDM_Design>

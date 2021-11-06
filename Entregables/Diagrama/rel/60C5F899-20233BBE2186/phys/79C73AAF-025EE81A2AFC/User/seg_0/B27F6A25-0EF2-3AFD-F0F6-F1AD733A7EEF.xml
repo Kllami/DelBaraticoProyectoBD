@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<UserOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UserOraclev10g" name="SYSTEM" directorySegmentName="seg_0" id="B27F6A25-0EF2-3AFD-F0F6-F1AD733A7EEF">
+<sourceConnName>DelBaratico</sourceConnName>
+<sourceObjName>SYSTEM</sourceObjName>
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:29 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<schemaObject>256221B8-459A-AD8C-160A-C3343756F6CF</schemaObject>
+</UserOraclev10g>

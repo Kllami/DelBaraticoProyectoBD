@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="FRESCO" directorySegmentName="seg_0" id="672182B7-B07D-54D8-A33F-4097EDB21EF2">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:29 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<schemaObject>256221B8-459A-AD8C-160A-C3343756F6CF</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>BB65E0B2-F66D-7F3C-A4A2-E02CCB01CEEF</segment>
+<tableSpace>8C2E7CE1-1B1C-A4A7-5492-A596EC8B75B6</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="PRECIO" id="15C81B08-80E8-574D-46A9-890300920D64">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="EAN" id="5238BE12-1319-2A0A-BC94-B50C98D0DDDF">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="DESCRIPCION" id="94BD8385-B48C-C771-848D-C107A8588D65">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID_FRESCO" id="9CA23A2A-9066-6031-D06E-C3B160832C75">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PLU" id="A5B83E86-52BF-3919-1E26-1292D3F500C1">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PESO" id="ED058049-7AA2-6B8E-7DE2-A49A87595F64">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="FRESCO_PK" id="61E0D12E-B39A-9503-72E4-38CFA4EA2F28">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<schemaObject>256221B8-459A-AD8C-160A-C3343756F6CF</schemaObject>
+<segment>9657969E-703D-87D1-41A9-B2CAD6677290</segment>
+<tableSpace>8C2E7CE1-1B1C-A4A7-5492-A596EC8B75B6</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="FRESCO_PK" id="06EDFFF9-C5B6-7E50-037C-0B9B1F08AF71">
+<createdBy>giak9</createdBy>
+<createdTime>2021-10-30 07:58:30 UTC</createdTime>
+<ownerDesignName>Diagrama</ownerDesignName>
+<segment>9657969E-703D-87D1-41A9-B2CAD6677290</segment>
+<tableSpace>8C2E7CE1-1B1C-A4A7-5492-A596EC8B75B6</tableSpace>
+<existingIndex>61E0D12E-B39A-9503-72E4-38CFA4EA2F28</existingIndex>
+<indexSegment>9657969E-703D-87D1-41A9-B2CAD6677290</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>
