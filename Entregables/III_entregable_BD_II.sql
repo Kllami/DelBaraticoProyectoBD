@@ -143,7 +143,8 @@ fecha date not null,
 total float not null,
 usuario varchar2(60) not null,
 num_caja int not null,
-constraint factura_pk primary key(id_factura)
+constraint factura_pk primary key(id_factura),
+constraint caja_fk_factura foreign key(num_caja) references system.caja(id_caja)
 );
 
 create table system.detalleSeco(
