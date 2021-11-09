@@ -136,6 +136,12 @@ precio float not null,
 constraint fresco_pk primary key(id_fresco)
 );
 
+create table system.caja(
+id_caja int not null,
+usuario varchar2(50) null,
+constraint caja_pk primary key(id_caja)
+);
+
 create table system.factura(
 id_factura int not null,
 numero int not null,
@@ -169,12 +175,6 @@ constraint detalleFresco_pk primary key(id_detalleFresco),
 constraint fresco_fk_detalle foreign key(fresco_id) references system.fresco(id_fresco),
 constraint facturaFresco_fk_detalle foreign key(factura_id)
 references system.factura(id_factura)
-);
-
-create table system.caja(
-id_caja int not null,
-usuario varchar2(50) null,
-constraint caja_pk primary key(id_caja)
 );
 
 PROMPT Asignacion de permisos para cajeros
@@ -221,7 +221,7 @@ PROMPT asignacion de permisos de seleccion al rol de sistemas
 PROMPT son los unicos con permiso de consulta a estas tablas
 
 grant select on system.auditoria to sistemas;
-grant select on system.venta to sistemas;
+--grant select on system.venta to sistemas;
 
 PROMPT Creacion de triggers para insertar en las bitacoras despues de cada movimiento
 
