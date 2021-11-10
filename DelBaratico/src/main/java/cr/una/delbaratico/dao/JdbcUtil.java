@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.Properties;
 
 
-
 public class JdbcUtil {
 
     private static final String DB_DRIVER = "oracle.jdbc.OracleDriver";
@@ -35,9 +34,8 @@ public class JdbcUtil {
             return DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            System.exit(-1);
+            return null;
         }
-        return null;
     }
 
     public int executeUpdate(String query) {
@@ -72,4 +70,7 @@ public class JdbcUtil {
         }
     }
 
+    public static boolean verifyConnection() {
+        return dbConnection != null;
+    }
 }

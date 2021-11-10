@@ -13,7 +13,7 @@ public class SecoDAO {
     private JdbcUtil jdbcUtil;
 
     public SecoDAO(String DB_USER, String DB_PASSWORD) {
-        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);;
+        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);
     }
 
     public SecoDAO(JdbcUtil jdbcUtil) {
