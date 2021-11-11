@@ -3,6 +3,7 @@ package main.java.cr.una.delbaratico.view;
 import main.java.cr.una.delbaratico.service.ServiceController;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class LoginView extends JFrame{
     private JPanel panel1;
@@ -14,6 +15,7 @@ public class LoginView extends JFrame{
 
     public LoginView(ServiceController servicio) {
         this.servicio = servicio;
+        this.panel1.setPreferredSize(new Dimension(400,200));
         this.setContentPane(panel1);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();

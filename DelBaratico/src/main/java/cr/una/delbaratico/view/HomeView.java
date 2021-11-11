@@ -3,6 +3,7 @@ package main.java.cr.una.delbaratico.view;
 import main.java.cr.una.delbaratico.service.ServiceController;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,11 +27,13 @@ public class HomeView extends JFrame {
 
     public HomeView(ServiceController servicio) {
         this.servicio = servicio;
+        this.panel1.setPreferredSize(new Dimension(300,100));
         this.setContentPane(panel1);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        //setMinimumSize(new Dimension(300,100));
         this.setTitle("DelBaratico Home");
 
         this.cajaViewButton = new JButton("Modulo Caja");
@@ -61,17 +64,17 @@ public class HomeView extends JFrame {
     }
 
     private void ajustarMenus() {
-        menuPrincipal = new JMenuBar();
-        menuPrincipal.add(menuArchivo = new JMenu("Archivo"));
-        menuArchivo.add(itemSalir = new JMenuItem("Salir"));
-        menuPrincipal.add(Box.createHorizontalGlue());
-        menuPrincipal.add(new JLabel("Nombre de usuario: " +
-                servicio.getUsuarioActual().getNombre() +
+        this.menuPrincipal = new JMenuBar();
+        this.menuPrincipal.add(this.menuArchivo = new JMenu("Archivo"));
+        this.menuArchivo.add(this.itemSalir = new JMenuItem("Salir"));
+        this.menuPrincipal.add(Box.createHorizontalGlue());
+        this.menuPrincipal.add(new JLabel("Nombre de usuario: " +
+                this.servicio.getUsuarioActual().getNombre() +
                 "  ||  Rol: " +
-                servicio.getUsuarioActual().getRol() +
+                this.servicio.getUsuarioActual().getRol() +
                 "   ",
                 SwingConstants.RIGHT));
-        setJMenuBar(menuPrincipal);
+        this.setJMenuBar(this.menuPrincipal);
     }
 
     private void createUIComponents() {
