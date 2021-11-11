@@ -69,6 +69,14 @@ create role gerente_frescos;
 create role gerente_general;
 create role sistemas;
 
+grant select on dba_role_privs to cajero;
+grant select on dba_role_privs to gerente_abarrotes;
+grant select on dba_role_privs to gerente_cuidado_personal;
+grant select on dba_role_privs to gerente_mercancias;
+grant select on dba_role_privs to gerente_frescos;
+grant select on dba_role_privs to gerente_general;
+grant select on dba_role_privs to sistemas;
+ 
 PROMPT Asignacion de permisos generales para cada rol
 grant connect, resource to cajero;
 grant create session to cajero;
@@ -155,6 +163,8 @@ constraint factura_pk primary key(id_factura),
 constraint caja_fk_factura foreign key(num_caja) references system.caja(id_caja)
 );
 
+CREATE SEQUENCE numero_factura_seq START WITH 100 INCREMENT BY 1;
+
 create table system.detalleSeco(
 id_detalleSeco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
 cantidad int not null,
@@ -182,6 +192,7 @@ references system.factura(id_factura)
 PROMPT Asignacion de permisos para cajeros
 grant select on system.seco to cajero;
 grant select on system.fresco to cajero;
+grant select on caja to cajero;
 
 PROMPT Asignacion de permisos para gerentes generales
 grant select, update, delete, insert on system.area to gerente_general;
