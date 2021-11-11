@@ -4,6 +4,7 @@ import main.java.cr.una.delbaratico.model.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.ConsoleHandler;
 
 public class UsuarioDAO {
     private JdbcUtil jdbcUtil;
@@ -24,7 +25,7 @@ public class UsuarioDAO {
             this.jdbcUtil = JdbcUtil.instance(username, password);
             result = this.jdbcUtil.isThereAConnection();
             if(result){
-                this.usuarioActual = new Usuario(username, this.getRol(username));
+                this.usuarioActual = new Usuario(username, this.getRol(username), password);
             }
             return result;
         }catch (Exception e){
@@ -37,6 +38,7 @@ public class UsuarioDAO {
         String rol = "";
         String sql = " SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = '%s'";//NOMBRE EN MAYUSC
         sql = String.format(sql, username.toUpperCase());
+
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
             rol = resultSet.getString("GRANTED_ROLE");

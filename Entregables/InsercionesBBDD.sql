@@ -34,11 +34,11 @@ insert into system.caja(id_caja, usuario) values (4, 'maria_fallas_mendez');
 -----------------------------------------------------------------------------------------------------------------------------------------------
 --Facturas
 ----------------------------------------------------------------------------------------------------------------------------------------------
-insert into system.factura(id_factura, numero, fecha, total, usuario, num_caja) values (1, 1, TO_DATE('2021-09-11', 'YYYY-MM-DD'), 5485, 'maria_fallas_mendez', 1);
-insert into system.factura(id_factura, numero, fecha, total, usuario, num_caja) values (2, 2, TO_DATE('2021-09-01', 'YYYY-MM-DD'), 12365, 'johnny_chacon_gairaud', 2);
-insert into system.factura(id_factura, numero, fecha, total, usuario, num_caja) values (3, 3, TO_DATE('2021-09-12', 'YYYY-MM-DD'), 78412, 'jose_perez_zamora', 3);
-insert into system.factura(id_factura, numero, fecha, total, usuario, num_caja) values (4, 4, TO_DATE('2021-09-12', 'YYYY-MM-DD'), 950, 'jose_perez_zamora', 3);
-insert into system.factura(id_factura, numero, fecha, total, usuario, num_caja) values (5, 5, TO_DATE('2021-09-12', 'YYYY-MM-DD'), 1250, 'jose_perez_zamora', 3);
+insert into system.factura(numero, fecha, total, usuario, num_caja) values (numero_factura_seq.NEXTVAL, TO_DATE('2021-09-11', 'YYYY-MM-DD'), 5485, 'maria_fallas_mendez', 1);
+insert into system.factura(numero, fecha, total, usuario, num_caja) values (numero_factura_seq.NEXTVAL, TO_DATE('2021-09-01', 'YYYY-MM-DD'), 12365, 'johnny_chacon_gairaud', 2);
+insert into system.factura(numero, fecha, total, usuario, num_caja) values (numero_factura_seq.NEXTVAL, TO_DATE('2021-09-12', 'YYYY-MM-DD'), 78412, 'jose_perez_zamora', 3);
+insert into system.factura(numero, fecha, total, usuario, num_caja) values (numero_factura_seq.NEXTVAL, TO_DATE('2021-09-12', 'YYYY-MM-DD'), 950, 'jose_perez_zamora', 3);
+insert into system.factura(numero, fecha, total, usuario, num_caja) values (numero_factura_seq.NEXTVAL, TO_DATE('2021-09-12', 'YYYY-MM-DD'), 1250, 'jose_perez_zamora', 3);
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --DetalleSeco
