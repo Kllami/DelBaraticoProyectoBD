@@ -4,77 +4,43 @@ import java.sql.*;
 import java.util.Properties;
 
 
-
 public class JdbcUtil {
 
     private static final String DB_DRIVER = "oracle.jdbc.OracleDriver";
     private static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:xe";
     private static String DB_USER;
     private static String DB_PASSWORD;
+
     private static Connection dbConnection;
-    private static boolean incorrectConnection;
-    private static JdbcUtil jdbcUtil;
-    private static Statement statement;
-    private static ResultSet resultSet;
-    private static String className;
 
     private JdbcUtil(String DB_USER, String DB_PASSWORD) {
-        String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
-
         this.DB_USER = DB_USER;
         this.DB_PASSWORD = DB_PASSWORD;
         dbConnection = getDBConnection();
-        try{
-            if(dbConnection != null)
-                statement = dbConnection.createStatement();
-        } catch (Exception e) {
-            System.err.println(className + " - " + methodName + " - " + e.getMessage());
-        }
-        className = this.getClass().getSimpleName();
     }
 
-    public boolean isThereAConnection(){
-        return (dbConnection!=null)?true:false;
-    }
+    private static JdbcUtil jdbcUtil;
 
     public static JdbcUtil instance(String DB_USER, String DB_PASSWORD) {
-        cerrarSesion();
-        jdbcUtil = new JdbcUtil(DB_USER, DB_PASSWORD);
+        if (jdbcUtil == null) {
+            jdbcUtil = new JdbcUtil(DB_USER, DB_PASSWORD);
+        }
         return jdbcUtil;
     }
 
-    public static void cerrarSesion(){
-        String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
-
-        try {
-            if(resultSet != null){
-                resultSet.close();
-            }
-            if(statement != null){
-                statement.close();
-            }
-            if(dbConnection != null){
-                dbConnection.close();
-            }
-        } catch (Exception e) {
-            System.err.println(className + " - " + methodName + " - " + e.getMessage());
-        }
-    }
-
     public static Connection getDBConnection() {
-        String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
         try {
             Class.forName(DB_DRIVER);
             return DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
         } catch (Exception e) {
-            System.err.println(className + " - " + methodName + " - " + e.getMessage());
+            System.err.println(e.getMessage());
+            return null;
         }
-        return null;
     }
 
     public int executeUpdate(String query) {
         try {
-            statement = dbConnection.createStatement();
+            Statement statement = dbConnection.createStatement();
             statement.executeUpdate(query);
             return statement.getUpdateCount();
         } catch (SQLException ex) {
@@ -84,7 +50,7 @@ public class JdbcUtil {
 
     public ResultSet executeQuery(String query) {
         try {
-            statement = dbConnection.createStatement();
+            Statement statement = dbConnection.createStatement();
             return statement.executeQuery(query);
         } catch (SQLException ex) {
         }
@@ -93,9 +59,9 @@ public class JdbcUtil {
 
     public int executeAddAI(String query) {
         try {
-            statement = dbConnection.createStatement();
+            Statement statement = dbConnection.createStatement();
             statement.executeUpdate(query);
-            resultSet = statement.getGeneratedKeys();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next())
                 return resultSet.getInt(1);
             return 0;
@@ -104,4 +70,7 @@ public class JdbcUtil {
         }
     }
 
+    public static boolean verifyConnection() {
+        return dbConnection != null;
+    }
 }
