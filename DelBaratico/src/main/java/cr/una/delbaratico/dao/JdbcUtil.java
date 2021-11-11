@@ -38,6 +38,10 @@ public class JdbcUtil {
         }
     }
 
+    public static void closeConnection() {
+        jdbcUtil = null;
+    }
+
     public int executeUpdate(String query) {
         try {
             Statement statement = dbConnection.createStatement();
