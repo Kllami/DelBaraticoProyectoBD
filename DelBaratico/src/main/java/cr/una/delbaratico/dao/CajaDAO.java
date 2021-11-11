@@ -28,6 +28,7 @@ public class CajaDAO {
             caja = new Caja(resultSet.getInt("id_caja"),
                     resultSet.getString("usuario"));
         }
+        resultSet.close();
         return caja;
     }
 
@@ -40,6 +41,7 @@ public class CajaDAO {
                     resultSet.getString("usuario"));
             cajasList.add(caja);
         }
+        resultSet.close();
         return cajasList;
     }
     

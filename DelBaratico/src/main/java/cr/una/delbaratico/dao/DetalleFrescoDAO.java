@@ -32,6 +32,7 @@ public class DetalleFrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getDouble("subtotal"), fresco, factura);
         }
+        resultSet.close();
         return detalleFresco;
     }
 
@@ -49,6 +50,7 @@ public class DetalleFrescoDAO {
                     resultSet.getDouble("subtotal"), fresco, factura);
             detalleFrescosList.add(detalleFresco);
         }
+        resultSet.close();
         return detalleFrescosList;
     }
 

@@ -34,6 +34,7 @@ public class SecoDAO {
                     resultSet.getDouble("precio"),
                     resultSet.getInt("cantidad"), area);
         }
+        resultSet.close();
         return seco;
     }
 
@@ -51,6 +52,7 @@ public class SecoDAO {
                     resultSet.getInt("cantidad"), area);
             secosList.add(seco);
         }
+        resultSet.close();
         return secosList;
     }
     

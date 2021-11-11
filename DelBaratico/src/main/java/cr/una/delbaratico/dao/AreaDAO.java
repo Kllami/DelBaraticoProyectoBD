@@ -28,6 +28,7 @@ public class AreaDAO {
             area = new Area(resultSet.getInt("id_area"),
                     resultSet.getString("descripcion"));
         }
+        resultSet.close();
         return area;
     }
 
@@ -40,6 +41,7 @@ public class AreaDAO {
                     resultSet.getString("descripcion"));
             areasList.add(area);
         }
+        resultSet.close();
         return areasList;
     }
 }

@@ -32,6 +32,7 @@ public class DetalleSecoDAO {
                     resultSet.getInt("cantidad"),
                     resultSet.getDouble("subtotal"), seco, factura);
         }
+        resultSet.close();
         return detalleSeco;
     }
 

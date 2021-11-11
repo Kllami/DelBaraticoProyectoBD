@@ -41,6 +41,7 @@ public class UsuarioDAO {
         if(resultSet.next()) {
             rol = resultSet.getString("GRANTED_ROLE");
         }
+        resultSet.close();
         return rol;
     }
 }

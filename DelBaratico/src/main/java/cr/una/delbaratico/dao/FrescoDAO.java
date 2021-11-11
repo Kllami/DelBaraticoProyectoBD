@@ -32,6 +32,7 @@ public class FrescoDAO {
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("peso"));
         }
+        resultSet.close();
         return fresco;
     }
 
@@ -48,6 +49,7 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"));
             frescosList.add(fresco);
         }
+        resultSet.close();
         return frescosList;
     }
     

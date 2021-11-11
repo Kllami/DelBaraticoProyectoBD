@@ -34,6 +34,7 @@ public class FacturaDAO {
                     resultSet.getDouble("total"),
                     resultSet.getString("usuario"), caja);
         }
+        resultSet.close();
         return factura;
     }
 
@@ -51,6 +52,7 @@ public class FacturaDAO {
                     resultSet.getString("usuario"), caja);
             facturasList.add(factura);
         }
+        resultSet.close();
         return facturasList;
     }
     

@@ -27,6 +27,7 @@ public class AuditoriaDAO {
                     resultSet.getString("transaccion"),
                     resultSet.getDate("fecha"));
         }
+        resultSet.close();
         return auditoria;
     }
 
