@@ -35,11 +35,11 @@ public class HomeView extends JFrame {
         this.setLocationRelativeTo(null);
         //setMinimumSize(new Dimension(300,100));
         this.setTitle("DelBaratico Home");
+        this.cajaViewButton.setText("Modulo de cajas");
+        this.facturasViewButton.setText("Modulo de facturas");
+        this.bitacorasViewButton.setText("Modulo de bitacoras");
+        this.inventarioViewButton.setText("Modulo de inventario");
 
-        this.cajaViewButton = new JButton("Modulo Caja");
-        this.facturasViewButton = new JButton("Modulo Facturas");
-        this.bitacorasViewButton = new JButton("Modulo Bitacora");
-        this.inventarioViewButton = new JButton("Modulo Inventario");
         this.ajustarMenus();
 
         this.iniciarListeners();//Siempre se llama de ultimo
@@ -61,6 +61,9 @@ public class HomeView extends JFrame {
                 inventarioView = new InventarioView(servicio);
             }
         });
+
+        this.cajaViewButton.addActionListener(e -> { cajaView = new CajaView(servicio); });
+
     }
 
     private void ajustarMenus() {
