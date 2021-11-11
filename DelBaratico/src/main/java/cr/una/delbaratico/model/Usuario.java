@@ -3,10 +3,12 @@ package main.java.cr.una.delbaratico.model;
 public class Usuario {
     private String nombre;
     private String rol;
+    private String password;
 
-    public Usuario(String nombre, String rol) {
+    public Usuario(String nombre, String rol, String password) {
         this.nombre = nombre;
         this.rol = rol;
+        this.password = password;
     }
 
     public String getRol() {
@@ -15,6 +17,10 @@ public class Usuario {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setRol(String rol) {

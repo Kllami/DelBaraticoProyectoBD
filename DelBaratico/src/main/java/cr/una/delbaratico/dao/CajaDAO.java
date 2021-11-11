@@ -34,7 +34,7 @@ public class CajaDAO {
 
     public List<Caja> findAll() throws SQLException {
         List<Caja> cajasList = new ArrayList<>();
-        String sql = "SELECT * FROM caja";
+        String sql = "SELECT * FROM system.caja";
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         while(resultSet.next()) {
             Caja caja = new Caja(resultSet.getInt("id_caja"),

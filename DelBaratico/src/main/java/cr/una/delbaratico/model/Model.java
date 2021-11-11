@@ -1,6 +1,6 @@
 package main.java.cr.una.delbaratico.model;
 
-import main.java.cr.una.delbaratico.dao.UsuarioDAO;
+import main.java.cr.una.delbaratico.dao.*;
 import main.java.cr.una.delbaratico.model.Caja;
 import main.java.cr.una.delbaratico.model.Factura;
 import main.java.cr.una.delbaratico.model.Usuario;
