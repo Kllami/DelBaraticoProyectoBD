@@ -70,6 +70,10 @@ public class JdbcUtil {
         return null;
     }
 
+    public static void closeConnection() {
+        jdbcUtil = null;
+    }
+
     public int executeUpdate(String query) {
         try {
             statement = dbConnection.createStatement();
