@@ -1,19 +1,16 @@
 package main.java.cr.una.delbaratico.service;
 
-import main.java.cr.una.delbaratico.dao.AreaDAO;
 import main.java.cr.una.delbaratico.dao.JdbcUtil;
-import main.java.cr.una.delbaratico.model.Area;
+import main.java.cr.una.delbaratico.dao.UsuarioDAO;
 
-import java.util.List;
 
 public class Service {
 
-    private AreaDAO areaDAO;
-
+    private UsuarioDAO usuarioDao;
     private static Service service;
 
     private Service(String DB_USER, String DB_PASSWORD) {
-        areaDAO = new AreaDAO(DB_USER, DB_PASSWORD);
+        //usuarioDao = new UsuarioDAO(DB_USER, DB_PASSWORD);
     }
 
     public static Service instance(String DB_USER, String DB_PASSWORD) {
@@ -23,17 +20,15 @@ public class Service {
         return service;
     }
 
-    public static boolean verifyConnection() {
-        return JdbcUtil.verifyConnection();
-    }
+    //public static boolean verifyConnection() {
+        //return JdbcUtil.verifyConnection();
+    //}
 
-    public Area findAreaById(int idArea) throws Exception {
-        return areaDAO.findById(idArea);
-    }
+    //public Area findAreaById(int idArea) throws Exception {
+    //    return areaDAO.findById(idArea);
+    //}
 
-    public List<Area> findAllAreas() throws Exception {
-        return areaDAO.findAll();
-    }
-
-
+    //public List<Area> findAllAreas() throws Exception {
+    //    return areaDAO.findAll();
+   // }
 }

@@ -2,10 +2,8 @@ package main.java.cr.una.delbaratico.view.iniciarsesion;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class IniciarSesionView {
+public class IniciarSesionView extends JFrame{
     private JPanel panel1;
     private JButton iniciarSesiónButton;
     private JTextField textField1;
@@ -14,8 +12,30 @@ public class IniciarSesionView {
 
     public IniciarSesionView(IniciarSesionController iniciarSesionController) {
         this.iniciarSesionController = iniciarSesionController;
+        iniciarListeners();
+        JFrame jFrame = new JFrame();
+        jFrame.setContentPane(panel1);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.pack();
+        jFrame.setVisible(true);
+    }
+
+    public void iniciarListeners(){
         iniciarSesiónButton.addActionListener(e -> {
-            iniciarSesionController.iniciarSesion(textField1.getText(), new String(passwordField1.getPassword()));
+            String userName = textField1.getText().trim();
+            String pwd = String.valueOf(passwordField1.getPassword()).trim();
+            boolean result = iniciarSesionController.iniciarSesion(userName, pwd);
+
+            if (result) {
+                JOptionPane.showMessageDialog(panel1, "Login exitoso");
+                Window win = SwingUtilities.getWindowAncestor(panel1);
+                win.setVisible(false);
+                win.dispose();
+
+                //ventanaHome = new VentanaHome(gestorPrincipal);
+            } else {
+                JOptionPane.showMessageDialog(panel1, "Passsword o nombre invalido");
+            }
         });
     }
 
@@ -53,5 +73,9 @@ public class IniciarSesionView {
 
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(null, message);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
