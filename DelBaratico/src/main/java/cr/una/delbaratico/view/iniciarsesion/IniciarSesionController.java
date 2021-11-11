@@ -36,6 +36,7 @@ public class IniciarSesionController {
         }
         else {
             iniciarSesionView.showMessage("Inicio de sesión fallido");
+            Service.instance(DB_USER, DB_PASSWORD).closeConnection();
         }
     }
 

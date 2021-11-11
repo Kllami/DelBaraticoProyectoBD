@@ -35,5 +35,8 @@ public class Service {
         return areaDAO.findAll();
     }
 
-
+    public void closeConnection() {
+        service = null;
+        JdbcUtil.closeConnection();
+    }
 }
