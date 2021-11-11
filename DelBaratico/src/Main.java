@@ -1,20 +1,11 @@
-import main.java.cr.una.delbaratico.dao.AreaDAO;
-import main.java.cr.una.delbaratico.dao.JdbcUtil;
-import main.java.cr.una.delbaratico.view.iniciarsesion.IniciarSesionController;
-import main.java.cr.una.delbaratico.view.iniciarsesion.IniciarSesionModel;
-import main.java.cr.una.delbaratico.view.iniciarsesion.IniciarSesionView;
-
-import javax.swing.*;
-import java.sql.Connection;
-import java.sql.SQLException;
+import main.java.cr.una.delbaratico.service.ServiceController;
+import main.java.cr.una.delbaratico.model.Model;
+import main.java.cr.una.delbaratico.view.LoginView;
 
 public class Main {
-
-    public static IniciarSesionController iniciarSesionController;
-    public static IniciarSesionView iniciarSesionView;
+    public static LoginView iniciarSesionView;
 
     public static void main(String[] args) {
-        iniciarSesionController = new IniciarSesionController(new IniciarSesionModel());
-        iniciarSesionView = new IniciarSesionView(iniciarSesionController);
+        iniciarSesionView = new LoginView(new ServiceController(new Model()));
     }
 }

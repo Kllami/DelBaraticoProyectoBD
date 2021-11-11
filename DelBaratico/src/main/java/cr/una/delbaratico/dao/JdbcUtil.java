@@ -1,8 +1,6 @@
 package main.java.cr.una.delbaratico.dao;
 
 import java.sql.*;
-import java.util.Properties;
-
 
 
 public class JdbcUtil {
@@ -36,12 +34,12 @@ public class JdbcUtil {
     }
 
     public static JdbcUtil instance(String DB_USER, String DB_PASSWORD) {
-        cerrarSesion();
+        cerrarConexion();
         jdbcUtil = new JdbcUtil(DB_USER, DB_PASSWORD);
         return jdbcUtil;
     }
 
-    public static void cerrarSesion(){
+    public static void cerrarConexion(){
         String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
 
         try {
