@@ -1,38 +1,41 @@
-package main.java.cr.una.delbaratico.view.iniciarsesion;
+package main.java.cr.una.delbaratico.view;
+
+import main.java.cr.una.delbaratico.service.ServiceController;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class IniciarSesionView extends JFrame{
+public class LoginView extends JFrame{
     private JPanel panel1;
     private JButton iniciarSesiónButton;
     private JTextField textField1;
     private JPasswordField passwordField1;
-    private IniciarSesionController iniciarSesionController;
+    private ServiceController servicio;
+    private HomeView homeView;
 
-    public IniciarSesionView(IniciarSesionController iniciarSesionController) {
-        this.iniciarSesionController = iniciarSesionController;
-        iniciarListeners();
-        JFrame jFrame = new JFrame();
-        jFrame.setContentPane(panel1);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.pack();
-        jFrame.setVisible(true);
+    public LoginView(ServiceController servicio) {
+        this.servicio = servicio;
+        this.panel1.setPreferredSize(new Dimension(400,200));
+        this.setContentPane(panel1);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+
+        this.iniciarListeners();//Siempre se llama de ultimo
     }
 
     public void iniciarListeners(){
         iniciarSesiónButton.addActionListener(e -> {
             String userName = textField1.getText().trim();
             String pwd = String.valueOf(passwordField1.getPassword()).trim();
-            boolean result = iniciarSesionController.iniciarSesion(userName, pwd);
+            boolean result = servicio.iniciarSesion(userName, pwd);
 
             if (result) {
                 JOptionPane.showMessageDialog(panel1, "Login exitoso");
-                Window win = SwingUtilities.getWindowAncestor(panel1);
-                win.setVisible(false);
-                win.dispose();
-
-                //ventanaHome = new VentanaHome(gestorPrincipal);
+                this.setVisible(false);
+                this.dispose();
+                homeView = new HomeView(servicio);
             } else {
                 JOptionPane.showMessageDialog(panel1, "Passsword o nombre invalido");
             }

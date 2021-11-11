@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="main.java.cr.una.delbaratico.view.iniciarsesion.IniciarSesionView">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="main.java.cr.una.delbaratico.view.LoginView">
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+    <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
-      <xy x="0" y="40" width="500" height="300"/>
+      <xy x="14" y="40" width="500" height="300"/>
     </constraints>
     <properties>
       <minimumSize width="500" height="300"/>
@@ -14,7 +14,7 @@
       <component id="5c0be" class="javax.swing.JLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="66" height="80"/>
+            <preferred-size width="20" height="62"/>
           </grid>
         </constraints>
         <properties>
@@ -41,31 +41,31 @@
           <text value="        Usuario"/>
         </properties>
       </component>
+      <component id="c457e" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="30"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="90cb" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="30"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
       <component id="86aa6" class="javax.swing.JButton" binding="iniciarSesiónButton" default-binding="true">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="291" height="30"/>
+            <preferred-size width="150" height="30"/>
           </grid>
         </constraints>
         <properties>
           <text value="Iniciar Sesión"/>
         </properties>
-      </component>
-      <component id="90cb" class="javax.swing.JTextField" binding="textField1" default-binding="true">
-        <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="291" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="c457e" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
-        <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="291" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
       </component>
     </children>
   </grid>

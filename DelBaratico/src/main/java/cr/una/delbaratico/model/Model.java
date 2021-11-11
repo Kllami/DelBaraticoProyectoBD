@@ -1,4 +1,4 @@
-package main.java.cr.una.delbaratico.view.iniciarsesion;
+package main.java.cr.una.delbaratico.model;
 
 import main.java.cr.una.delbaratico.dao.UsuarioDAO;
 import main.java.cr.una.delbaratico.model.Caja;
@@ -9,12 +9,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Observable;
 
-public class IniciarSesionModel extends Observable {
+public class Model extends Observable {
 
     Factura factura;
-    private UsuarioDAO usuarioDao;
+    private final UsuarioDAO usuarioDao;
 
-    public IniciarSesionModel() {
+    public Model() {
         usuarioDao = new UsuarioDAO();
         Date todayDateUtil = Calendar.getInstance().getTime();
         factura = new Factura(0, 0, new java.sql.Date(todayDateUtil.getTime()), 0, "", new Caja(0, ""));
@@ -26,11 +26,15 @@ public class IniciarSesionModel extends Observable {
         notifyObservers();
     }
 
-    public boolean login(String username, String password){
+    public boolean login(String username, String password) {
         return this.usuarioDao.login(username, password);
     }
 
-    public Usuario getUsuarioActual(){
+    public void logot() {
+        this.usuarioDao.cerrarConexion();
+    }
+
+    public Usuario getUsuarioActual() {
         return this.usuarioDao.getUsuarioActual();
     }
 }

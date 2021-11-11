@@ -44,4 +44,8 @@ public class UsuarioDAO {
         resultSet.close();
         return rol;
     }
+
+    public void cerrarConexion(){
+        this.jdbcUtil.cerrarConexion();
+    }
 }
