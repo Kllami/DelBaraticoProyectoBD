@@ -67,6 +67,7 @@ public class CajaView extends JFrame {
                     int sec = Integer.parseInt(c);
                     Seco seco;
                     try {
+
                         seco = servicio.findSecoById(sec);
                         if(seco.getCantidad() > 0){
                             preciosList.add(seco.getPrecio());
@@ -176,6 +177,11 @@ public class CajaView extends JFrame {
                 System.out.println(cajasList.get(index).getUsuario().toString());
                 this.comboBox1.addItem(cajasList.get(index).getIdCaja());
             }
+
+            System.out.println(cajasList.toString());
+        } catch (SQLException ex){
+            System.out.println(ex.toString());
+
         }
     }
 
