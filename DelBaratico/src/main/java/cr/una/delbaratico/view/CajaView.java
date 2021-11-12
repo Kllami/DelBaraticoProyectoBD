@@ -4,6 +4,8 @@ import main.java.cr.una.delbaratico.service.ServiceController;
 import main.java.cr.una.delbaratico.model.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +45,23 @@ public class CajaView extends JFrame {
         preciosList = new ArrayList<>();
         rellenarComboBox();
 
+        secoCheckBox.addItemListener(new ItemListener(){
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(secoCheckBox.isSelected())
+                    pesoTextField.setEnabled(false);
+                else
+                    pesoTextField.setEnabled(true);
+                panel1.validate();
+                panel1.repaint();
+            }
+        });
+
         agregarALaListaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(secoCheckBox.isSelected() && !textField3.getText().equals("")){
                     //Deshabilitar campo de peso
-                    pesoTextField.setEnabled(false);
                     String c = textField3.getText();
                     assert c != null;
                     int sec = Integer.parseInt(c);
@@ -73,7 +86,6 @@ public class CajaView extends JFrame {
                 }
                 else if(!secoCheckBox.isSelected() && !textField3.getText().equals("")){
                     //Deshabilitar campo de peso
-                    pesoTextField.setEnabled(true);
                     String c = textField3.getText();
                     assert c != null;
                     int sec = Integer.parseInt(c);
