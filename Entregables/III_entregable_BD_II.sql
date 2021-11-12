@@ -4,7 +4,80 @@
 	-- Diana Fallas Méndez 117770654
 	-- Johnny Chacón Gairaud 115540497
 	-- Giancarlo Alvarado Sánchez 117230466
-	
+conn system/system;
+
+PROMPT Creacion de tablas
+create table system.area(
+id_area NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+descripcion varchar2(30) not null,
+constraint area_pk primary key(id_area)
+);
+
+create table system.seco(
+id_seco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+ean number(13,0) not null,
+descripcion varchar2(30) not null,
+precio float not null,
+cantidad int not null,
+area_id int not null,
+constraint seco_pk primary key(id_seco),
+constraint seco_uk_ean unique(ean),
+constraint area_fk_producto foreign key(area_id) references system.area(id_area)
+);
+
+create table system.fresco(
+id_fresco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+plu int not null,
+peso float not null,
+ean number(13,0) not null,
+descripcion varchar2(30) not null,
+precio float not null,
+cantidad int not null,
+constraint fresco_pk primary key(id_fresco),
+constraint fresco_uk_ean unique(ean)
+);
+
+create table system.caja(
+id_caja NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+usuario varchar2(50) null,
+constraint caja_pk primary key(id_caja)
+);
+
+create table system.factura(
+id_factura NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+numero int not null,
+fecha date not null,
+total float not null,
+usuario varchar2(60) not null,
+num_caja int not null,
+constraint factura_pk primary key(id_factura),
+constraint caja_fk_factura foreign key(num_caja) references system.caja(id_caja)
+);
+
+create table system.detalleSeco(
+id_detalleSeco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+cantidad int not null,
+subtotal float not null,
+seco_id int not null,
+factura_id int not null,
+constraint detalleseco_pk primary key(id_detalleSeco),
+constraint seco_fk_detalle foreign key(seco_id) references system.seco(id_seco),
+constraint factura_fk_detalle foreign key(factura_id)
+references system.factura(id_factura)
+);
+
+create table system.detalleFresco(
+id_detalleFresco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+peso float not null,
+subtotal float not null,
+fresco_id int not null,
+factura_id int not null,
+constraint detalleFresco_pk primary key(id_detalleFresco),
+constraint fresco_fk_detalle foreign key(fresco_id) references system.fresco(id_fresco),
+constraint facturaFresco_fk_detalle foreign key(factura_id)
+references system.factura(id_factura)
+);
+
 conn system/system as sysdba
 alter session set "_oracle_script"=true;
 
@@ -129,80 +202,7 @@ grant gerente_general to alex_soto_moreira;
 grant gerente_general to david_camacho_melendez;
 
 grant sistemas to diana_quiros_ugalde;
-grant sistemas to tatiana_torres_fernandez; 
-
-PROMPT Creacion de tablas
-create table system.area(
-id_area NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-descripcion varchar2(30) not null,
-constraint area_pk primary key(id_area)
-);
-
-create table system.seco(
-id_seco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-ean number(13,0) not null,
-descripcion varchar2(30) not null,
-precio float not null,
-cantidad int not null,
-area_id int not null,
-constraint seco_pk primary key(id_seco),
-constraint seco_uk_ean unique(ean),
-constraint area_fk_producto foreign key(area_id),
-references system.area(id_area)
-);
-
-create table system.fresco(
-id_fresco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-plu int not null,
-peso float not null,
-ean number(13,0) not null,
-descripcion varchar2(30) not null,
-precio float not null,
-cantidad int not null,
-constraint fresco_pk primary key(id_fresco),
-constraint fresco_uk_ean unique(ean)
-);
-
-create table system.caja(
-id_caja NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-usuario varchar2(50) null,
-constraint caja_pk primary key(id_caja)
-);
-
-create table system.factura(
-id_factura NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-numero int not null,
-fecha date not null,
-total float not null,
-usuario varchar2(60) not null,
-num_caja int not null,
-constraint factura_pk primary key(id_factura),
-constraint caja_fk_factura foreign key(num_caja) references system.caja(id_caja)
-);
-
-create table system.detalleSeco(
-id_detalleSeco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-cantidad int not null,
-subtotal float not null,
-seco_id int not null,
-factura_id int not null,
-constraint detalleseco_pk primary key(id_detalleSeco),
-constraint seco_fk_detalle foreign key(seco_id) references system.seco(id_seco),
-constraint factura_fk_detalle foreign key(factura_id)
-references system.factura(id_factura)
-);
-
-create table system.detalleFresco(
-id_detalleFresco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-peso float not null,
-subtotal float not null,
-fresco_id int not null,
-factura_id int not null,
-constraint detalleFresco_pk primary key(id_detalleFresco),
-constraint fresco_fk_detalle foreign key(fresco_id) references system.fresco(id_fresco),
-constraint facturaFresco_fk_detalle foreign key(factura_id)
-references system.factura(id_factura)
-);
+grant sistemas to tatiana_torres_fernandez;
 
 PROMPT Asignacion de permisos para cajeros
 grant select on system.seco to cajero;
