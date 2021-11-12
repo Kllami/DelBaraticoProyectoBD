@@ -158,6 +158,7 @@ peso float not null,
 ean number(13,0) not null,
 descripcion varchar2(30) not null,
 precio float not null,
+cantidad int not null,
 constraint fresco_pk primary key(id_fresco),
 constraint fresco_uk_ean unique(ean)
 );
@@ -218,7 +219,6 @@ PROMPT Asignacion de permisos para gerentes de area
 CREATE VIEW vista_producto_abarrotes AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM system.seco WHERE area_id = 1;
 CREATE VIEW vista_producto_cuidado_personal AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM  system.seco WHERE area_id = 2;
 CREATE VIEW vista_producto_mercancias AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM  system.seco WHERE area_id = 3;
-
 CREATE VIEW vista_producto_frescos AS SELECT id_fresco, PLU, EAN, descripcion, peso, precio FROM  system.fresco;
 
 GRANT select, update on vista_producto_abarrotes to gerente_abarrotes;
