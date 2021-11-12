@@ -21,7 +21,7 @@ public class AreaDAO {
 
     public Area findById(int idArea) throws SQLException {
         Area area = null;
-        String sql = "SELECT * FROM area where id_area = %d";
+        String sql = "SELECT * FROM system.area where id_area = %d";
         sql = String.format(sql, idArea);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {

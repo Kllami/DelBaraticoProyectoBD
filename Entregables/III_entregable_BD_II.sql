@@ -80,6 +80,11 @@ grant select on dba_role_privs to sistemas;
 PROMPT Asignacion de permisos generales para cada rol
 grant connect, resource to cajero;
 grant create session to cajero;
+grant select on system.factura to cajero;
+grant insert on system.factura to cajero;
+grant select on system.fresco to cajero;
+grant select on system.seco to cajero;
+grant create any sequence to cajero;
 
 grant connect, resource to gerente_abarrotes;
 grant create session to gerente_abarrotes;
@@ -103,6 +108,17 @@ PROMPT Asignacion de roles
 grant cajero to maria_fallas_mendez;
 grant cajero to johnny_chacon_gairaud;
 grant cajero to jose_perez_zamora;
+
+conn maria_fallas_mendez/1234;
+CREATE SEQUENCE numero_factura_seq START WITH 100 INCREMENT BY 1;
+
+conn johnny_chacon_gairaud/1234;
+CREATE SEQUENCE numero_factura_seq START WITH 100 INCREMENT BY 1;
+
+conn jose_perez_zamora/1234;
+CREATE SEQUENCE numero_factura_seq START WITH 100 INCREMENT BY 1;
+
+conn system/system;
 
 grant gerente_abarrotes to giancarlo_alvarado_sanchez;
 grant gerente_cuidado_personal to juan_hernandez_ramirez;
@@ -162,8 +178,6 @@ num_caja int not null,
 constraint factura_pk primary key(id_factura),
 constraint caja_fk_factura foreign key(num_caja) references system.caja(id_caja)
 );
-
-CREATE SEQUENCE numero_factura_seq START WITH 100 INCREMENT BY 1;
 
 create table system.detalleSeco(
 id_detalleSeco NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),

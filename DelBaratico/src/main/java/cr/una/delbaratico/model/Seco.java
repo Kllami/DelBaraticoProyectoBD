@@ -8,9 +8,9 @@ public class Seco {
   private String descripcion;
   private double precio;
   private int cantidad;
-  private Area areaId;
+  private int areaId;
 
-  public Seco(int idSeco, Long ean, String descripcion, double precio, int cantidad, Area areaId) {
+  public Seco(int idSeco, Long ean, String descripcion, double precio, int cantidad, int areaId) {
     this.idSeco = idSeco;
     this.ean = ean;
     this.descripcion = descripcion;
@@ -63,11 +63,11 @@ public class Seco {
     this.cantidad = cantidad;
   }
 
-  public Area getAreaId() {
+  public int getAreaId() {
     return areaId;
   }
 
-  public void setAreaId(Area areaId) {
+  public void setAreaId(int areaId) {
     this.areaId = areaId;
   }
 

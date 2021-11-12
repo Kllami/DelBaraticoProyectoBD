@@ -17,7 +17,7 @@ public class Model extends Observable {
     public Model() {
         usuarioDao = new UsuarioDAO();
         Date todayDateUtil = Calendar.getInstance().getTime();
-        factura = new Factura(0, 0, new java.sql.Date(todayDateUtil.getTime()), 0, "", new Caja(0, ""));
+        factura = new Factura(0, 0, new java.sql.Date(todayDateUtil.getTime()), 0, "", 0);
     }
 
     public void genericMethod() {

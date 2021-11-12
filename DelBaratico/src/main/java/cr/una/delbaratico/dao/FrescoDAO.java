@@ -21,7 +21,7 @@ public class FrescoDAO {
 
     public Fresco findById(int idFresco) throws SQLException {
         Fresco fresco = null;
-        String sql = "SELECT * FROM fresco where id_fresco = %d";
+        String sql = "SELECT * FROM system.fresco where id_fresco = %d";
         sql = String.format(sql, idFresco);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
@@ -30,7 +30,7 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
-                    resultSet.getDouble("peso"));
+                    resultSet.getDouble("precio"));
         }
         resultSet.close();
         return fresco;
