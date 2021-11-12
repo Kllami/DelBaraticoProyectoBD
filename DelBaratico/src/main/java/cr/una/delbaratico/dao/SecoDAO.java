@@ -1,6 +1,7 @@
 package main.java.cr.una.delbaratico.dao;
 
 import main.java.cr.una.delbaratico.model.Area;
+import main.java.cr.una.delbaratico.model.Fresco;
 import main.java.cr.una.delbaratico.model.Seco;
 
 import java.sql.ResultSet;
@@ -20,6 +21,11 @@ public class SecoDAO {
         this.jdbcUtil = jdbcUtil;
     }
 
+    public void updateInventario(int cantidad, int idSeco){
+        String sql = "update system.seco set cantidad = " + cantidad + " where id_seco = %d";
+        sql = String.format(sql, idSeco);
+        jdbcUtil.executeQuery(sql);
+    }
     public Seco findById(int idSeco) throws SQLException {
         Seco seco = null;
         String sql = "SELECT * FROM system.seco where id_seco = %d";
