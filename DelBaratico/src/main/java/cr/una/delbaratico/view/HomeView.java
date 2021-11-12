@@ -27,7 +27,7 @@ public class HomeView extends JFrame {
 
     public HomeView(ServiceController servicio) {
         this.servicio = servicio;
-        this.panel1.setPreferredSize(new Dimension(300,100));
+        this.panel1.setPreferredSize(new Dimension(400,100));
         this.setContentPane(panel1);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
