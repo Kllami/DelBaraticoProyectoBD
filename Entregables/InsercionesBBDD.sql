@@ -20,8 +20,8 @@ insert into system.seco(id_seco, ean, descripcion, precio, cantidad, area_id) va
 insert into system.seco(id_seco, ean, descripcion, precio, cantidad, area_id) values (6, 1232587745123, 'Basurero', 3540, 10, 3);
 -------------------------------------------------------------------------------------------------------------------------------------------
 --FRESCOS
-insert into system.fresco(id_fresco, plu, peso, ean, descripcion, precio) values (1, 52634, 2.6, 1232784525123, 'Papaya', 950);
-insert into system.fresco(id_fresco, plu, peso, ean, descripcion, precio) values (2, 52414, 3.5, 1232723625123, 'Melon', 1250);
+insert into system.fresco(plu, peso, ean, descripcion, precio, cantidad) values (52634, 2.6, 1232784525123, 'Papaya', 950, 10);
+insert into system.fresco(plu, peso, ean, descripcion, precio, cantidad) values (52414, 3.5, 1232723625123, 'Melon', 1250, 10);
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------------------------------------------------------------------

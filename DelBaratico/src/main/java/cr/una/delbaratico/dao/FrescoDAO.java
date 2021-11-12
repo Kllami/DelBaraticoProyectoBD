@@ -30,10 +30,17 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
-                    resultSet.getDouble("precio"));
+                    resultSet.getDouble("precio"),
+                    resultSet.getInt("cantidad"));
         }
         resultSet.close();
         return fresco;
+    }
+
+    public void updateInventario(int cantidad, int idFresco) throws SQLException {
+        String sql = "update system.fresco set cantidad = " + cantidad + " where id_fresco = %d";
+        sql = String.format(sql, idFresco);
+        jdbcUtil.executeQuery(sql);
     }
 
     public List<Fresco> findAll() throws SQLException {
@@ -46,7 +53,8 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
-                    resultSet.getDouble("peso"));
+                    resultSet.getDouble("peso"),
+                    resultSet.getInt("cantidad"));
             frescosList.add(fresco);
         }
         resultSet.close();

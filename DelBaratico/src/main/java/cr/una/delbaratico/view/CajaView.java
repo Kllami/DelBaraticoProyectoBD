@@ -61,9 +61,16 @@ public class CajaView extends JFrame {
                     SecoDAO secoDAO = new SecoDAO(servicio.getUsuarioActual().getNombre(), servicio.getUsuarioActual().getPassword());
                     try {
                         seco = secoDAO.findById(sec);
-                        preciosList.add(seco.getPrecio());
-                        secoCheckBox.setSelected(false);
-                        textField3.setText("");
+                        if(seco.getCantidad() > 0){
+                            preciosList.add(seco.getPrecio());
+                            secoDAO.updateInventario(seco.getCantidad() - 1, seco.getIdSeco());
+                            secoCheckBox.setSelected(false);
+                            textField3.setText("");
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(panel1 , "No hay mas productos de este tipo en inventario");
+                        }
                     } catch (SQLException ex){
                         System.out.println(ex.toString());
                     } catch (NullPointerException nu){
@@ -78,9 +85,15 @@ public class CajaView extends JFrame {
                     FrescoDAO frescoDAO = new FrescoDAO(servicio.getUsuarioActual().getNombre(), servicio.getUsuarioActual().getPassword());
                     try {
                         fresco = frescoDAO.findById(sec);
-                        preciosList.add(fresco.getPrecio());
-                        secoCheckBox.setSelected(false);
-                        textField3.setText("");
+                        if(fresco.getCantidad() > 0) {
+                            preciosList.add(fresco.getPrecio());
+                            frescoDAO.updateInventario(fresco.getCantidad() - 1, fresco.getIdFresco());
+                            secoCheckBox.setSelected(false);
+                            textField3.setText("");
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(panel1, "No hay mas productos de este tipo en inventario");
+                        }
                     } catch (SQLException ex){
                         System.out.println(ex.toString());
                     } catch (NullPointerException nu){
