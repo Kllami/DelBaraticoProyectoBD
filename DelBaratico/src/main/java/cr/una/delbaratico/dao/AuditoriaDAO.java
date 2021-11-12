@@ -15,6 +15,10 @@ public class AuditoriaDAO {
         this.jdbcUtil = jdbcUtil;
     }
 
+    public AuditoriaDAO(String DB_USER, String DB_PASSWORD) {
+        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);
+    }
+
     public Auditoria findById(int idAuditoria) throws SQLException {
         Auditoria auditoria = null;
         String sql = "SELECT * FROM system.auditoria where id_auditoria = %d";
