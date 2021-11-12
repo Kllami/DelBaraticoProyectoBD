@@ -179,9 +179,6 @@ public class CajaView extends JFrame {
             }
 
             System.out.println(cajasList.toString());
-        } catch (SQLException ex){
-            System.out.println(ex.toString());
-
         }
     }
 
