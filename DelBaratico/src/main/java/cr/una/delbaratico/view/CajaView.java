@@ -61,7 +61,8 @@ public class CajaView extends JFrame {
                     SecoDAO secoDAO = new SecoDAO(servicio.getUsuarioActual().getNombre(), servicio.getUsuarioActual().getPassword());
                     try {
                         seco = secoDAO.findById(sec);
-                        if(seco.getCantidad() > 0){
+                        System.out.println(seco);
+/*                        if(seco.getCantidad() > 0){
                             preciosList.add(seco.getPrecio());
                             secoDAO.updateInventario(seco.getCantidad() - 1, seco.getIdSeco());
                             secoCheckBox.setSelected(false);
@@ -70,7 +71,7 @@ public class CajaView extends JFrame {
                         else
                         {
                             JOptionPane.showMessageDialog(panel1 , "No hay mas productos de este tipo en inventario");
-                        }
+                        }*/
                     } catch (SQLException ex){
                         System.out.println(ex.toString());
                     } catch (NullPointerException nu){
@@ -171,6 +172,8 @@ public class CajaView extends JFrame {
                     this.comboBox1.addItem(cajasList.get(index).getIdCaja());
                 }
             }
+
+            System.out.println(cajasList.toString());
         } catch (SQLException ex){
             System.out.println(ex.toString());
         }

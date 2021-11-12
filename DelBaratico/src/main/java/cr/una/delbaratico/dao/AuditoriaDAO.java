@@ -17,7 +17,7 @@ public class AuditoriaDAO {
 
     public Auditoria findById(int idAuditoria) throws SQLException {
         Auditoria auditoria = null;
-        String sql = "SELECT * FROM auditoria where id_auditoria = %d";
+        String sql = "SELECT * FROM system.auditoria where id_auditoria = %d";
         sql = String.format(sql, idAuditoria);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
@@ -33,7 +33,7 @@ public class AuditoriaDAO {
 
     public List<Auditoria> findAll() throws SQLException {
         List<Auditoria> auditoriasList = new ArrayList<>();
-        String sql = "SELECT * FROM auditoria";
+        String sql = "SELECT * FROM system.auditoria";
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         while(resultSet.next()) {
             Auditoria auditoria = new Auditoria(resultSet.getInt("id_auditoria"),
@@ -43,6 +43,25 @@ public class AuditoriaDAO {
                     resultSet.getDate("fecha"));
             auditoriasList.add(auditoria);
         }
+        System.out.println(auditoriasList);
+        return auditoriasList;
+    }
+
+    public List<Auditoria> findSelect(String user) throws SQLException {
+        List<Auditoria> auditoriasList = new ArrayList<>();
+        String sql = "Select ENTRYID, username, timestamp, obj_name, action_name from dba_audit_object where username='" + user + "' AND action_name = 'SELECT' " +
+                "AND (obj_name = 'AUDITORIA' OR obj_name = 'FACTURA' OR obj_name = 'AREA' OR obj_name = 'SECO' OR obj_name = 'FRESCO' OR obj_name = 'CAJA' OR obj_name = 'DETALLESECO' OR obj_name = 'DETALLEFRESCO')";
+
+        ResultSet resultSet = jdbcUtil.executeQuery(sql);
+        while(resultSet.next()) {
+            Auditoria auditoria = new Auditoria(resultSet.getInt("ENTRYID"),
+                    resultSet.getString("username"),
+                    resultSet.getString("obj_name"),
+                    resultSet.getString("action_name"),
+                    resultSet.getDate("timestamp"));
+            auditoriasList.add(auditoria);
+        }
+        System.out.println(auditoriasList);
         return auditoriasList;
     }
     

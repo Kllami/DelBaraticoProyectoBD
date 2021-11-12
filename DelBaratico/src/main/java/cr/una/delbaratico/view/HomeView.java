@@ -64,6 +64,7 @@ public class HomeView extends JFrame {
 
         this.cajaViewButton.addActionListener(e -> { cajaView = new CajaView(servicio); });
 
+        this.bitacorasViewButton.addActionListener( e -> {bitacorasView = new BitacorasView(servicio); } );
     }
 
     private void ajustarMenus() {

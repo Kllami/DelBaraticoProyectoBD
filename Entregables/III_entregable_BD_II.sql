@@ -207,7 +207,7 @@ grant sistemas to tatiana_torres_fernandez;
 PROMPT Asignacion de permisos para cajeros
 grant select on system.seco to cajero;
 grant select on system.fresco to cajero;
-grant select on caja to cajero;
+grant select on system.caja to cajero;
 
 PROMPT Asignacion de permisos para gerentes generales
 grant select, update, delete, insert on system.area to gerente_general;
