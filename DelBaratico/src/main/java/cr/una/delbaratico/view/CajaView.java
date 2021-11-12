@@ -29,6 +29,9 @@ public class CajaView extends JFrame {
     private JTextField textField3;
     private JButton agregarALaListaButton;
     private JButton salirButton;
+    private JButton consultarPrecioButton;
+    private JTextField textField1;
+    private JButton consultarButton;
     private Model modeloPrincipal;
     private Caja caja;
     private List preciosList;
@@ -101,6 +104,45 @@ public class CajaView extends JFrame {
                 setVisible(false);
             }
         });
+
+        consultarPrecioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(secoCheckBox.isSelected() && !textField3.getText().equals("")){
+                    String c = textField3.getText();
+                    assert c != null;
+                    int sec = Integer.parseInt(c);
+                    Seco seco;
+                    SecoDAO secoDAO = new SecoDAO(servicio.getUsuarioActual().getNombre(), servicio.getUsuarioActual().getPassword());
+                    try {
+                        seco = secoDAO.findById(sec);
+                        JOptionPane.showMessageDialog(panel1, seco.getPrecio());
+                    } catch (SQLException ex){
+                        System.out.println(ex.toString());
+                    } catch (NullPointerException nu){
+                        JOptionPane.showMessageDialog(panel1, "Este producto no esta registrado en el sistema");
+                    }
+                }
+                else if(!secoCheckBox.isSelected() && !textField3.getText().equals("")){
+                    String c = textField3.getText();
+                    assert c != null;
+                    int sec = Integer.parseInt(c);
+                    Fresco fresco;
+                    FrescoDAO frescoDAO = new FrescoDAO(servicio.getUsuarioActual().getNombre(), servicio.getUsuarioActual().getPassword());
+                    try {
+                        fresco = frescoDAO.findById(sec);
+                        JOptionPane.showMessageDialog(panel1, fresco.getPrecio());
+                    } catch (SQLException ex){
+                        System.out.println(ex.toString());
+                    } catch (NullPointerException nu){
+                        JOptionPane.showMessageDialog(panel1, "Este producto no esta registrado en el sistema");
+                    }
+                }
+                else if (textField3.getText().equals("")) {
+                    JOptionPane.showMessageDialog(panel1, "Debe indicar el id del producto por agregar");
+                }
+            }
+    });
     }
 
     public void rellenarComboBox () {
