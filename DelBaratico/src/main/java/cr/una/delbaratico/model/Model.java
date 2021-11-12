@@ -17,6 +17,10 @@ public class Model extends Observable {
     private FrescoDAO frescoDAO;
     private CajaDAO cajaDAO;
     private FacturaDAO facturaDAO;
+    private AreaDAO areaDAO;
+    private AuditoriaDAO auditoriaDAO;
+    private DetalleFrescoDAO detalleFrescoDAO;
+    private DetalleSecoDAO detalleSecoDAO;
 
     public Model() {
         usuarioDao = new UsuarioDAO();
@@ -39,6 +43,10 @@ public class Model extends Observable {
             this.frescoDAO = new FrescoDAO(this.jdbcUtil);
             this.cajaDAO = new CajaDAO(this.jdbcUtil);
             this.facturaDAO = new FacturaDAO(this.jdbcUtil);
+            this.areaDAO = new AreaDAO(this.jdbcUtil);
+            this.auditoriaDAO = new AuditoriaDAO(this.jdbcUtil);
+            this.detalleFrescoDAO = new DetalleFrescoDAO(this.jdbcUtil);
+            this.detalleSecoDAO = new DetalleSecoDAO(this.jdbcUtil);
         }
         return result;
     }

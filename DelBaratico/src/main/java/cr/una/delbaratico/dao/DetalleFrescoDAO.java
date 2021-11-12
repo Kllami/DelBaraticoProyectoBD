@@ -13,8 +13,8 @@ public class DetalleFrescoDAO {
 
     private JdbcUtil jdbcUtil;
 
-    public DetalleFrescoDAO(String DB_USER, String DB_PASSWORD) {
-        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);
+    public DetalleFrescoDAO(JdbcUtil jdbcUtil) {
+        this.jdbcUtil = jdbcUtil;
     }
 
     public DetalleFresco findById(int idDetalleFresco) throws SQLException {
