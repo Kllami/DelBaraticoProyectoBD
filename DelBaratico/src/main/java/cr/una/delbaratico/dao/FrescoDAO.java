@@ -11,10 +11,6 @@ public class FrescoDAO {
 
     private JdbcUtil jdbcUtil;
 
-    public FrescoDAO(String DB_USER, String DB_PASSWORD) {
-        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);;
-    }
-
     public FrescoDAO(JdbcUtil jdbcUtil) {
         this.jdbcUtil = jdbcUtil;
     }
@@ -37,8 +33,8 @@ public class FrescoDAO {
         return fresco;
     }
 
-    public void updateInventario(int cantidad, int idFresco) throws SQLException {
-        String sql = "update system.fresco set cantidad = " + cantidad + " where id_fresco = %d";
+    public void updateInventario(double peso, int idFresco) {
+        String sql = "update system.fresco set peso = " + peso + " where id_fresco = %d";
         sql = String.format(sql, idFresco);
         jdbcUtil.executeQuery(sql);
     }

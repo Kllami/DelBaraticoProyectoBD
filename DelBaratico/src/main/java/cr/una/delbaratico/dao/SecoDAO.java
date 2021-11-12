@@ -13,19 +13,16 @@ public class SecoDAO {
 
     private JdbcUtil jdbcUtil;
 
-    public SecoDAO(String DB_USER, String DB_PASSWORD) {
-        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);
-    }
-
     public SecoDAO(JdbcUtil jdbcUtil) {
         this.jdbcUtil = jdbcUtil;
     }
 
-    public void updateInventario(int cantidad, int idSeco){
+    public void updateInventario(int cantidad, int idSeco) {
         String sql = "update system.seco set cantidad = " + cantidad + " where id_seco = %d";
         sql = String.format(sql, idSeco);
         jdbcUtil.executeQuery(sql);
     }
+
     public Seco findById(int idSeco) throws SQLException {
         Seco seco = null;
         String sql = "SELECT * FROM system.seco where id_seco = %d";

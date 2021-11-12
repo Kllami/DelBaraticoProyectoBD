@@ -34,6 +34,10 @@ public class UsuarioDAO {
         return result;
     }
 
+    public JdbcUtil returnJdbcUtil(){
+        return this.jdbcUtil;
+    }
+
     public String getRol(String username) throws SQLException {
         String rol = "";
         String sql = " SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = '%s'";//NOMBRE EN MAYUSC
