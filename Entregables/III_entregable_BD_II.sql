@@ -32,7 +32,6 @@ peso float not null,
 ean number(13,0) not null,
 descripcion varchar2(30) not null,
 precio float not null,
-cantidad int not null,
 constraint fresco_pk primary key(id_fresco),
 constraint fresco_uk_ean unique(ean)
 );

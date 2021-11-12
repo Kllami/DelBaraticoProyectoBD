@@ -16,10 +16,6 @@ public class FacturaDAO {
 
     private JdbcUtil jdbcUtil;
 
-    public FacturaDAO(String DB_USER, String DB_PASSWORD) {
-        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);;
-    }
-
     public FacturaDAO(JdbcUtil jdbcUtil) {
         this.jdbcUtil = jdbcUtil;
     }
@@ -62,7 +58,7 @@ public class FacturaDAO {
         return facturasList;
     }
 
-    public void insertarFactura(Factura factura) throws SQLException {
+    public void insertarFactura(Factura factura) {
         String sql = "INSERT INTO system.factura(numero, fecha, total, usuario, num_caja) VALUES " +
                 "(numero_factura_seq.NEXTVAL, " + "TO_DATE(" + "'" + factura.getFecha() + "'" + ", 'YYYY-MM-DD HH:MI:SS')" + ", " + factura.getTotal()+ ", "
                 + "'" + factura.getUsuario() +  "'" +  ", " + factura.getNumCaja() + ")";

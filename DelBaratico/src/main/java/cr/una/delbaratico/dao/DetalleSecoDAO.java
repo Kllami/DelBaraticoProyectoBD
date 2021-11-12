@@ -13,8 +13,8 @@ public class DetalleSecoDAO {
 
     private JdbcUtil jdbcUtil;
 
-    public DetalleSecoDAO(String DB_USER, String DB_PASSWORD) {
-        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);
+    public DetalleSecoDAO(JdbcUtil jdbcUtil) {
+        this.jdbcUtil = jdbcUtil;
     }
 
     public DetalleSeco findById(int idDetalleSeco) throws SQLException {

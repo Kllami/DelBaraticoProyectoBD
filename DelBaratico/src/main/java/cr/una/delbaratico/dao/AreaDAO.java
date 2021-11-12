@@ -11,10 +11,6 @@ public class AreaDAO {
 
     private JdbcUtil jdbcUtil;
 
-    public AreaDAO(String DB_USER, String DB_PASSWORD) {
-        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);
-    }
-
     public AreaDAO(JdbcUtil jdbcUtil) {
         this.jdbcUtil = jdbcUtil;
     }
