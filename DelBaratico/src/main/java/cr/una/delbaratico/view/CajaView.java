@@ -1,23 +1,17 @@
 package main.java.cr.una.delbaratico.view;
 
-import com.sun.tools.jconsole.JConsoleContext;
-import main.java.cr.una.delbaratico.dao.CajaDAO;
-import main.java.cr.una.delbaratico.dao.FacturaDAO;
-import main.java.cr.una.delbaratico.dao.FrescoDAO;
-import main.java.cr.una.delbaratico.dao.SecoDAO;
-import main.java.cr.una.delbaratico.model.*;
 import main.java.cr.una.delbaratico.service.ServiceController;
-import oracle.sql.DATE;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
+import main.java.cr.una.delbaratico.model.*;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.sql.Date;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
+import javax.swing.*;
+import java.awt.*;
 
 public class CajaView extends JFrame {
     double precio = 0;
@@ -30,7 +24,8 @@ public class CajaView extends JFrame {
     private JButton agregarALaListaButton;
     private JButton salirButton;
     private JButton consultarPrecioButton;
-    private JTextField textField1;
+    public JTextField pesoTextField;
+    private JLabel pesoJLabel;
     private JButton consultarButton;
     private Model modeloPrincipal;
     private Caja caja;
@@ -50,20 +45,32 @@ public class CajaView extends JFrame {
         preciosList = new ArrayList<>();
         rellenarComboBox();
 
+        secoCheckBox.addItemListener(new ItemListener(){
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(secoCheckBox.isSelected())
+                    pesoTextField.setEnabled(false);
+                else
+                    pesoTextField.setEnabled(true);
+                panel1.validate();
+                panel1.repaint();
+            }
+        });
+
         agregarALaListaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(secoCheckBox.isSelected() && !textField3.getText().equals("")){
+                    //Deshabilitar campo de peso
                     String c = textField3.getText();
                     assert c != null;
                     int sec = Integer.parseInt(c);
                     Seco seco;
-                    SecoDAO secoDAO = new SecoDAO(servicio.getUsuarioActual().getNombre(), servicio.getUsuarioActual().getPassword());
                     try {
-                        seco = secoDAO.findById(sec);
+                        seco = servicio.findSecoById(sec);
                         if(seco.getCantidad() > 0){
                             preciosList.add(seco.getPrecio());
-                            secoDAO.updateInventario(seco.getCantidad() - 1, seco.getIdSeco());
+                            servicio.updateInventarioSeco(seco.getCantidad() - 1, seco.getIdSeco());
                             secoCheckBox.setSelected(false);
                             textField3.setText("");
                         }
@@ -78,22 +85,27 @@ public class CajaView extends JFrame {
                     }
                 }
                 else if(!secoCheckBox.isSelected() && !textField3.getText().equals("")){
+                    //Deshabilitar campo de peso
                     String c = textField3.getText();
                     assert c != null;
                     int sec = Integer.parseInt(c);
                     Fresco fresco;
-                    FrescoDAO frescoDAO = new FrescoDAO(servicio.getUsuarioActual().getNombre(), servicio.getUsuarioActual().getPassword());
                     try {
-                        fresco = frescoDAO.findById(sec);
-                        if(fresco.getCantidad() > 0) {
-                            preciosList.add(fresco.getPrecio());
-                            frescoDAO.updateInventario(fresco.getCantidad() - 1, fresco.getIdFresco());
-                            secoCheckBox.setSelected(false);
-                            textField3.setText("");
+                        fresco = servicio.findFrescoById(sec);
+                        double pesoFresco = 0;
+                        if(servicio.esNumero(pesoTextField.getText())) {
+                            pesoFresco = Double.parseDouble(pesoTextField.getText());
+                            if(fresco.getCantidad() > 0) {
+                                preciosList.add(fresco.getPrecio());
+                                servicio.updateInventarioFresco(fresco.getPeso() - pesoFresco, fresco.getIdFresco());
+                                secoCheckBox.setSelected(false);
+                                textField3.setText("");
+                            }
+                            else
+                                JOptionPane.showMessageDialog(panel1, "No hay mas productos de este tipo en inventario");
                         }
-                        else{
-                            JOptionPane.showMessageDialog(panel1, "No hay mas productos de este tipo en inventario");
-                        }
+                        else
+                            JOptionPane.showMessageDialog(panel1, "El campo para peso solo debe contener numeros");
                     } catch (SQLException ex){
                         System.out.println(ex.toString());
                     } catch (NullPointerException nu){
@@ -126,9 +138,8 @@ public class CajaView extends JFrame {
                     assert c != null;
                     int sec = Integer.parseInt(c);
                     Seco seco;
-                    SecoDAO secoDAO = new SecoDAO(servicio.getUsuarioActual().getNombre(), servicio.getUsuarioActual().getPassword());
                     try {
-                        seco = secoDAO.findById(sec);
+                        seco = servicio.findSecoById(sec);
                         JOptionPane.showMessageDialog(panel1, seco.getPrecio());
                     } catch (SQLException ex){
                         System.out.println(ex.toString());
@@ -141,9 +152,8 @@ public class CajaView extends JFrame {
                     assert c != null;
                     int sec = Integer.parseInt(c);
                     Fresco fresco;
-                    FrescoDAO frescoDAO = new FrescoDAO(servicio.getUsuarioActual().getNombre(), servicio.getUsuarioActual().getPassword());
                     try {
-                        fresco = frescoDAO.findById(sec);
+                        fresco = servicio.findFrescoById(sec);
                         JOptionPane.showMessageDialog(panel1, fresco.getPrecio());
                     } catch (SQLException ex){
                         System.out.println(ex.toString());
@@ -159,22 +169,14 @@ public class CajaView extends JFrame {
     }
 
     public void rellenarComboBox () {
+        List<Caja> cajasList = servicio.listaCajas();
 
-        CajaDAO caja = new CajaDAO(this.servicio.getUsuarioActual().getNombre(), this.servicio.getUsuarioActual().getPassword());
-
-        try {
-            List<Caja> cajasList = caja.findAll();
-
-            for(int index = 0; index < cajasList.size(); index++){
-                if(cajasList.get(index).getUsuario().toString().equals(this.servicio.getUsuarioActual().getNombre())){
-                    System.out.println(cajasList.get(index).getUsuario().toString());
-                    this.comboBox1.addItem(cajasList.get(index).getIdCaja());
-                }
+        for(int index = 0; index < cajasList.size(); index++){
+            if(cajasList.get(index).getUsuario().toString().equals(this.servicio.getUsuarioActual().getNombre())){
+                System.out.println(cajasList.get(index).getUsuario().toString());
+                this.comboBox1.addItem(cajasList.get(index).getIdCaja());
             }
-        } catch (SQLException ex){
-            System.out.println(ex.toString());
         }
-
     }
 
     public void registrarVenta(){
@@ -182,25 +184,18 @@ public class CajaView extends JFrame {
         for (int index = 0; index < preciosList.size(); index++) {
             precio = precio + (double) preciosList.get(index);
         }
-        FacturaDAO facturaDAO = new FacturaDAO(this.servicio.getUsuarioActual().getNombre(), this.servicio.getUsuarioActual().getPassword());
-        try {
-            java.util.Date d = new java.util.Date();
-            Date date = new Date(d.getTime());
-            String c = this.comboBox1.getSelectedItem().toString();
-            assert c != null;
-            int caja = Integer.parseInt(c);
-            System.out.println(precio);
-            Factura factura = new Factura(0, 0, date, precio, this.servicio.getUsuarioActual().getNombre(), caja);
-            if(precio > 0){
-                facturaDAO.insertarFactura(factura);
-            }
-            else{
-                JOptionPane.showMessageDialog(panel1, "Debe ingresar al menos un artículo");
-            }
-
+        java.util.Date d = new java.util.Date();
+        Date date = new Date(d.getTime());
+        String c = this.comboBox1.getSelectedItem().toString();
+        assert c != null;
+        int caja = Integer.parseInt(c);
+        System.out.println(precio);
+        Factura factura = new Factura(0, 0, date, precio, this.servicio.getUsuarioActual().getNombre(), caja);
+        if(precio > 0){
+            servicio.insertarFactura(factura);
         }
-        catch (SQLException ex){
-            System.out.println(ex.toString());
+        else{
+            JOptionPane.showMessageDialog(panel1, "Debe ingresar al menos un artículo");
         }
     }
 }

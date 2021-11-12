@@ -11,10 +11,6 @@ public class CajaDAO {
 
     private JdbcUtil jdbcUtil;
 
-    public CajaDAO(String DB_USER, String DB_PASSWORD) {
-        this.jdbcUtil = JdbcUtil.instance(DB_USER, DB_PASSWORD);
-    }
-
     public CajaDAO(JdbcUtil jdbcUtil) {
         this.jdbcUtil = jdbcUtil;
     }
