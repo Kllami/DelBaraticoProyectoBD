@@ -84,9 +84,11 @@ public class JdbcUtil {
 
     public ResultSet executeQuery(String query) {
         try {
+            System.out.println(query);
             statement = dbConnection.createStatement();
             return statement.executeQuery(query);
         } catch (SQLException ex) {
+            System.out.println(ex.toString());
         }
         return null;
     }

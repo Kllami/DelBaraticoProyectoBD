@@ -9,9 +9,9 @@ public class Factura {
   private java.sql.Date fecha;
   private double total;
   private String usuario;
-  private Caja numCaja;
+  private int numCaja;
 
-  public Factura(int idFactura, int numero, Date fecha, double total, String usuario, Caja numCaja) {
+  public Factura(int idFactura, int numero, Date fecha, double total, String usuario, int numCaja) {
     this.idFactura = idFactura;
     this.numero = numero;
     this.fecha = fecha;
@@ -65,11 +65,11 @@ public class Factura {
   }
 
 
-  public Caja getNumCaja() {
+  public int getNumCaja() {
     return numCaja;
   }
 
-  public void setNumCaja(Caja numCaja) {
+  public void setNumCaja(int numCaja) {
     this.numCaja = numCaja;
   }
 

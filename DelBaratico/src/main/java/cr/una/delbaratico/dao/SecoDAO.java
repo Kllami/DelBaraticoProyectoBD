@@ -22,17 +22,18 @@ public class SecoDAO {
 
     public Seco findById(int idSeco) throws SQLException {
         Seco seco = null;
-        String sql = "SELECT * FROM seco where id_seco = %d";
+        String sql = "SELECT * FROM system.seco where id_seco = %d";
         sql = String.format(sql, idSeco);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
-            AreaDAO areaDAO = new AreaDAO(jdbcUtil);
-            Area area = areaDAO.findById(resultSet.getInt("area_id"));
+            /*AreaDAO areaDAO = new AreaDAO(jdbcUtil);
+            Area area = areaDAO.findById(resultSet.getInt("area_id"));*/
             seco = new Seco(resultSet.getInt("id_seco"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getInt("cantidad"), area);
+                    resultSet.getInt("cantidad"),
+                    resultSet.getInt("area_id"));
         }
         resultSet.close();
         return seco;
@@ -40,7 +41,7 @@ public class SecoDAO {
 
     public List<Seco> findAll() throws SQLException {
         List<Seco> secosList = new ArrayList<>();
-        String sql = "SELECT * FROM seco";
+        String sql = "SELECT * FROM system.seco";
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
@@ -49,7 +50,8 @@ public class SecoDAO {
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getInt("cantidad"), area);
+                    resultSet.getInt("cantidad"),
+                    resultSet.getInt("area_id"));
             secosList.add(seco);
         }
         resultSet.close();

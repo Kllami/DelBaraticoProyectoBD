@@ -2,9 +2,13 @@ package main.java.cr.una.delbaratico.dao;
 
 import main.java.cr.una.delbaratico.model.Caja;
 import main.java.cr.una.delbaratico.model.Factura;
+import main.java.cr.una.delbaratico.model.Usuario;
+import oracle.sql.DATE;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +36,8 @@ public class FacturaDAO {
                     resultSet.getInt("numero"),
                     resultSet.getDate("fecha"),
                     resultSet.getDouble("total"),
-                    resultSet.getString("usuario"), caja);
+                    resultSet.getString("usuario"),
+                    resultSet.getInt("num_caja"));
         }
         resultSet.close();
         return factura;
@@ -49,11 +54,18 @@ public class FacturaDAO {
                     resultSet.getInt("numero"),
                     resultSet.getDate("fecha"),
                     resultSet.getDouble("total"),
-                    resultSet.getString("usuario"), caja);
+                    resultSet.getString("usuario"),
+                    resultSet.getInt("num_caja"));
             facturasList.add(factura);
         }
         resultSet.close();
         return facturasList;
     }
-    
+
+    public void insertarFactura(Factura factura) throws SQLException {
+        String sql = "INSERT INTO system.factura(numero, fecha, total, usuario, num_caja) VALUES " +
+                "(numero_factura_seq.NEXTVAL, " + "TO_DATE(" + "'" + factura.getFecha() + "'" + ", 'YYYY-MM-DD HH:MI:SS')" + ", " + factura.getTotal()+ ", "
+                + "'" + factura.getUsuario() +  "'" +  ", " + factura.getNumCaja() + ")";
+        jdbcUtil.executeQuery(sql);
+    }
 }
