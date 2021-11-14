@@ -57,7 +57,7 @@ public class FrescoDAO {
     public List<Fresco> findSimilarPercentDesc(String desripcion) throws SQLException {
         List<Fresco> frescosList = new ArrayList<>();
         String sql = "SELECT system.fresco.*, UTL_MATCH.edit_distance_similarity('%s', system.fresco.descripcion) " +
-                "AS SIMILARITY_PERCENT FROM system.fresco ORDER BY SIMILARITY_PERCENT DESC";
+                "AS SIMILARITY_PERCENT FROM system.fresco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, desripcion);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);

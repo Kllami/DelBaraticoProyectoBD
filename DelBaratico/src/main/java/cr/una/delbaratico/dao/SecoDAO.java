@@ -64,7 +64,7 @@ public class SecoDAO {
     public List<Seco> findSimilarPercentDesc(String desripcion) throws SQLException {
         List<Seco> secosList = new ArrayList<>();
         String sql = "SELECT system.seco.*, UTL_MATCH.edit_distance_similarity('%s', system.seco.descripcion) " +
-                "AS SIMILARITY_PERCENT FROM system.seco ORDER BY SIMILARITY_PERCENT DESC";
+                "AS SIMILARITY_PERCENT FROM system.seco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, desripcion);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);

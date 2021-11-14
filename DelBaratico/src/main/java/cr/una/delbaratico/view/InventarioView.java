@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -91,19 +92,53 @@ public class InventarioView extends JFrame {
         }
 
         this.todosProductosList = this.servicio.ordenarProductosDeAcuerdoSimilitud(todosProductosList, descripcionUsuario);
+        Collections.reverse(this.todosProductosList);
 
-        this.columnasTabla = new Vector<String>();
-        this.columnasTabla.add("ID");
-        this.columnasTabla.add("EAN");
-        this.columnasTabla.add("Descripcion");
-        this.columnasTabla.add("Precio");
-        this.columnasTabla.add("Cantidad");
-        this.columnasTabla.add("AreaID");
-        this.columnasTabla.add("PLU");
-        this.columnasTabla.add("Peso");
+        this.model = new DefaultTableModel();
 
-        this.model = new DefaultTableModel(this.columnasTabla, this.todosProductosList.size());
+        model.addColumn("ID");
+        model.addColumn("EAN");
+        model.addColumn("Descripcion");
+        model.addColumn("Precio");
+        model.addColumn("Cantidad");
+        model.addColumn("AreaID");
+        model.addColumn("PLU");
+        model.addColumn("Peso");
+
+        for(Producto producto: this.todosProductosList) {
+            Vector<Object> row = new Vector<Object>();
+
+            ID = producto.getID();
+            ean = producto.getEan();
+            descripcion = producto.getDescripcion();
+            precio = producto.getPrecio();
+            cantidad = producto.getCantidad();
+            areaId = producto.getCantidad();
+            plu = producto.getPlu();
+            peso = producto.getPeso();
+
+            model.addRow(new Object[]{ID,ean,descripcion,precio,cantidad,areaId,plu,peso});
+        }
+
         this.productosJTable = new JTable(this.model);
+        this.jScrollPanel.setViewportView(productosJTable);
+
+        /*this.model = new DefaultTableModel(this.columnasTabla, this.todosProductosList.size());
+
+        for(Producto producto: this.todosProductosList) {
+            Vector<Object> row = new Vector<Object>();
+            row.add(producto.getID());
+            row.add(producto.getEan());
+            row.add(producto.getDescripcion());
+            row.add(producto.getPrecio());
+            row.add(producto.getCantidad());
+            row.add(producto.getAreaId());
+            row.add(producto.getPlu());
+            row.add(producto.getPeso());
+            model.addRow(row);
+        }
+
+        this.productosJTable = new JTable(this.model);*/
     }
 
     private void ajustarMenus() {
@@ -156,11 +191,14 @@ public class InventarioView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(String.valueOf(buscarJComboBox.getSelectedItem()).equals("Descripción")){
-                    String descripcion = buscarTextField.getText();
+                    String descripcion = buscarTextField.getText().trim();
                     if(!servicio.esNumero(descripcion) && !descripcion.equals("")){
                         fillTabla(descripcion);
-                        panelPrincipal.validate();
-                        panelPrincipal.repaint();
+                        //jScrollPanel.revalidate();
+                        //jScrollPanel.repaint();
+                        //panelPrincipal.revalidate();
+                        //panelPrincipal.repaint();
+
                     }
 
                 }else{
