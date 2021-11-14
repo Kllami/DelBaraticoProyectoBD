@@ -60,5 +60,24 @@ public class SecoDAO {
         resultSet.close();
         return secosList;
     }
-    
+
+    public List<Seco> findSimilarPercentDesc(String desripcion) throws SQLException {
+        List<Seco> secosList = new ArrayList<>();
+        String sql = "SELECT system.seco.*, UTL_MATCH.edit_distance_similarity('%s', system.seco.descripcion) " +
+                "AS SIMILARITY_PERCENT FROM system.seco ORDER BY SIMILARITY_PERCENT DESC";
+        sql = String.format(sql, desripcion);
+        ResultSet resultSet = jdbcUtil.executeQuery(sql);
+        AreaDAO areaDAO = new AreaDAO(jdbcUtil);
+        while(resultSet.next()) {
+            Seco seco = new Seco(resultSet.getInt("id_seco"),
+                    resultSet.getLong("ean"),
+                    resultSet.getString("descripcion"),
+                    resultSet.getDouble("precio"),
+                    resultSet.getInt("cantidad"),
+                    resultSet.getInt("area_id"));
+            secosList.add(seco);
+        }
+        resultSet.close();
+        return secosList;
+    }
 }

@@ -2,6 +2,7 @@ package main.java.cr.una.delbaratico.model;
 
 import main.java.cr.una.delbaratico.dao.*;
 
+import java.security.spec.ECField;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -86,5 +87,23 @@ public class Model extends Observable {
 
     public void insertarFactura(Factura factura){
         this.facturaDAO.insertarFactura(factura);
+    }
+
+    public List<Seco> buscarSecosXDescripcion(String descripcion) {
+        try{
+            return this.secoDAO.findSimilarPercentDesc(descripcion);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Fresco> buscarFrescosXDescripcion(String descripcion) {
+        try{
+            return this.frescoDAO.findSimilarPercentDesc(descripcion);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
     }
 }

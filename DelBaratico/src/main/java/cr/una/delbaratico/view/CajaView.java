@@ -96,7 +96,7 @@ public class CajaView extends JFrame {
                         double pesoFresco = 0;
                         if(servicio.esNumero(pesoTextField.getText())) {
                             pesoFresco = Double.parseDouble(pesoTextField.getText());
-                            if(fresco.getCantidad() > 0) {
+                            if(fresco.getPeso() > 0) {
                                 preciosList.add(fresco.getPrecio());
                                 servicio.updateInventarioFresco(fresco.getPeso() - pesoFresco, fresco.getIdFresco());
                                 secoCheckBox.setSelected(false);

@@ -13,8 +13,6 @@ public class HomeView extends JFrame {
     private JButton facturasViewButton;
     private JButton bitacorasViewButton;
     private JButton inventarioViewButton;
-
-
     private CajaView cajaView;
     private FacturasView facturasView;
     private BitacorasView bitacorasView;
@@ -27,22 +25,23 @@ public class HomeView extends JFrame {
 
     public HomeView(ServiceController servicio) {
         this.servicio = servicio;
+        this.ajustarMenus();
+        this.initComponents();
+        this.iniciarListeners();
+    }
+
+    public void initComponents(){
         this.panel1.setPreferredSize(new Dimension(400,100));
         this.setContentPane(panel1);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        //setMinimumSize(new Dimension(300,100));
         this.setTitle("DelBaratico Home");
         this.cajaViewButton.setText("Modulo de cajas");
         this.facturasViewButton.setText("Modulo de facturas");
         this.bitacorasViewButton.setText("Modulo de bitacoras");
         this.inventarioViewButton.setText("Modulo de inventario");
-
-        this.ajustarMenus();
-
-        this.iniciarListeners();//Siempre se llama de ultimo
     }
 
 
