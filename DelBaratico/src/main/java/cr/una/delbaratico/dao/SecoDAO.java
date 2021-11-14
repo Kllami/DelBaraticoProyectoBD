@@ -83,7 +83,7 @@ public class SecoDAO {
 
     public List<Seco> findSimilarPercentEAN(String ean) throws SQLException {
         List<Seco> secosList = new ArrayList<>();
-        String sql = "SELECT system.seco.*, UTL_MATCH.edit_distance_similarity('%s', system.seco.ean) " +
+        String sql = "SELECT system.seco.*, UTL_MATCH.edit_distance_similarity(%s, system.seco.ean) " +
                 "AS SIMILARITY_PERCENT FROM system.seco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
@@ -118,10 +118,10 @@ public class SecoDAO {
         return null;
     }
 
-    public void add(Seco seco) {
+    public int add(Seco seco) {
         String sql = "INSERT INTO system.seco(ean, descripcion, precio, cantidad, area_id) VALUES " +
                 "(%d, '%s', %f, %d, %d)";
-        String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId());
-        jdbcUtil.executeQuery(sql);
+        sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId());
+        return jdbcUtil.executeUpdate(sql);
     }
 }

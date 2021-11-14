@@ -3,6 +3,7 @@ package main.java.cr.una.delbaratico.service;
 import main.java.cr.una.delbaratico.dao.JdbcUtil;
 import main.java.cr.una.delbaratico.model.*;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -178,12 +179,12 @@ public class ServiceController {
         return productos;
     }
 
-    public void addFresco(Fresco fresco) {
-        this.modeloPrincipal.addFresco(fresco);
+    public int addFresco(Fresco fresco) {
+        return this.modeloPrincipal.addFresco(fresco);
     }
 
-    public void addSeco(Seco seco) {
-        this.modeloPrincipal.addSeco(seco);
+    public int addSeco(Seco seco) {
+        return this.modeloPrincipal.addSeco(seco);
     }
 
     public Seco findSecoXEAN(Long ean){
@@ -193,4 +194,10 @@ public class ServiceController {
     public Fresco findFrescoXEAN(Long ean){
         return this.modeloPrincipal.findFrescoXEAN(ean);
     }
+
+    public Fresco findFrescoXPLU(Integer plu) {
+        return this.modeloPrincipal.findFrescoXPLU(plu);
+    }
+
+    public List<Integer> areasIDS() { return this.modeloPrincipal.areasIDS();}
 }

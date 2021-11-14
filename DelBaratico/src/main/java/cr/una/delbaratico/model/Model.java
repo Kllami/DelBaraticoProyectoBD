@@ -3,6 +3,7 @@ package main.java.cr.una.delbaratico.model;
 import main.java.cr.una.delbaratico.dao.*;
 
 import java.security.spec.ECField;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -144,12 +145,12 @@ public class Model extends Observable {
         return null;
     }
 
-    public void addFresco(Fresco fresco) {
-        this.frescoDAO.add(fresco);
+    public int addFresco(Fresco fresco) {
+        return this.frescoDAO.add(fresco);
     }
 
-    public void addSeco(Seco seco) {
-        this.secoDAO.add(seco);
+    public int addSeco(Seco seco) {
+        return this.secoDAO.add(seco);
     }
 
     public Seco findSecoXEAN(Long ean){
@@ -165,6 +166,24 @@ public class Model extends Observable {
         try{
             return this.frescoDAO.findByEAN(ean);
         }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public Fresco findFrescoXPLU(Integer plu) {
+        try{
+            return this.frescoDAO.findByPLU(plu);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Integer> areasIDS() {
+        try {
+            return this.areaDAO.areasIDS();
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         return null;

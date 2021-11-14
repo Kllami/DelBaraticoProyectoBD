@@ -81,7 +81,7 @@ public class InventarioView extends JFrame {
         }
 
         if(this.secosList.size() + this.frescosList.size() == 0)
-            JOptionPane.showMessageDialog(this.panelPrincipal, "No existen productos con la descripcion brindada");
+            JOptionPane.showMessageDialog(this.panelPrincipal, "No existen productos con el/la " + criterioBusqueda + " brindada(o)");
 
         this.todosProductosList = new ArrayList<>();
         String ID, ean, descripcion, precio, cantidad, areaId, plu, peso;
