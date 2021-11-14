@@ -43,28 +43,21 @@ public class HomeView extends JFrame {
         this.ajustarMenus();
 
         this.iniciarListeners();//Siempre se llama de ultimo
+
     }
 
 
 
     public void iniciarListeners(){
-        this.itemSalir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        this.itemSalir.addActionListener(e -> System.exit(0));
 
-        this.inventarioViewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                inventarioView = new InventarioView(servicio);
-            }
-        });
+        this.inventarioViewButton.addActionListener(e -> inventarioView = new InventarioView(servicio));
 
         this.cajaViewButton.addActionListener(e -> { cajaView = new CajaView(servicio); });
 
-        this.bitacorasViewButton.addActionListener( e -> {bitacorasView = new BitacorasView(servicio); } );
+        this.bitacorasViewButton.addActionListener( e -> { bitacorasView = new BitacorasView(servicio); } );
+
+        this.facturasViewButton.addActionListener(e -> { facturasView = new FacturasView(servicio); });
     }
 
     private void ajustarMenus() {

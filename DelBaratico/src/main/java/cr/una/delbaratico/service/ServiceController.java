@@ -56,4 +56,9 @@ public class ServiceController {
     public void insertarFactura(Factura factura){
         this.modeloPrincipal.insertarFactura(factura);
     }
+
+    public List<Factura> listaFacturas() {
+        return this.modeloPrincipal.listaFacturas();
+    }
+
 }
