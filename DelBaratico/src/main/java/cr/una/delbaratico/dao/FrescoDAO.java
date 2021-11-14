@@ -16,16 +16,16 @@ public class FrescoDAO {
         this.jdbcUtil = jdbcUtil;
     }
 
-    public Fresco findById(int idFresco) throws SQLException {
+    public Fresco findById(double idFresco) throws SQLException {
         Fresco fresco = null;
-        String sql = "SELECT * FROM system.fresco where id_fresco = %d";
+        String sql = "SELECT * FROM system.fresco where id_fresco = %f";
         sql = String.format(sql, idFresco);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
-            fresco = new Fresco(resultSet.getInt("id_fresco"),
-                    resultSet.getInt("plu"),
+            fresco = new Fresco(resultSet.getDouble("id_fresco"),
+                    resultSet.getDouble("plu"),
                     resultSet.getDouble("peso"),
-                    resultSet.getLong("ean"),
+                    resultSet.getDouble("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"));
         }
@@ -33,8 +33,8 @@ public class FrescoDAO {
         return fresco;
     }
 
-    public void updateInventario(double peso, int idFresco) {
-        String sql = "update system.fresco set peso = " + peso + " where id_fresco = %d";
+    public void updateInventario(double peso, double idFresco) {
+        String sql = "update system.fresco set peso = " + peso + " where id_fresco = %f";
         sql = String.format(sql, idFresco);
         jdbcUtil.executeQuery(sql);
     }
@@ -44,10 +44,10 @@ public class FrescoDAO {
         String sql = "SELECT * FROM system.fresco";
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         while(resultSet != null && resultSet.next()) {
-            Fresco fresco = new Fresco(resultSet.getInt("id_fresco"),
-                    resultSet.getInt("plu"),
+            Fresco fresco = new Fresco(resultSet.getDouble("id_fresco"),
+                    resultSet.getDouble("plu"),
                     resultSet.getDouble("peso"),
-                    resultSet.getLong("ean"),
+                    resultSet.getDouble("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("peso"));
             frescosList.add(fresco);
@@ -64,10 +64,10 @@ public class FrescoDAO {
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
-            Fresco fresco = new Fresco(resultSet.getInt("id_fresco"),
-                    resultSet.getInt("plu"),
+            Fresco fresco = new Fresco(resultSet.getDouble("id_fresco"),
+                    resultSet.getDouble("plu"),
                     resultSet.getDouble("peso"),
-                    resultSet.getLong("ean"),
+                    resultSet.getDouble("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("peso"));
             frescosList.add(fresco);
@@ -76,18 +76,18 @@ public class FrescoDAO {
         return frescosList;
     }
 
-    public List<Fresco> findSimilarPercentEAN(String ean) throws SQLException {
+    public List<Fresco> findSimilarPercentEAN(double ean) throws SQLException {
         List<Fresco> frescosList = new ArrayList<>();
-        String sql = "SELECT system.fresco.*, UTL_MATCH.edit_distance_similarity(%s, system.fresco.ean) " +
+        String sql = "SELECT system.fresco.*, UTL_MATCH.edit_distance_similarity(%f, system.fresco.ean) " +
                 "AS SIMILARITY_PERCENT FROM system.fresco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
-            Fresco fresco = new Fresco(resultSet.getInt("id_fresco"),
-                    resultSet.getInt("plu"),
+            Fresco fresco = new Fresco(resultSet.getDouble("id_fresco"),
+                    resultSet.getDouble("plu"),
                     resultSet.getDouble("peso"),
-                    resultSet.getLong("ean"),
+                    resultSet.getDouble("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("peso"));
             frescosList.add(fresco);
@@ -96,18 +96,18 @@ public class FrescoDAO {
         return frescosList;
     }
 
-    public List<Fresco> findSimilarPercentPLU(String plu) throws SQLException {
+    public List<Fresco> findSimilarPercentPLU(double plu) throws SQLException {
         List<Fresco> frescosList = new ArrayList<>();
-        String sql = "SELECT system.fresco.*, UTL_MATCH.edit_distance_similarity(%s, system.fresco.plu) " +
+        String sql = "SELECT system.fresco.*, UTL_MATCH.edit_distance_similarity(%f, system.fresco.plu) " +
                 "AS SIMILARITY_PERCENT FROM system.fresco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, plu);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
-            Fresco fresco = new Fresco(resultSet.getInt("id_fresco"),
-                    resultSet.getInt("plu"),
+            Fresco fresco = new Fresco(resultSet.getDouble("id_fresco"),
+                    resultSet.getDouble("plu"),
                     resultSet.getDouble("peso"),
-                    resultSet.getLong("ean"),
+                    resultSet.getDouble("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("peso"));
             frescosList.add(fresco);
@@ -116,15 +116,15 @@ public class FrescoDAO {
         return frescosList;
     }
 
-    public Fresco findByEAN(Long ean) throws SQLException {
-        String sql = "SELECT * FROM system.fresco where ean = %d";
+    public Fresco findByEAN(double ean) throws SQLException {
+        String sql = "SELECT * FROM system.fresco where ean = %f";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
-            Fresco fresco = new Fresco(resultSet.getInt("id_fresco"),
-                    resultSet.getInt("plu"),
+            Fresco fresco = new Fresco(resultSet.getDouble("id_fresco"),
+                    resultSet.getDouble("plu"),
                     resultSet.getDouble("peso"),
-                    resultSet.getLong("ean"),
+                    resultSet.getDouble("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("peso"));
             return fresco;
@@ -133,15 +133,15 @@ public class FrescoDAO {
         return null;
     }
 
-    public Fresco findByPLU(Integer plu) throws SQLException {
-        String sql = "SELECT * FROM system.fresco where plu = %d";
+    public Fresco findByPLU(double plu) throws SQLException {
+        String sql = "SELECT * FROM system.fresco where plu = %f";
         sql = String.format(sql, plu);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
-            Fresco fresco = new Fresco(resultSet.getInt("id_fresco"),
-                    resultSet.getInt("plu"),
+            Fresco fresco = new Fresco(resultSet.getDouble("id_fresco"),
+                    resultSet.getDouble("plu"),
                     resultSet.getDouble("peso"),
-                    resultSet.getLong("ean"),
+                    resultSet.getDouble("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("peso"));
             return fresco;
@@ -152,7 +152,7 @@ public class FrescoDAO {
 
     public int add(Fresco fresco) {
         String sql = "INSERT INTO system.fresco(plu, peso, ean, descripcion, precio) VALUES " +
-                "(%d, %f, %d, '%s', %f)";
+                "(%f, %f, %f, '%s', %f)";
         sql = String.format(sql, fresco.getPlu(), fresco.getPeso(), fresco.getEan(), fresco.getDescripcion(), fresco.getPrecio());
         return jdbcUtil.executeUpdate(sql);
     }

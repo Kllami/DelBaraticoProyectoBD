@@ -61,7 +61,7 @@ public class Model extends Observable {
         return this.usuarioDao.getUsuarioActual();
     }
 
-    public Seco findSecoById(int idSeco) {
+    public Seco findSecoById(double idSeco) {
         try{
             return this.secoDAO.findById(idSeco);
         }catch (Exception e){
@@ -70,11 +70,11 @@ public class Model extends Observable {
         return null;
     }
 
-    public void updateInventarioSeco(int cantidad, int idSeco){
+    public void updateInventarioSeco(double cantidad, double idSeco){
         this.secoDAO.updateInventario(cantidad, idSeco);
     }
 
-    public Fresco findFrescoById(int idFresco) {
+    public Fresco findFrescoById(double idFresco) {
         try{
             return this.frescoDAO.findById(idFresco);
         }catch (Exception e){
@@ -83,7 +83,7 @@ public class Model extends Observable {
         return null;
     }
 
-    public void updateInventarioFresco(double peso, int idFresco) {
+    public void updateInventarioFresco(double peso, double idFresco) {
         this.frescoDAO.updateInventario(peso, idFresco);
     }
 
@@ -109,7 +109,7 @@ public class Model extends Observable {
         return null;
     }
 
-    public List<Seco> buscarSecosXEAN(String EAN) {
+    public List<Seco> buscarSecosXEAN(double EAN) {
         try{
             return this.secoDAO.findSimilarPercentEAN(EAN);
         }catch (Exception e){
@@ -127,7 +127,7 @@ public class Model extends Observable {
         return null;
     }
 
-    public List<Fresco> buscarFrescosXEAN(String EAN) {
+    public List<Fresco> buscarFrescosXEAN(double EAN) {
         try{
             return this.frescoDAO.findSimilarPercentEAN(EAN);
         }catch (Exception e){
@@ -136,7 +136,7 @@ public class Model extends Observable {
         return null;
     }
 
-    public List<Fresco> buscarFrescosXPLU(String PLU) {
+    public List<Fresco> buscarFrescosXPLU(double PLU) {
         try{
             return this.frescoDAO.findSimilarPercentPLU(PLU);
         }catch (Exception e){
@@ -153,7 +153,7 @@ public class Model extends Observable {
         return this.secoDAO.add(seco);
     }
 
-    public Seco findSecoXEAN(Long ean){
+    public Seco findSecoXEAN(double ean){
         try{
             return this.secoDAO.findByEAN(ean);
         }catch (Exception e){
@@ -162,7 +162,7 @@ public class Model extends Observable {
         return null;
     }
 
-    public Fresco findFrescoXEAN(Long ean){
+    public Fresco findFrescoXEAN(double ean){
         try{
             return this.frescoDAO.findByEAN(ean);
         }catch (Exception e){
@@ -171,7 +171,7 @@ public class Model extends Observable {
         return null;
     }
 
-    public Fresco findFrescoXPLU(Integer plu) {
+    public Fresco findFrescoXPLU(double plu) {
         try{
             return this.frescoDAO.findByPLU(plu);
         }catch (Exception e){

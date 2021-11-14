@@ -342,33 +342,15 @@ public class VentanaAgregarEditar extends JFrame{
                 String areaID = String.valueOf(areaComboBox.getSelectedItem()).trim();
                 String plu = pluTextField.getText().trim();
                 String peso = pesoTextField.getText().trim();
-
                 String mensajeIntroduzca = "Introduzca la información aquí...";
+
                 if (String.valueOf(tipoProdComboBox.getSelectedItem()).equals("Fresco")) {
-                    if (ean.equals(mensajeIntroduzca) || descripcion.equals(mensajeIntroduzca) ||
-                            precio.equals(mensajeIntroduzca) || plu.equals(mensajeIntroduzca) ||
-                            peso.equals(mensajeIntroduzca))
-                        JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar que información buscar");
-                    else if (ean.equals("") || descripcion.equals("") || precio.equals("") ||
-                            plu.equals("") || peso.equals(""))
-                        JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar que información buscar");
-                    else if (!servicio.esNumero(ean))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo EAN contiene letras");
-                    else if (servicio.esNumero(descripcion))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo Descripcion contiene numeros");
-                    else if (!servicio.esNumero(precio))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo Precio contiene letras");
-                    else if (!servicio.esNumero(plu))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo PLU contiene letras");
-                    else if (!servicio.esNumero(peso))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo Peso contiene letras");
-                    else {
-                        //
-                        if (servicio.findFrescoXEAN(Long.valueOf(ean)) != null || servicio.findFrescoXPLU(Integer.valueOf(plu)) != null ||
-                                servicio.findSecoXEAN(Long.valueOf(ean)) != null)
+                    if (verificarValoresCorrectosFresco(ean, descripcion, precio, plu, peso, mensajeIntroduzca)){
+                        if (servicio.findFrescoXEAN(Double.valueOf(ean)) != null || servicio.findFrescoXPLU(Double.valueOf(plu)) != null ||
+                                servicio.findSecoXEAN(Double.valueOf(ean)) != null)
                             JOptionPane.showMessageDialog(panelPrincipal, "Ya existe un producto con el codigo EAN o el codigo PLU introducido");
                         else {
-                            fresco = new Fresco(-1, Integer.valueOf(plu), Double.valueOf(peso), Long.valueOf(ean),
+                            fresco = new Fresco(-1, Double.valueOf(plu), Double.valueOf(peso), Double.valueOf(ean),
                                     descripcion, Double.valueOf(precio));
                             if (servicio.addFresco(fresco) > 0)
                                 JOptionPane.showMessageDialog(panelPrincipal, "Producto agregado");
@@ -377,30 +359,12 @@ public class VentanaAgregarEditar extends JFrame{
                         }
                     }
                 } else if (String.valueOf(tipoProdComboBox.getSelectedItem()).equals("Seco")){
-                    if (ean.equals(mensajeIntroduzca) || descripcion.equals(mensajeIntroduzca) ||
-                            precio.equals(mensajeIntroduzca) || cantidad.equals(mensajeIntroduzca) ||
-                            areaID.equals("Seleccione..."))
-                        JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar que información buscar");
-                    else if (ean.equals("") || descripcion.equals("") || precio.equals("") || cantidad.equals("") ||
-                            areaID.equals(""))
-                        JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar que información buscar");
-                    else if (!servicio.esNumero(ean))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo EAN contiene letras");
-                    else if (servicio.esNumero(descripcion))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo Descripcion contiene numeros");
-                    else if (!servicio.esNumero(precio))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo Precio contiene letras");
-                    else if (!servicio.esNumero(cantidad))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo Cantidad contiene letras");
-                    else if (!servicio.esNumero(areaID))
-                        JOptionPane.showMessageDialog(panelPrincipal, "El campo Area ID contiene letras");
-                    else {
-                        //
-                        if (servicio.findFrescoXEAN(Long.valueOf(ean)) != null ||servicio.findSecoXEAN(Long.valueOf(ean)) != null)
+                    if (verificarValoresCorrectosSeco(ean, descripcion, precio, cantidad, areaID, mensajeIntroduzca)){
+                        if (servicio.findFrescoXEAN(Double.valueOf(ean)) != null ||servicio.findSecoXEAN(Double.valueOf(ean)) != null)
                             JOptionPane.showMessageDialog(panelPrincipal, "Ya existe un producto con el codigo EAN o el codigo PLU introducido");
                         else {
-                            seco = new Seco(-1, Long.valueOf(ean), descripcion, Double.valueOf(precio),
-                                    Integer.valueOf(cantidad), Integer.valueOf(areaID));
+                            seco = new Seco(-1, Double.valueOf(ean), descripcion, Double.valueOf(precio),
+                                    Double.valueOf(cantidad), Double.valueOf(areaID));
                             if (servicio.addSeco(seco) > 0)
                                 JOptionPane.showMessageDialog(panelPrincipal, "Producto agregado");
                             else
@@ -412,5 +376,67 @@ public class VentanaAgregarEditar extends JFrame{
                 }
             }
         });
+    }
+
+    public boolean verificarValoresCorrectosFresco(String ean, String descripcion, String precio, String plu, String peso, String mensajeIntroduzca){
+        boolean result = true;
+
+        if (ean.equals(mensajeIntroduzca) || descripcion.equals(mensajeIntroduzca) ||
+                precio.equals(mensajeIntroduzca) || plu.equals(mensajeIntroduzca) ||
+                peso.equals(mensajeIntroduzca)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar que información buscar");
+        }else if (ean.equals("") || descripcion.equals("") || precio.equals("") ||
+                plu.equals("") || peso.equals("")) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar que información buscar");
+        }else if (!servicio.esNumero(ean)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo EAN contiene letras");
+        }else if (servicio.esNumero(descripcion)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo Descripcion contiene numeros");
+        }else if (!servicio.esNumero(precio)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo Precio contiene letras");
+        }else if (!servicio.esNumero(plu)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo PLU contiene letras");
+        }else if (!servicio.esNumero(peso)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo Peso contiene letras");
+        }
+        return result;
+    }
+
+    public boolean verificarValoresCorrectosSeco(String ean, String descripcion, String precio, String cantidad, String areaID, String mensajeIntroduzca){
+        boolean result = true;
+
+        if (ean.equals(mensajeIntroduzca) || descripcion.equals(mensajeIntroduzca) ||
+                precio.equals(mensajeIntroduzca) || cantidad.equals(mensajeIntroduzca) ||
+                areaID.equals("Seleccione...")) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar que información buscar");
+        }else if (ean.equals("") || descripcion.equals("") || precio.equals("") || cantidad.equals("") ||
+                areaID.equals("")) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar que información buscar");
+        }else if (!servicio.esNumero(ean)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo EAN contiene letras");
+        }else if (servicio.esNumero(descripcion)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo Descripcion contiene numeros");
+        }else if (!servicio.esNumero(precio)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo Precio contiene letras");
+        }else if (!servicio.esNumero(cantidad)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo Cantidad contiene letras");
+        }else if (!servicio.esNumero(areaID)) {
+            result = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "El campo Area ID contiene letras");
+        }
+        return result;
     }
 }

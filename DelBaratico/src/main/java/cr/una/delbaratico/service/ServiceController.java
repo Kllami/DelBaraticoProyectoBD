@@ -35,19 +35,19 @@ public class ServiceController {
         return isNumeric;
     }
 
-    public Seco findSecoById(int idSeco) {
+    public Seco findSecoById(double idSeco) {
         return this.modeloPrincipal.findSecoById(idSeco);
     }
 
-    public void updateInventarioFresco(double cantidad, int idSeco) {
+    public void updateInventarioFresco(double cantidad, double idSeco) {
         this.modeloPrincipal.updateInventarioFresco(cantidad, idSeco);
     }
 
-    public void updateInventarioSeco(int cantidad, int idSeco){
+    public void updateInventarioSeco(double cantidad, double idSeco){
         this.modeloPrincipal.updateInventarioSeco(cantidad, idSeco);
     }
 
-    public Fresco findFrescoById(int idFresco) {
+    public Fresco findFrescoById(double idFresco) {
         return this.modeloPrincipal.findFrescoById(idFresco);
     }
 
@@ -63,7 +63,7 @@ public class ServiceController {
         return this.modeloPrincipal.buscarSecosXDescripcion(descripcion);
     }
 
-    public List<Seco> buscarSecosXEAN(String EAN) {
+    public List<Seco> buscarSecosXEAN(double EAN) {
         return this.modeloPrincipal.buscarSecosXEAN(EAN);
     }
 
@@ -71,11 +71,11 @@ public class ServiceController {
         return this.modeloPrincipal.buscarFrescosXDescripcion(descripcion);
     }
 
-    public List<Fresco> buscarFrescosXEAN(String EAN) {
+    public List<Fresco> buscarFrescosXEAN(double EAN) {
         return this.modeloPrincipal.buscarFrescosXEAN(EAN);
     }
 
-    public List<Fresco> buscarFrescosXPLU(String PLU) {
+    public List<Fresco> buscarFrescosXPLU(double PLU) {
         return this.modeloPrincipal.buscarFrescosXPLU(PLU);
     }
 
@@ -141,14 +141,14 @@ public class ServiceController {
         return productos;
     }
 
-    public List<Producto> ordenarProductosDeAcuerdoSimilitudEAN(List<Producto> productos, String ID){
+    public List<Producto> ordenarProductosDeAcuerdoSimilitudEAN(List<Producto> productos, String EAN){
         boolean sorted = false;
         Producto temp;
         while(!sorted) {
             sorted = true;
             for (int i = 0; i < productos.size() - 1; i++) {
-                double similarityA = this.similarity(productos.get(i).getEan(), ID);
-                double similarityB = this.similarity(productos.get(i + 1).getEan(), ID);
+                double similarityA = this.similarity(productos.get(i).getEan(), EAN);
+                double similarityB = this.similarity(productos.get(i + 1).getEan(), EAN);
                 if (similarityA > similarityB) {
                     temp = productos.get(i);
                     productos.set(i, productos.get(i + 1));
@@ -160,14 +160,14 @@ public class ServiceController {
         return productos;
     }
 
-    public List<Producto> ordenarProductosDeAcuerdoSimilitudPLU(List<Producto> productos, String ID){
+    public List<Producto> ordenarProductosDeAcuerdoSimilitudPLU(List<Producto> productos, String PLU){
         boolean sorted = false;
         Producto temp;
         while(!sorted) {
             sorted = true;
             for (int i = 0; i < productos.size() - 1; i++) {
-                double similarityA = this.similarity(productos.get(i).getPlu(), ID);
-                double similarityB = this.similarity(productos.get(i + 1).getPlu(), ID);
+                double similarityA = this.similarity(productos.get(i).getPlu(), PLU);
+                double similarityB = this.similarity(productos.get(i + 1).getPlu(), PLU);
                 if (similarityA > similarityB) {
                     temp = productos.get(i);
                     productos.set(i, productos.get(i + 1));
@@ -187,15 +187,15 @@ public class ServiceController {
         return this.modeloPrincipal.addSeco(seco);
     }
 
-    public Seco findSecoXEAN(Long ean){
+    public Seco findSecoXEAN(double ean){
         return this.modeloPrincipal.findSecoXEAN(ean);
     }
 
-    public Fresco findFrescoXEAN(Long ean){
+    public Fresco findFrescoXEAN(double ean){
         return this.modeloPrincipal.findFrescoXEAN(ean);
     }
 
-    public Fresco findFrescoXPLU(Integer plu) {
+    public Fresco findFrescoXPLU(double plu) {
         return this.modeloPrincipal.findFrescoXPLU(plu);
     }
 

@@ -65,19 +65,19 @@ public class InventarioView extends JFrame {
             this.secosList = this.servicio.buscarSecosXDescripcion(valorBusqueda);
             this.frescosList = this.servicio.buscarFrescosXDescripcion(valorBusqueda);
         }else if(criterioBusqueda.equals("ID")) {
-            Seco secoTemp = this.servicio.findSecoById(Integer.valueOf(valorBusqueda));
+            Seco secoTemp = this.servicio.findSecoById(Double.valueOf(valorBusqueda));
             this.secosList = new ArrayList<>();
             if(secoTemp!=null)
                 secosList.add(secoTemp);
-            Fresco frescoTemp = this.servicio.findFrescoById(Integer.valueOf((valorBusqueda)));
+            Fresco frescoTemp = this.servicio.findFrescoById(Double.valueOf((valorBusqueda)));
             this.frescosList = new ArrayList<>();
             if(frescoTemp!=null)
                 this.frescosList.add(frescoTemp);
         }else if(criterioBusqueda.equals("EAN")) {
-            this.secosList = this.servicio.buscarSecosXEAN(valorBusqueda);
-            this.frescosList = this.servicio.buscarFrescosXEAN(valorBusqueda);
+            this.secosList = this.servicio.buscarSecosXEAN(Double.valueOf(valorBusqueda));
+            this.frescosList = this.servicio.buscarFrescosXEAN(Double.valueOf(valorBusqueda));
         }else if(criterioBusqueda.equals("PLU")) {
-            this.frescosList = this.servicio.buscarFrescosXPLU(valorBusqueda);
+            this.frescosList = this.servicio.buscarFrescosXPLU(Double.valueOf(valorBusqueda));
         }
 
         if(this.secosList.size() + this.frescosList.size() == 0)
