@@ -60,16 +60,26 @@ public class Model extends Observable {
         return this.usuarioDao.getUsuarioActual();
     }
 
-    public Seco findSecoById(int idSeco) throws SQLException {
-        return this.secoDAO.findById(idSeco);
+    public Seco findSecoById(int idSeco) {
+        try{
+            return this.secoDAO.findById(idSeco);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
     }
 
     public void updateInventarioSeco(int cantidad, int idSeco){
         this.secoDAO.updateInventario(cantidad, idSeco);
     }
 
-    public Fresco findFrescoById(int idFresco) throws SQLException {
-        return this.frescoDAO.findById(idFresco);
+    public Fresco findFrescoById(int idFresco) {
+        try{
+            return this.frescoDAO.findById(idFresco);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
     }
 
     public void updateInventarioFresco(double peso, int idFresco) {
@@ -98,9 +108,62 @@ public class Model extends Observable {
         return null;
     }
 
+    public List<Seco> buscarSecosXEAN(String EAN) {
+        try{
+            return this.secoDAO.findSimilarPercentEAN(EAN);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
     public List<Fresco> buscarFrescosXDescripcion(String descripcion) {
         try{
             return this.frescoDAO.findSimilarPercentDesc(descripcion);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Fresco> buscarFrescosXEAN(String EAN) {
+        try{
+            return this.frescoDAO.findSimilarPercentEAN(EAN);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Fresco> buscarFrescosXPLU(String PLU) {
+        try{
+            return this.frescoDAO.findSimilarPercentPLU(PLU);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public void addFresco(Fresco fresco) {
+        this.frescoDAO.add(fresco);
+    }
+
+    public void addSeco(Seco seco) {
+        this.secoDAO.add(seco);
+    }
+
+    public Seco findSecoXEAN(Long ean){
+        try{
+            return this.secoDAO.findByEAN(ean);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public Fresco findFrescoXEAN(Long ean){
+        try{
+            return this.frescoDAO.findByEAN(ean);
         }catch (Exception e){
             System.err.println(e.getMessage());
         }

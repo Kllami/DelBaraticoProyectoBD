@@ -7,7 +7,6 @@ import main.java.cr.una.delbaratico.service.ServiceController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -36,6 +35,7 @@ public class InventarioView extends JFrame {
     List<Seco> secosList;
     List<Fresco> frescosList;
     List<Producto> todosProductosList;
+    VentanaAgregarEditar ventanaAgregarEditar;
 
     public InventarioView(ServiceController servicio) {
         this.servicio = servicio;
@@ -52,15 +52,33 @@ public class InventarioView extends JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Modulo de Inventario");
         this.buscarJComboBox.addItem("Descripción");
-        this.buscarJComboBox.addItem("Código");
+        this.buscarJComboBox.addItem("ID");
+        this.buscarJComboBox.addItem("EAN");
+        this.buscarJComboBox.addItem("PLU");
         this.buscarJComboBox.setFocusable(true);
         this.buscarJComboBox.setRequestFocusEnabled(true);
         this.buscarJComboBox.requestFocus();
     }
 
-    private void fillTabla(String descripcionUsuario){
-        this.secosList = this.servicio.buscarSecosXDescripcion(descripcionUsuario);
-        this.frescosList = this.servicio.buscarFrescosXDescripcion(descripcionUsuario);
+    private void fillTabla(String valorBusqueda, String criterioBusqueda){
+        if(criterioBusqueda.equals("Descripción")) {
+            this.secosList = this.servicio.buscarSecosXDescripcion(valorBusqueda);
+            this.frescosList = this.servicio.buscarFrescosXDescripcion(valorBusqueda);
+        }else if(criterioBusqueda.equals("ID")) {
+            Seco secoTemp = this.servicio.findSecoById(Integer.valueOf(valorBusqueda));
+            this.secosList = new ArrayList<>();
+            if(secoTemp!=null)
+                secosList.add(secoTemp);
+            Fresco frescoTemp = this.servicio.findFrescoById(Integer.valueOf((valorBusqueda)));
+            this.frescosList = new ArrayList<>();
+            if(frescoTemp!=null)
+                this.frescosList.add(frescoTemp);
+        }else if(criterioBusqueda.equals("EAN")) {
+            this.secosList = this.servicio.buscarSecosXEAN(valorBusqueda);
+            this.frescosList = this.servicio.buscarFrescosXEAN(valorBusqueda);
+        }else if(criterioBusqueda.equals("PLU")) {
+            this.frescosList = this.servicio.buscarFrescosXPLU(valorBusqueda);
+        }
 
         if(this.secosList.size() + this.frescosList.size() == 0)
             JOptionPane.showMessageDialog(this.panelPrincipal, "No existen productos con la descripcion brindada");
@@ -91,8 +109,18 @@ public class InventarioView extends JFrame {
             this.todosProductosList.add(new Producto(ID, ean, descripcion, precio, cantidad, areaId, plu, peso));
         }
 
-        this.todosProductosList = this.servicio.ordenarProductosDeAcuerdoSimilitud(todosProductosList, descripcionUsuario);
-        Collections.reverse(this.todosProductosList);
+        if(criterioBusqueda.equals("Descripción")) {
+            this.todosProductosList = this.servicio.ordenarProductosDeAcuerdoSimilitudDescr(todosProductosList, valorBusqueda);
+            Collections.reverse(this.todosProductosList);
+        }else if(criterioBusqueda.equals("ID")) {
+            //Nothing, since sorting is not needed due to the fact only should be one product for each ID
+        }else if(criterioBusqueda.equals("EAN")) {
+            this.todosProductosList = this.servicio.ordenarProductosDeAcuerdoSimilitudEAN(todosProductosList, valorBusqueda);
+            Collections.reverse(this.todosProductosList);
+        }else if(criterioBusqueda.equals("PLU")) {
+            this.todosProductosList = this.servicio.ordenarProductosDeAcuerdoSimilitudPLU(todosProductosList, valorBusqueda);
+            Collections.reverse(this.todosProductosList);
+        }
 
         this.model = new DefaultTableModel();
 
@@ -122,23 +150,6 @@ public class InventarioView extends JFrame {
 
         this.productosJTable = new JTable(this.model);
         this.jScrollPanel.setViewportView(productosJTable);
-
-        /*this.model = new DefaultTableModel(this.columnasTabla, this.todosProductosList.size());
-
-        for(Producto producto: this.todosProductosList) {
-            Vector<Object> row = new Vector<Object>();
-            row.add(producto.getID());
-            row.add(producto.getEan());
-            row.add(producto.getDescripcion());
-            row.add(producto.getPrecio());
-            row.add(producto.getCantidad());
-            row.add(producto.getAreaId());
-            row.add(producto.getPlu());
-            row.add(producto.getPeso());
-            model.addRow(row);
-        }
-
-        this.productosJTable = new JTable(this.model);*/
     }
 
     private void ajustarMenus() {
@@ -190,19 +201,32 @@ public class InventarioView extends JFrame {
         this.buscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(String.valueOf(buscarJComboBox.getSelectedItem()).equals("Descripción")){
-                    String descripcion = buscarTextField.getText().trim();
-                    if(!servicio.esNumero(descripcion) && !descripcion.equals("")){
-                        fillTabla(descripcion);
-                        //jScrollPanel.revalidate();
-                        //jScrollPanel.repaint();
-                        //panelPrincipal.revalidate();
-                        //panelPrincipal.repaint();
+                String valorBusqueda = buscarTextField.getText().trim();
 
+                if(valorBusqueda.equals("") || valorBusqueda.equals("Introduzca la información aquí..."))
+                    JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar que información buscar");
+                else {
+                    if (String.valueOf(buscarJComboBox.getSelectedItem()).equals("Descripción")) {
+                        if (!servicio.esNumero(valorBusqueda))
+                            fillTabla(valorBusqueda, "Descripción");
+                        else
+                            JOptionPane.showMessageDialog(panelPrincipal, "La descripcion contiene numeros");
+                    } else if (String.valueOf(buscarJComboBox.getSelectedItem()).equals("ID")) {
+                        if (servicio.esNumero(valorBusqueda))
+                            fillTabla(valorBusqueda, "ID");
+                        else
+                            JOptionPane.showMessageDialog(panelPrincipal, "La descripcion contiene letras");
+                    } else if (String.valueOf(buscarJComboBox.getSelectedItem()).equals("EAN")) {
+                        if (servicio.esNumero(valorBusqueda))
+                            fillTabla(valorBusqueda, "EAN");
+                        else
+                            JOptionPane.showMessageDialog(panelPrincipal, "La descripcion contiene letras");
+                    } else if (String.valueOf(buscarJComboBox.getSelectedItem()).equals("PLU")) {
+                        if (servicio.esNumero(valorBusqueda))
+                            fillTabla(valorBusqueda, "PLU");
+                        else
+                            JOptionPane.showMessageDialog(panelPrincipal, "La descripcion contiene letras");
                     }
-
-                }else{
-
                 }
             }
         });
@@ -210,7 +234,7 @@ public class InventarioView extends JFrame {
         this.agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //model.addRow(new Object[model.getColumnCount()]); //adds a new, empty row to the table
+                ventanaAgregarEditar = new VentanaAgregarEditar(servicio);
             }
         });
     }

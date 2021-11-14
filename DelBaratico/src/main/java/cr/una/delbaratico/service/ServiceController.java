@@ -34,7 +34,7 @@ public class ServiceController {
         return isNumeric;
     }
 
-    public Seco findSecoById(int idSeco) throws SQLException {
+    public Seco findSecoById(int idSeco) {
         return this.modeloPrincipal.findSecoById(idSeco);
     }
 
@@ -46,7 +46,7 @@ public class ServiceController {
         this.modeloPrincipal.updateInventarioSeco(cantidad, idSeco);
     }
 
-    public Fresco findFrescoById(int idFresco) throws SQLException {
+    public Fresco findFrescoById(int idFresco) {
         return this.modeloPrincipal.findFrescoById(idFresco);
     }
 
@@ -62,8 +62,20 @@ public class ServiceController {
         return this.modeloPrincipal.buscarSecosXDescripcion(descripcion);
     }
 
+    public List<Seco> buscarSecosXEAN(String EAN) {
+        return this.modeloPrincipal.buscarSecosXEAN(EAN);
+    }
+
     public List<Fresco> buscarFrescosXDescripcion(String descripcion) {
         return this.modeloPrincipal.buscarFrescosXDescripcion(descripcion);
+    }
+
+    public List<Fresco> buscarFrescosXEAN(String EAN) {
+        return this.modeloPrincipal.buscarFrescosXEAN(EAN);
+    }
+
+    public List<Fresco> buscarFrescosXPLU(String PLU) {
+        return this.modeloPrincipal.buscarFrescosXPLU(PLU);
     }
 
     public double similarity(String s1, String s2) {
@@ -109,7 +121,7 @@ public class ServiceController {
         return costs[s2.length()];
     }
 
-    public List<Producto> ordenarProductosDeAcuerdoSimilitud(List<Producto> productos, String descripcion){
+    public List<Producto> ordenarProductosDeAcuerdoSimilitudDescr(List<Producto> productos, String descripcion){
         boolean sorted = false;
         Producto temp;
         while(!sorted) {
@@ -128,4 +140,57 @@ public class ServiceController {
         return productos;
     }
 
+    public List<Producto> ordenarProductosDeAcuerdoSimilitudEAN(List<Producto> productos, String ID){
+        boolean sorted = false;
+        Producto temp;
+        while(!sorted) {
+            sorted = true;
+            for (int i = 0; i < productos.size() - 1; i++) {
+                double similarityA = this.similarity(productos.get(i).getEan(), ID);
+                double similarityB = this.similarity(productos.get(i + 1).getEan(), ID);
+                if (similarityA > similarityB) {
+                    temp = productos.get(i);
+                    productos.set(i, productos.get(i + 1));
+                    productos.set(i + 1, temp);
+                    sorted = false;
+                }
+            }
+        }
+        return productos;
+    }
+
+    public List<Producto> ordenarProductosDeAcuerdoSimilitudPLU(List<Producto> productos, String ID){
+        boolean sorted = false;
+        Producto temp;
+        while(!sorted) {
+            sorted = true;
+            for (int i = 0; i < productos.size() - 1; i++) {
+                double similarityA = this.similarity(productos.get(i).getPlu(), ID);
+                double similarityB = this.similarity(productos.get(i + 1).getPlu(), ID);
+                if (similarityA > similarityB) {
+                    temp = productos.get(i);
+                    productos.set(i, productos.get(i + 1));
+                    productos.set(i + 1, temp);
+                    sorted = false;
+                }
+            }
+        }
+        return productos;
+    }
+
+    public void addFresco(Fresco fresco) {
+        this.modeloPrincipal.addFresco(fresco);
+    }
+
+    public void addSeco(Seco seco) {
+        this.modeloPrincipal.addSeco(seco);
+    }
+
+    public Seco findSecoXEAN(Long ean){
+        return this.modeloPrincipal.findSecoXEAN(ean);
+    }
+
+    public Fresco findFrescoXEAN(Long ean){
+        return this.modeloPrincipal.findFrescoXEAN(ean);
+    }
 }
