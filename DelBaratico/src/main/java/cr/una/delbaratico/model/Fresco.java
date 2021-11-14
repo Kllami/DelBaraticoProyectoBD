@@ -9,24 +9,18 @@ public class Fresco {
   private Long ean;
   private String descripcion;
   private double precio;
-  private int cantidad;
 
-  public Fresco(int idFresco, int plu, double peso, Long ean, String descripcion, double precio, int cantidad) {
+  public Fresco(int idFresco, int plu, double peso, Long ean, String descripcion, double precio) {
     this.idFresco = idFresco;
     this.plu = plu;
     this.peso = peso;
     this.ean = ean;
     this.descripcion = descripcion;
     this.precio = precio;
-    this.cantidad = cantidad;
   }
 
   public int getIdFresco() {
     return idFresco;
-  }
-
-  public int getCantidad() {
-    return cantidad;
   }
 
   public void setIdFresco(int idFresco) {
@@ -40,9 +34,6 @@ public class Fresco {
 
   public void setPlu(int plu) {
     this.plu = plu;
-  }
-  public void setCantidad(int cantidad) {
-    this.cantidad = cantidad;
   }
 
   public double getPeso() {

@@ -39,5 +39,16 @@ public class AreaDAO {
         }
         resultSet.close();
         return areasList;
+   }
+
+    public List<Integer> areasIDS() throws SQLException {
+        List<Integer> areasIDsList = new ArrayList<Integer>();
+        String sql = "SELECT id_area FROM system.area";
+        ResultSet resultSet = jdbcUtil.executeQuery(sql);
+        while(resultSet.next()) {
+            areasIDsList.add(resultSet.getInt("id_area"));
+        }
+        resultSet.close();
+        return areasIDsList;
     }
 }

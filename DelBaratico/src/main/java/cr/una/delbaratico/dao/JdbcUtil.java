@@ -78,6 +78,7 @@ public class JdbcUtil {
             statement.executeUpdate(query);
             return statement.getUpdateCount();
         } catch (SQLException ex) {
+            System.err.println(ex.toString());
             return 0;
         }
     }
@@ -88,7 +89,7 @@ public class JdbcUtil {
             statement = dbConnection.createStatement();
             return statement.executeQuery(query);
         } catch (SQLException ex) {
-            System.out.println(ex.toString());
+            System.err.println(ex.toString());
         }
         return null;
     }
@@ -102,6 +103,7 @@ public class JdbcUtil {
                 return resultSet.getInt(1);
             return 0;
         } catch (SQLException ex) {
+            System.err.println(ex.toString());
             return 0;
         }
     }

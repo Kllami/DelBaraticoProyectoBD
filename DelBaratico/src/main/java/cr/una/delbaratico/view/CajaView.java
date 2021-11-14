@@ -79,8 +79,6 @@ public class CajaView extends JFrame {
                         {
                             JOptionPane.showMessageDialog(panel1 , "No hay mas productos de este tipo en inventario");
                         }
-                    } catch (SQLException ex){
-                        System.out.println(ex.toString());
                     } catch (NullPointerException nu){
                         JOptionPane.showMessageDialog(panel1, "Este producto no esta registrado en el sistema");
                     }
@@ -96,7 +94,7 @@ public class CajaView extends JFrame {
                         double pesoFresco = 0;
                         if(servicio.esNumero(pesoTextField.getText())) {
                             pesoFresco = Double.parseDouble(pesoTextField.getText());
-                            if(fresco.getCantidad() > 0) {
+                            if(fresco.getPeso() > 0) {
                                 preciosList.add(fresco.getPrecio());
                                 servicio.updateInventarioFresco(fresco.getPeso() - pesoFresco, fresco.getIdFresco());
                                 secoCheckBox.setSelected(false);
@@ -107,8 +105,6 @@ public class CajaView extends JFrame {
                         }
                         else
                             JOptionPane.showMessageDialog(panel1, "El campo para peso solo debe contener numeros");
-                    } catch (SQLException ex){
-                        System.out.println(ex.toString());
                     } catch (NullPointerException nu){
                         JOptionPane.showMessageDialog(panel1, "Este producto no esta registrado en el sistema");
                     }
@@ -142,8 +138,6 @@ public class CajaView extends JFrame {
                     try {
                         seco = servicio.findSecoById(sec);
                         JOptionPane.showMessageDialog(panel1, seco.getPrecio());
-                    } catch (SQLException ex){
-                        System.out.println(ex.toString());
                     } catch (NullPointerException nu){
                         JOptionPane.showMessageDialog(panel1, "Este producto no esta registrado en el sistema");
                     }
@@ -156,8 +150,6 @@ public class CajaView extends JFrame {
                     try {
                         fresco = servicio.findFrescoById(sec);
                         JOptionPane.showMessageDialog(panel1, fresco.getPrecio());
-                    } catch (SQLException ex){
-                        System.out.println(ex.toString());
                     } catch (NullPointerException nu){
                         JOptionPane.showMessageDialog(panel1, "Este producto no esta registrado en el sistema");
                     }
