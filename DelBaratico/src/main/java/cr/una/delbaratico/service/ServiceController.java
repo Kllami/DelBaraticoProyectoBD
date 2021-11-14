@@ -200,4 +200,9 @@ public class ServiceController {
     }
 
     public List<Integer> areasIDS() { return this.modeloPrincipal.areasIDS();}
+
+    public List<Factura> listaFacturas() {
+        return this.modeloPrincipal.listaFacturas();
+    }
+
 }

@@ -45,7 +45,7 @@ public class FacturaDAO {
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         CajaDAO cajaDAO = new CajaDAO(jdbcUtil);
         while(resultSet.next()) {
-            Caja caja = cajaDAO.findById(resultSet.getInt("id_caja"));
+            Caja caja = cajaDAO.findById(resultSet.getInt("num_caja"));
             Factura factura = new Factura(resultSet.getInt("id_factura"),
                     resultSet.getInt("numero"),
                     resultSet.getDate("fecha"),

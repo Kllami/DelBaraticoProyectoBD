@@ -188,4 +188,13 @@ public class Model extends Observable {
         }
         return null;
     }
+
+    public List<Factura> listaFacturas() {
+        try {
+            return this.facturaDAO.findAll();
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 }
