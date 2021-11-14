@@ -52,5 +52,44 @@ public class DetalleSecoDAO {
         }
         return detalleSecosList;
     }
+
+    public Integer addDetalleSeco(DetalleSeco detalleSeco) throws Exception {
+        try {
+            String sql = "INSERT INTO DetalleSeco(cantidad, subtotal, seco_id, factura_id) "
+                    + "VALUES(%d, %f, %d, %d)";
+            sql = String.format(sql, detalleSeco.getCantidad(), detalleSeco.getSubtotal(), detalleSeco.getSecoId(), detalleSeco.getFacturaId());
+            return jdbcUtil.executeAddAI(sql);
+        } catch(Exception e) {
+            throw new Exception("Exception: " + e.getMessage());
+        }
+    }
+
+    public Integer updateDetalleSeco(DetalleSeco detalleSeco) throws Exception {
+        try{
+            String sql="UPDATE DetalleSeco SET cantidad=%d, subtotal=%f, seco_id=%d, factura_id=%d  WHERE id_detalleSeco=%d";
+            sql = String.format(sql, detalleSeco.getCantidad(), detalleSeco.getSubtotal(), detalleSeco.getSecoId(), detalleSeco.getFacturaId(), detalleSeco.getIdDetalleSeco());
+            int result = jdbcUtil.executeUpdate(sql);
+            if(result == 0){
+                throw new Exception("/DetalleSeco/{" + detalleSeco.getIdDetalleSeco() + "} Does not exist in DataBase");
+            }
+            return result;
+        }catch(Exception e){
+            throw new Exception("Exception: " + e.getMessage());
+        }
+    }
+
+    public Integer deleteDetalleSeco(String id_detalleSeco) throws Exception {
+        try{
+            String sql="DELETE FROM DetalleSeco WHERE id_detalleSeco=%d";
+            sql = String.format(sql, id_detalleSeco);
+            int result = jdbcUtil.executeUpdate(sql);
+            if(result == 0){
+                throw new Exception("DetalleSeco/{" + id_detalleSeco + "} Does not exist in DataBase");
+            }
+            return result;
+        }catch(Exception e){
+            throw new Exception("Exception: " + e.getMessage());
+        }
+    }
     
 }

@@ -87,4 +87,13 @@ public class Model extends Observable {
     public void insertarFactura(Factura factura){
         this.facturaDAO.insertarFactura(factura);
     }
+
+    public List<Factura> listaFacturas() {
+        try {
+            return this.facturaDAO.findAll();
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 }
