@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class ServiceController {
 
@@ -35,19 +37,33 @@ public class ServiceController {
         return isNumeric;
     }
 
-    public Seco findSecoById(int idSeco) {
+    public boolean esNumero2(String input){
+        String DOUBLE_PATTERN = "[0-9]+(\\.){0,1}[0-9]*";
+        String INTEGER_PATTERN = "\\d+";
+
+        boolean result = false;
+
+        if (Pattern.matches(INTEGER_PATTERN, input))  // Input is Integer
+            result = true;
+        else if (Pattern.matches(DOUBLE_PATTERN, input))  // Input is Double
+            result = true;
+
+        return result;
+    }
+
+    public Seco findSecoById(long idSeco) {
         return this.modeloPrincipal.findSecoById(idSeco);
     }
 
-    public void updateInventarioFresco(double cantidad, int idSeco) {
-        this.modeloPrincipal.updateInventarioFresco(cantidad, idSeco);
+    public int updateInventarioFresco(double peso, long idSeco) {
+        return this.modeloPrincipal.updateInventarioFresco(peso, idSeco);
     }
 
-    public void updateInventarioSeco(int cantidad, int idSeco){
-        this.modeloPrincipal.updateInventarioSeco(cantidad, idSeco);
+    public int updateInventarioSeco(long cantidad, long idSeco){
+        return this.modeloPrincipal.updateInventarioSeco(cantidad, idSeco);
     }
 
-    public Fresco findFrescoById(int idFresco) {
+    public Fresco findFrescoById(double idFresco) {
         return this.modeloPrincipal.findFrescoById(idFresco);
     }
 
@@ -63,7 +79,7 @@ public class ServiceController {
         return this.modeloPrincipal.buscarSecosXDescripcion(descripcion);
     }
 
-    public List<Seco> buscarSecosXEAN(String EAN) {
+    public List<Seco> buscarSecosXEAN(long EAN) {
         return this.modeloPrincipal.buscarSecosXEAN(EAN);
     }
 
@@ -71,11 +87,11 @@ public class ServiceController {
         return this.modeloPrincipal.buscarFrescosXDescripcion(descripcion);
     }
 
-    public List<Fresco> buscarFrescosXEAN(String EAN) {
+    public List<Fresco> buscarFrescosXEAN(long EAN) {
         return this.modeloPrincipal.buscarFrescosXEAN(EAN);
     }
 
-    public List<Fresco> buscarFrescosXPLU(String PLU) {
+    public List<Fresco> buscarFrescosXPLU(long PLU) {
         return this.modeloPrincipal.buscarFrescosXPLU(PLU);
     }
 
@@ -141,14 +157,14 @@ public class ServiceController {
         return productos;
     }
 
-    public List<Producto> ordenarProductosDeAcuerdoSimilitudEAN(List<Producto> productos, String ID){
+    public List<Producto> ordenarProductosDeAcuerdoSimilitudEAN(List<Producto> productos, String EAN){
         boolean sorted = false;
         Producto temp;
         while(!sorted) {
             sorted = true;
             for (int i = 0; i < productos.size() - 1; i++) {
-                double similarityA = this.similarity(productos.get(i).getEan(), ID);
-                double similarityB = this.similarity(productos.get(i + 1).getEan(), ID);
+                double similarityA = this.similarity(productos.get(i).getEan(), EAN);
+                double similarityB = this.similarity(productos.get(i + 1).getEan(), EAN);
                 if (similarityA > similarityB) {
                     temp = productos.get(i);
                     productos.set(i, productos.get(i + 1));
@@ -160,14 +176,14 @@ public class ServiceController {
         return productos;
     }
 
-    public List<Producto> ordenarProductosDeAcuerdoSimilitudPLU(List<Producto> productos, String ID){
+    public List<Producto> ordenarProductosDeAcuerdoSimilitudPLU(List<Producto> productos, String PLU){
         boolean sorted = false;
         Producto temp;
         while(!sorted) {
             sorted = true;
             for (int i = 0; i < productos.size() - 1; i++) {
-                double similarityA = this.similarity(productos.get(i).getPlu(), ID);
-                double similarityB = this.similarity(productos.get(i + 1).getPlu(), ID);
+                double similarityA = this.similarity(productos.get(i).getPlu(), PLU);
+                double similarityB = this.similarity(productos.get(i + 1).getPlu(), PLU);
                 if (similarityA > similarityB) {
                     temp = productos.get(i);
                     productos.set(i, productos.get(i + 1));
@@ -187,22 +203,37 @@ public class ServiceController {
         return this.modeloPrincipal.addSeco(seco);
     }
 
-    public Seco findSecoXEAN(Long ean){
+    public Seco findSecoXEAN(long ean){
         return this.modeloPrincipal.findSecoXEAN(ean);
     }
 
-    public Fresco findFrescoXEAN(Long ean){
+    public Fresco findFrescoXEAN(long ean){
         return this.modeloPrincipal.findFrescoXEAN(ean);
     }
 
-    public Fresco findFrescoXPLU(Integer plu) {
+    public Fresco findFrescoXPLU(long plu) {
         return this.modeloPrincipal.findFrescoXPLU(plu);
     }
 
-    public List<Integer> areasIDS() { return this.modeloPrincipal.areasIDS();}
+    public List<String> areasIDSNombres() { return this.modeloPrincipal.areasIDSNombres();}
 
     public List<Factura> listaFacturas() {
         return this.modeloPrincipal.listaFacturas();
     }
 
+    public int updateFresco(Fresco fresco) {
+        return this.modeloPrincipal.updateFresco(fresco);
+    }
+
+    public int updateSeco(Seco seco) {
+        return this.modeloPrincipal.updateSeco(seco);
+    }
+
+    public int eliminarSeco(Seco seco) {
+        return this.modeloPrincipal.eliminarSeco(seco);
+    }
+
+    public int eliminarFresco(Long id) {
+        return this.modeloPrincipal.eliminarFresco(id);
+    }
 }

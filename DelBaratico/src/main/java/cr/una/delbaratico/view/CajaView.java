@@ -92,7 +92,7 @@ public class CajaView extends JFrame {
                     try {
                         fresco = servicio.findFrescoById(sec);
                         double pesoFresco = 0;
-                        if(servicio.esNumero(pesoTextField.getText())) {
+                        if(servicio.esNumero2(pesoTextField.getText())) {
                             pesoFresco = Double.parseDouble(pesoTextField.getText());
                             if(fresco.getPeso() > 0) {
                                 preciosList.add(fresco.getPrecio());

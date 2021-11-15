@@ -3,14 +3,14 @@ package main.java.cr.una.delbaratico.model;
 
 public class Seco {
 
-  private int idSeco;
-  private Long ean;
+  private long idSeco;
+  private long ean;
   private String descripcion;
   private double precio;
-  private int cantidad;
-  private int areaId;
+  private long cantidad;
+  private long areaId;
 
-  public Seco(int idSeco, Long ean, String descripcion, double precio, int cantidad, int areaId) {
+  public Seco(long idSeco, long ean, String descripcion, double precio, long cantidad, long areaId) {
     this.idSeco = idSeco;
     this.ean = ean;
     this.descripcion = descripcion;
@@ -19,7 +19,7 @@ public class Seco {
     this.areaId = areaId;
   }
 
-  public int getIdSeco() {
+  public long getIdSeco() {
     return idSeco;
   }
 
@@ -28,7 +28,7 @@ public class Seco {
   }
 
 
-  public Long getEan() {
+  public long getEan() {
     return ean;
   }
 
@@ -55,19 +55,19 @@ public class Seco {
   }
 
 
-  public int getCantidad() {
+  public long getCantidad() {
     return cantidad;
   }
 
-  public void setCantidad(int cantidad) {
+  public void setCantidad(long cantidad) {
     this.cantidad = cantidad;
   }
 
-  public int getAreaId() {
+  public long getAreaId() {
     return areaId;
   }
 
-  public void setAreaId(int areaId) {
+  public void setAreaId(long areaId) {
     this.areaId = areaId;
   }
 

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LoginView extends JFrame{
-    private JPanel panel1;
+    private JPanel panelPrincipal;
     private JButton iniciarSesiónButton;
     private JTextField textField1;
     private JPasswordField passwordField1;
@@ -15,13 +15,13 @@ public class LoginView extends JFrame{
 
     public LoginView(ServiceController servicio) {
         this.servicio = servicio;
-        this.panel1.setPreferredSize(new Dimension(400,200));
-        this.setContentPane(panel1);
+        this.panelPrincipal.setPreferredSize(new Dimension(400,200));
+        this.setContentPane(panelPrincipal);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-
+        this.setResizable(false);
         this.iniciarListeners();//Siempre se llama de ultimo
     }
 
@@ -32,22 +32,22 @@ public class LoginView extends JFrame{
             boolean result = servicio.iniciarSesion(userName, pwd);
 
             if (result) {
-                JOptionPane.showMessageDialog(panel1, "Login exitoso");
+                JOptionPane.showMessageDialog(panelPrincipal, "Login exitoso");
                 this.setVisible(false);
                 this.dispose();
                 homeView = new HomeView(servicio);
             } else {
-                JOptionPane.showMessageDialog(panel1, "Passsword o nombre invalido");
+                JOptionPane.showMessageDialog(panelPrincipal, "Passsword o nombre invalido");
             }
         });
     }
 
     public JPanel getPanel1() {
-        return panel1;
+        return panelPrincipal;
     }
 
     public void setPanel1(JPanel panel1) {
-        this.panel1 = panel1;
+        this.panelPrincipal = panel1;
     }
 
     public JButton getIniciarSesiónButton() {

@@ -77,4 +77,18 @@ public class Producto {
     public void setPeso(String peso) {
         this.peso = peso;
     }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "ID='" + ID + '\'' +
+                ", ean='" + ean + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", precio='" + precio + '\'' +
+                ", cantidad='" + cantidad + '\'' +
+                ", areaId='" + areaId + '\'' +
+                ", plu='" + plu + '\'' +
+                ", peso='" + peso + '\'' +
+                '}';
+    }
 }

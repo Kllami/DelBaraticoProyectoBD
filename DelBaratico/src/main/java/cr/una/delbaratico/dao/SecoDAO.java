@@ -17,13 +17,13 @@ public class SecoDAO {
         this.jdbcUtil = jdbcUtil;
     }
 
-    public void updateInventario(int cantidad, int idSeco) {
+    public int updateInventario(long cantidad, long idSeco) {
         String sql = "update system.seco set cantidad = " + cantidad + " where id_seco = %d";
         sql = String.format(sql, idSeco);
-        jdbcUtil.executeQuery(sql);
+        return jdbcUtil.executeUpdate(sql);
     }
 
-    public Seco findById(int idSeco) throws SQLException {
+    public Seco findById(long idSeco) throws SQLException {
         Seco seco = null;
         String sql = "SELECT * FROM system.seco where id_seco = %d";
         sql = String.format(sql, idSeco);
@@ -31,12 +31,12 @@ public class SecoDAO {
         if(resultSet.next()) {
             /*AreaDAO areaDAO = new AreaDAO(jdbcUtil);
             Area area = areaDAO.findById(resultSet.getInt("area_id"));*/
-            seco = new Seco(resultSet.getInt("id_seco"),
+            seco = new Seco(resultSet.getLong("id_seco"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getInt("cantidad"),
-                    resultSet.getInt("area_id"));
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
         }
         resultSet.close();
         return seco;
@@ -49,13 +49,12 @@ public class SecoDAO {
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
             Area area = areaDAO.findById(resultSet.getInt("area_id"));
-            Seco seco = new Seco(resultSet.getInt("id_seco"),
+            Seco seco = new Seco(resultSet.getLong("id_seco"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getInt("cantidad"),
-                    resultSet.getInt("area_id"));
-            secosList.add(seco);
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
         }
         resultSet.close();
         return secosList;
@@ -69,49 +68,49 @@ public class SecoDAO {
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
-            Seco seco = new Seco(resultSet.getInt("id_seco"),
+            Seco seco = new Seco(resultSet.getLong("id_seco"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getInt("cantidad"),
-                    resultSet.getInt("area_id"));
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
             secosList.add(seco);
         }
         resultSet.close();
         return secosList;
     }
 
-    public List<Seco> findSimilarPercentEAN(String ean) throws SQLException {
+    public List<Seco> findSimilarPercentEAN(long ean) throws SQLException {
         List<Seco> secosList = new ArrayList<>();
-        String sql = "SELECT system.seco.*, UTL_MATCH.edit_distance_similarity(%s, system.seco.ean) " +
+        String sql = "SELECT system.seco.*, UTL_MATCH.edit_distance_similarity(%d, system.seco.ean) " +
                 "AS SIMILARITY_PERCENT FROM system.seco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
-            Seco seco = new Seco(resultSet.getInt("id_seco"),
+            Seco seco = new Seco(resultSet.getLong("id_seco"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getInt("cantidad"),
-                    resultSet.getInt("area_id"));
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
             secosList.add(seco);
         }
         resultSet.close();
         return secosList;
     }
 
-    public Seco findByEAN(Long ean) throws SQLException {
+    public Seco findByEAN(long ean) throws SQLException {
         String sql = "SELECT * FROM system.seco where ean = %d";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
-            Seco seco = new Seco(resultSet.getInt("id_seco"),
+            Seco seco = new Seco(resultSet.getLong("id_seco"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getInt("cantidad"),
-                    resultSet.getInt("area_id"));
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
             return seco;
         }
         resultSet.close();
@@ -122,6 +121,18 @@ public class SecoDAO {
         String sql = "INSERT INTO system.seco(ean, descripcion, precio, cantidad, area_id) VALUES " +
                 "(%d, '%s', %f, %d, %d)";
         sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId());
+        return jdbcUtil.executeUpdate(sql);
+    }
+
+    public int updateSeco(Seco seco) {
+        String sql = "UPDATE system.seco SET ean = %d, descripcion = '%s', precio = %f, cantidad = %d, area_id = %d WHERE id_seco = %d";
+        sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId(), seco.getIdSeco());
+        return jdbcUtil.executeUpdate(sql);
+    }
+
+    public int eliminarSeco(Seco seco) {
+        String sql = "DELETE system.seco WHERE id_seco = %d";
+        sql = String.format(sql, seco.getIdSeco());
         return jdbcUtil.executeUpdate(sql);
     }
 }
