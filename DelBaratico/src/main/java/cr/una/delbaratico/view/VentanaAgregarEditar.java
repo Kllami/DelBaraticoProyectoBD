@@ -58,23 +58,17 @@ public class VentanaAgregarEditar extends JFrame{
 
     public void mostrarInfoProduEditable(){
         if (this.productoEditable.getCantidad().equals("NO APLICA")) { // Fresco
-            this.tipoProductoJLabel.setEnabled(true);
+            this.tipoProductoJLabel.setEnabled(false);
             this.tipoProdComboBox.setSelectedItem("Fresco");
-            this.tipoProdComboBox.setEnabled(true);
+            this.tipoProdComboBox.setEnabled(false);
 
             this.cantidadJLabel.setEnabled(false);
             this.cantidadTextField.setText(this.productoEditable.getCantidad());
             this.cantidadTextField.setEnabled(false);
 
-            this.areaIDJLabel.setEnabled(true);
-            List<String> areasIDSNombres = this.servicio.areasIDSNombres();
-            for (int i = 0; i < areasIDSNombres.size(); i++){
-                if(areasIDSNombres.get(i).contains(this.productoEditable.getAreaId())) {
-                    this.areaComboBox.setSelectedItem(String.valueOf(areasIDSNombres.get(i)));
-                    break;
-                }
-            }
-            this.areaComboBox.setEnabled(true);
+            this.areaIDJLabel.setEnabled(false);
+            this.areaComboBox.setSelectedItem("Seleccione...");
+            this.areaComboBox.setEnabled(false);
 
             this.pluJLabel.setEnabled(true);
             this.pluTextField.setText(this.productoEditable.getPlu());
@@ -100,9 +94,9 @@ public class VentanaAgregarEditar extends JFrame{
             this.panelPrincipal.validate();
             this.panelPrincipal.repaint();
         } else if (this.productoEditable.getPlu().equals("NO APLICA")) {//Seco
-            this.tipoProductoJLabel.setEnabled(true);
+            this.tipoProductoJLabel.setEnabled(false);
             this.tipoProdComboBox.setSelectedItem("Seco");
-            this.tipoProdComboBox.setEnabled(true);
+            this.tipoProdComboBox.setEnabled(false);
 
             this.pluJLabel.setEnabled(false);
             this.pluTextField.setText(this.productoEditable.getPlu());
@@ -249,7 +243,7 @@ public class VentanaAgregarEditar extends JFrame{
     public void initComponents(){
         this.panelPrincipal.setPreferredSize(new Dimension(400,300));
         this.setContentPane(panelPrincipal);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -467,50 +461,104 @@ public class VentanaAgregarEditar extends JFrame{
                 String peso = pesoTextField.getText().trim();
                 String mensajeIntroduzca = "Introduzca la información aquí...";
 
-                if (String.valueOf(tipoProdComboBox.getSelectedItem()).equals("Fresco")) {
-                    if (verificarValoresCorrectosFresco(ean, descripcion, precio, plu, peso, mensajeIntroduzca)){
-                        if (servicio.findFrescoXEAN(Long.valueOf(ean)) != null || servicio.findFrescoXPLU(Long.valueOf(plu)) != null ||
-                                servicio.findSecoXEAN(Long.valueOf(ean)) != null)
-                            JOptionPane.showMessageDialog(panelPrincipal, "Ya existe un producto con el codigo EAN o el codigo PLU introducido");
-                        else {
-                            fresco = new Fresco(-1, Long.valueOf(plu), Double.valueOf(peso), Long.valueOf(ean),
-                                    descripcion, Double.valueOf(precio));
-                            if(productoEditable == null) {
-                                if (servicio.addFresco(fresco) > 0) { // Add Fresco
-                                    tipoProdComboBox.setSelectedItem("Seleccione...");
-                                    JOptionPane.showMessageDialog(panelPrincipal, "Producto agregado");
-                                    habilitarCampos();
-                                } else
-                                    JOptionPane.showMessageDialog(panelPrincipal, "Hubo un problema al agregar el producto");
-                            }else{ // Update Fresco
-                                servicio.updateInventarioFresco(fresco.getPeso(), fresco.getIdFresco());
-                            }
-                        }
-                    }
-                } else if (String.valueOf(tipoProdComboBox.getSelectedItem()).equals("Seco")){
-                    if (verificarValoresCorrectosSeco(ean, descripcion, precio, cantidad, areaID, mensajeIntroduzca)){
-                        if (servicio.findFrescoXEAN(Long.valueOf(ean)) != null ||servicio.findSecoXEAN(Long.valueOf(ean)) != null)
-                            JOptionPane.showMessageDialog(panelPrincipal, "Ya existe un producto con el codigo EAN o el codigo PLU introducido");
-                        else {
-                            seco = new Seco(-1, Long.valueOf(ean), descripcion, Double.valueOf(precio),
-                                    Long.valueOf(cantidad), Long.valueOf(areaID));
-                            if(productoEditable == null) {
-                                if (servicio.addSeco(seco) > 0) { // Add Seco
-                                    tipoProdComboBox.setSelectedItem("Seleccione...");
-                                    JOptionPane.showMessageDialog(panelPrincipal, "Producto agregado");
-                                    habilitarCampos();
-                                } else
-                                    JOptionPane.showMessageDialog(panelPrincipal, "Hubo un problema al agregar el producto");
-                            }else{ // Update Seco
-                                servicio.updateInventarioSeco(seco.getCantidad(), seco.getIdSeco());
-                            }
-                        }
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar el tipo del producto");
-                }
+                if(productoEditable == null)
+                    agregarProducto(ean, descripcion, precio, cantidad, areaID, plu, peso, mensajeIntroduzca);
+                else
+                    editarProducto(ean, descripcion, precio, cantidad, areaID, plu, peso, mensajeIntroduzca);
             }
         });
+    }
+
+    public void agregarProducto(String ean, String descripcion, String precio, String cantidad, String areaID, String plu, String peso, String mensajeIntroduzca){
+        if (String.valueOf(tipoProdComboBox.getSelectedItem()).equals("Fresco")) {
+            if (verificarValoresCorrectosFresco(ean, descripcion, precio, plu, peso, mensajeIntroduzca)){
+                if (servicio.findFrescoXEAN(Long.valueOf(ean)) != null || servicio.findFrescoXPLU(Long.valueOf(plu)) != null ||
+                        servicio.findSecoXEAN(Long.valueOf(ean)) != null)
+                    JOptionPane.showMessageDialog(panelPrincipal, "Ya existe un producto con el codigo EAN o el codigo PLU introducido");
+                else {
+                    fresco = new Fresco(-1, Long.valueOf(plu), Double.valueOf(peso), Long.valueOf(ean),
+                            descripcion, Double.valueOf(precio));
+                    if (servicio.addFresco(fresco) > 0) { // Add Fresco
+                        tipoProdComboBox.setSelectedItem("Seleccione...");
+                        JOptionPane.showMessageDialog(panelPrincipal, "Producto agregado");
+                        dispose();
+                    } else
+                        JOptionPane.showMessageDialog(panelPrincipal, "Hubo un problema al agregar el producto");
+                }
+            }
+        } else if (String.valueOf(tipoProdComboBox.getSelectedItem()).equals("Seco")){
+            if (verificarValoresCorrectosSeco(ean, descripcion, precio, cantidad, areaID, mensajeIntroduzca)){
+                if (servicio.findFrescoXEAN(Long.valueOf(ean)) != null ||servicio.findSecoXEAN(Long.valueOf(ean)) != null)
+                    JOptionPane.showMessageDialog(panelPrincipal, "Ya existe un producto con el codigo EAN o el codigo PLU introducido");
+                else {
+                    seco = new Seco(-1, Long.valueOf(ean), descripcion, Double.valueOf(precio),
+                            Long.valueOf(cantidad), Long.valueOf(areaID));
+                    if (servicio.addSeco(seco) > 0) { // Add Seco
+                        tipoProdComboBox.setSelectedItem("Seleccione...");
+                        JOptionPane.showMessageDialog(panelPrincipal, "Producto agregado");
+                        dispose();
+                    } else
+                        JOptionPane.showMessageDialog(panelPrincipal, "Hubo un problema al agregar el producto");
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar el tipo del producto");
+        }
+    }
+
+    public boolean editarCodigosCorrectosFresco(Producto producto, String ean, String plu){
+        boolean result = true;
+        if (servicio.findFrescoXEAN(Long.valueOf(ean)) != null && !Long.valueOf(producto.getID()).equals(servicio.findFrescoXEAN(Long.valueOf(ean)).getIdFresco()))
+            result = false;
+        else if (servicio.findFrescoXPLU(Long.valueOf(plu)) != null && !Long.valueOf(producto.getID()).equals(servicio.findFrescoXPLU(Long.valueOf(plu)).getIdFresco()))
+            result = false;
+        else if(servicio.findSecoXEAN(Long.valueOf(ean)) != null && !Long.valueOf(producto.getID()).equals(servicio.findSecoXEAN(Long.valueOf(ean)).getIdSeco()))
+            result = false;
+        return result;
+    }
+
+    public boolean editarCodigosCorrectosSeco(Producto producto, String ean, String plu){
+        boolean result = true;
+        if(servicio.findFrescoXEAN(Long.valueOf(ean)) != null && !Long.valueOf(producto.getID()).equals(servicio.findFrescoXEAN(Long.valueOf(ean)).getIdFresco()))
+                result = false;
+        else if (servicio.findSecoXEAN(Long.valueOf(ean)) != null && !Long.valueOf(producto.getID()).equals(servicio.findSecoXEAN(Long.valueOf(ean)).getIdSeco()))
+            result = false;
+        return result;
+    }
+
+    public void editarProducto(String ean, String descripcion, String precio, String cantidad, String areaID, String plu, String peso, String mensajeIntroduzca){
+        if (String.valueOf(tipoProdComboBox.getSelectedItem()).equals("Fresco")) {
+            if (verificarValoresCorrectosFresco(ean, descripcion, precio, plu, peso, mensajeIntroduzca)){
+                if (!editarCodigosCorrectosFresco(this.productoEditable, ean, plu))
+                    JOptionPane.showMessageDialog(panelPrincipal, "Ya existe un producto con el codigo EAN o el codigo PLU introducido");
+                else {
+                    fresco = new Fresco(Long.valueOf(this.productoEditable.getID()), Long.valueOf(plu), Double.valueOf(peso), Long.valueOf(ean),
+                            descripcion, Double.valueOf(precio));
+                    if(servicio.updateFresco(fresco) > 0) {
+                        JOptionPane.showMessageDialog(panelPrincipal, "Producto editado");
+                        dispose();
+                    }else
+                        JOptionPane.showMessageDialog(panelPrincipal, "Hubo un problema al editar el producto");
+                }
+            }
+        } else if (String.valueOf(tipoProdComboBox.getSelectedItem()).equals("Seco")){
+            if (verificarValoresCorrectosSeco(ean, descripcion, precio, cantidad, areaID, mensajeIntroduzca)){
+                if (!editarCodigosCorrectosSeco(this.productoEditable, ean, plu))
+                    JOptionPane.showMessageDialog(panelPrincipal, "Ya existe un producto con el codigo EAN o el codigo PLU introducido");
+                else {
+                    seco = new Seco(Long.valueOf(this.productoEditable.getID()), Long.valueOf(ean), descripcion, Double.valueOf(precio),
+                            Long.valueOf(cantidad), Long.valueOf(areaID));
+
+                    if(servicio.updateSeco(seco) > 0) {
+                        JOptionPane.showMessageDialog(panelPrincipal, "Producto editado");
+                        dispose();
+                    } else
+                        JOptionPane.showMessageDialog(panelPrincipal, "Hubo un problema al editar el producto");
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar el tipo del producto");
+        }
     }
 
     public boolean verificarValoresCorrectosFresco(String ean, String descripcion, String precio, String plu, String peso, String mensajeIntroduzca){
@@ -531,13 +579,13 @@ public class VentanaAgregarEditar extends JFrame{
         }else if (servicio.esNumero(descripcion)) {
             result = false;
             JOptionPane.showMessageDialog(panelPrincipal, "El campo Descripcion contiene numeros");
-        }else if (!servicio.esNumero(precio)) {
+        }else if (!servicio.esNumero2(precio)) {
             result = false;
             JOptionPane.showMessageDialog(panelPrincipal, "El campo Precio contiene letras");
         }else if (!servicio.esNumero(plu)) {
             result = false;
             JOptionPane.showMessageDialog(panelPrincipal, "El campo PLU contiene letras");
-        }else if (!servicio.esNumero(peso)) {
+        }else if (!servicio.esNumero2(peso)) {
             result = false;
             JOptionPane.showMessageDialog(panelPrincipal, "El campo Peso contiene letras");
         }
@@ -562,7 +610,7 @@ public class VentanaAgregarEditar extends JFrame{
         }else if (servicio.esNumero(descripcion)) {
             result = false;
             JOptionPane.showMessageDialog(panelPrincipal, "El campo Descripcion contiene numeros");
-        }else if (!servicio.esNumero(precio)) {
+        }else if (!servicio.esNumero2(precio)) {
             result = false;
             JOptionPane.showMessageDialog(panelPrincipal, "El campo Precio contiene letras");
         }else if (!servicio.esNumero(cantidad)) {

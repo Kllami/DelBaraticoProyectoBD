@@ -47,7 +47,7 @@ public class InventarioView extends JFrame {
 
     public void initComponents(){
         this.setContentPane(panelPrincipal);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -258,6 +258,13 @@ public class InventarioView extends JFrame {
                     ventanaAgregarEditar = new VentanaAgregarEditar(servicio, productoEditable);
                 }else
                     JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar un producto de la tabla");
+            }
+        });
+
+        atrasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
     }

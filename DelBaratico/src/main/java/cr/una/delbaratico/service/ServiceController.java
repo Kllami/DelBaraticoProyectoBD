@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class ServiceController {
 
@@ -33,6 +35,20 @@ public class ServiceController {
             }
         }
         return isNumeric;
+    }
+
+    public boolean esNumero2(String input){
+        String DOUBLE_PATTERN = "[0-9]+(\\.){0,1}[0-9]*";
+        String INTEGER_PATTERN = "\\d+";
+
+        boolean result = false;
+
+        if (Pattern.matches(INTEGER_PATTERN, input))  // Input is Integer
+            result = true;
+        else if (Pattern.matches(DOUBLE_PATTERN, input))  // Input is Double
+            result = true;
+
+        return result;
     }
 
     public Seco findSecoById(long idSeco) {
@@ -205,4 +221,11 @@ public class ServiceController {
         return this.modeloPrincipal.listaFacturas();
     }
 
+    public int updateFresco(Fresco fresco) {
+        return this.modeloPrincipal.updateFresco(fresco);
+    }
+
+    public int updateSeco(Seco seco) {
+        return this.modeloPrincipal.updateSeco(seco);
+    }
 }

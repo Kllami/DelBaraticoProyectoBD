@@ -123,4 +123,10 @@ public class SecoDAO {
         sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId());
         return jdbcUtil.executeUpdate(sql);
     }
+
+    public int updateSeco(Seco seco) {
+        String sql = "UPDATE system.seco SET ean = %d, descripcion = '%s', precio = %f, cantidad = %d, area_id = %d WHERE id_seco = %d";
+        sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId(), seco.getIdSeco());
+        return jdbcUtil.executeUpdate(sql);
+    }
 }

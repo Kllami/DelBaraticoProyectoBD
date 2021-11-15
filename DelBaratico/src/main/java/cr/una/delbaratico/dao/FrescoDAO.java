@@ -1,7 +1,6 @@
 package main.java.cr.una.delbaratico.dao;
 
 import main.java.cr.una.delbaratico.model.Fresco;
-import main.java.cr.una.delbaratico.model.Seco;
 
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -37,6 +36,13 @@ public class FrescoDAO {
         String sql = "update system.fresco set peso = " + peso + " where id_fresco = %d";
         sql = String.format(sql, idFresco);
         jdbcUtil.executeQuery(sql);
+    }
+
+    public int updateFresco(Fresco fresco) {
+        String sql = "UPDATE system.fresco SET plu = %d, peso = %f, ean = %d, descripcion = '%s', precio = %f WHERE id_fresco = %d";
+        sql = String.format(sql, fresco.getPlu(), fresco.getPeso(), fresco.getEan(), fresco.getDescripcion(), fresco.getPrecio(),
+                fresco.getIdFresco());
+        return jdbcUtil.executeUpdate(sql);
     }
 
     public List<Fresco> findAll() throws SQLException {

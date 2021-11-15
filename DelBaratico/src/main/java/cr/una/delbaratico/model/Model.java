@@ -197,4 +197,12 @@ public class Model extends Observable {
         }
         return null;
     }
+
+    public int updateFresco(Fresco fresco) {
+        return this.frescoDAO.updateFresco(fresco);
+    }
+
+    public int updateSeco(Seco seco) {
+        return this.secoDAO.updateSeco(seco);
+    }
 }
