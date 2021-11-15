@@ -13,7 +13,7 @@ public class HomeView extends JFrame {
     private JButton facturasViewButton;
     private JButton bitacorasViewButton;
     private JButton inventarioViewButton;
-    private CajaView cajaView;
+    private RegistroVentasView registroVentasView;
     private FacturasView facturasView;
     private BitacorasView bitacorasView;
     private InventarioView inventarioView;
@@ -41,13 +41,27 @@ public class HomeView extends JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("DelBaratico Home");
         this.setResizable(false);
-        this.cajaViewButton.setText("Modulo de cajas");
-        this.facturasViewButton.setText("Modulo de facturas");
-        this.bitacorasViewButton.setText("Modulo de bitacoras");
-        this.inventarioViewButton.setText("Modulo de inventario");
+
+        Color color = new Color(255,255,153);
+        this.cajaViewButton.setBackground(color);
+        this.cajaViewButton.setText("Modulo de Registro de Ventas");
+        this.cajaViewButton.setOpaque(true);
+
+        color = new Color(153,255,204);
+        this.facturasViewButton.setBackground(color);
+        this.facturasViewButton.setText("Modulo de Facturas");
+        this.facturasViewButton.setOpaque(true);
+
+        color = new Color(255,204, 153);
+        this.bitacorasViewButton.setBackground(color);
+        this.bitacorasViewButton.setText("Modulo de Bitacoras");
+        this.bitacorasViewButton.setOpaque(true);
+
+        color = new Color(153,153, 255);
+        this.inventarioViewButton.setBackground(color);
+        this.inventarioViewButton.setText("Modulo de Inventario");
+        this.inventarioViewButton.setOpaque(true);
     }
-
-
 
     public void iniciarListeners(){
         this.itemSalir.addActionListener(new ActionListener() {
@@ -65,7 +79,7 @@ public class HomeView extends JFrame {
         });
 
         this.cajaViewButton.addActionListener(e -> {
-            cajaView = new CajaView(servicio, homeView);
+            registroVentasView = new RegistroVentasView(servicio, homeView);
         });
 
         this.bitacorasViewButton.addActionListener( e -> {

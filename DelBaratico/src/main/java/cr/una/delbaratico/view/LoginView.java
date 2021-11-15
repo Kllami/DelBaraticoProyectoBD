@@ -23,6 +23,7 @@ public class LoginView extends JFrame{
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.iniciarListeners();//Siempre se llama de ultimo
+        this.setTitle("DelBaratico Login");
     }
 
     public void iniciarListeners(){
