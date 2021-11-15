@@ -27,11 +27,12 @@ public class InventarioView extends JFrame {
     private JButton agregarButton;
     private JButton editarButton;
     private JButton atrasButton;
+    private JLabel areasIDsNom;
     private JMenuBar menuPrincipal;
     private JMenu menuArchivo;
     private JMenuItem itemSalir;
     Vector<String> columnasTabla;
-    DefaultTableModel model;
+    DefaultTableModel defaultJTableModel;
     List<Seco> secosList;
     List<Fresco> frescosList;
     List<Producto> todosProductosList;
@@ -65,7 +66,7 @@ public class InventarioView extends JFrame {
             this.secosList = this.servicio.buscarSecosXDescripcion(valorBusqueda);
             this.frescosList = this.servicio.buscarFrescosXDescripcion(valorBusqueda);
         }else if(criterioBusqueda.equals("ID")) {
-            Seco secoTemp = this.servicio.findSecoById(Double.valueOf(valorBusqueda));
+            Seco secoTemp = this.servicio.findSecoById(Long.valueOf(valorBusqueda));
             this.secosList = new ArrayList<>();
             if(secoTemp!=null)
                 secosList.add(secoTemp);
@@ -74,10 +75,10 @@ public class InventarioView extends JFrame {
             if(frescoTemp!=null)
                 this.frescosList.add(frescoTemp);
         }else if(criterioBusqueda.equals("EAN")) {
-            this.secosList = this.servicio.buscarSecosXEAN(Double.valueOf(valorBusqueda));
-            this.frescosList = this.servicio.buscarFrescosXEAN(Double.valueOf(valorBusqueda));
+            this.secosList = this.servicio.buscarSecosXEAN(Long.valueOf(valorBusqueda));
+            this.frescosList = this.servicio.buscarFrescosXEAN(Long.valueOf(valorBusqueda));
         }else if(criterioBusqueda.equals("PLU")) {
-            this.frescosList = this.servicio.buscarFrescosXPLU(Double.valueOf(valorBusqueda));
+            this.frescosList = this.servicio.buscarFrescosXPLU(Long.valueOf(valorBusqueda));
         }
 
         if(this.secosList.size() + this.frescosList.size() == 0)
@@ -103,7 +104,7 @@ public class InventarioView extends JFrame {
             descripcion = String.valueOf(fresco.getDescripcion());
             precio = String.valueOf(fresco.getPrecio());
             cantidad = "NO APLICA";
-            areaId = "NO APLICA";
+            areaId = "4";
             plu = String.valueOf(fresco.getPlu());
             peso = String.valueOf(fresco.getPeso());
             this.todosProductosList.add(new Producto(ID, ean, descripcion, precio, cantidad, areaId, plu, peso));
@@ -122,16 +123,16 @@ public class InventarioView extends JFrame {
             Collections.reverse(this.todosProductosList);
         }
 
-        this.model = new DefaultTableModel();
+        this.defaultJTableModel = new DefaultTableModel();
 
-        model.addColumn("ID");
-        model.addColumn("EAN");
-        model.addColumn("Descripcion");
-        model.addColumn("Precio");
-        model.addColumn("Cantidad");
-        model.addColumn("AreaID");
-        model.addColumn("PLU");
-        model.addColumn("Peso");
+        defaultJTableModel.addColumn("ID");
+        defaultJTableModel.addColumn("EAN");
+        defaultJTableModel.addColumn("Descripcion");
+        defaultJTableModel.addColumn("Precio");
+        defaultJTableModel.addColumn("Cantidad");
+        defaultJTableModel.addColumn("AreaID");
+        defaultJTableModel.addColumn("PLU");
+        defaultJTableModel.addColumn("Peso");
 
         for(Producto producto: this.todosProductosList) {
             Vector<Object> row = new Vector<Object>();
@@ -141,14 +142,14 @@ public class InventarioView extends JFrame {
             descripcion = producto.getDescripcion();
             precio = producto.getPrecio();
             cantidad = producto.getCantidad();
-            areaId = producto.getCantidad();
+            areaId = producto.getAreaId();
             plu = producto.getPlu();
             peso = producto.getPeso();
 
-            model.addRow(new Object[]{ID,ean,descripcion,precio,cantidad,areaId,plu,peso});
+            defaultJTableModel.addRow(new Object[]{ID,ean,descripcion,precio,cantidad,areaId,plu,peso});
         }
 
-        this.productosJTable = new JTable(this.model);
+        this.productosJTable = new JTable(this.defaultJTableModel);
         this.jScrollPanel.setViewportView(productosJTable);
     }
 
@@ -235,6 +236,28 @@ public class InventarioView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ventanaAgregarEditar = new VentanaAgregarEditar(servicio);
+            }
+        });
+
+        this.editarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = productosJTable.getSelectedRow();
+                if(row>-1) {// If there is a selected row
+                    String ID = productosJTable.getModel().getValueAt(row, 0).toString().trim();
+                    String ean = productosJTable.getModel().getValueAt(row, 1).toString().trim();
+                    String descripcion = productosJTable.getModel().getValueAt(row, 2).toString().trim();
+                    String precio = productosJTable.getModel().getValueAt(row, 3).toString().trim();
+                    String cantidad = productosJTable.getModel().getValueAt(row, 4).toString().trim();
+                    String areaID = productosJTable.getModel().getValueAt(row, 5).toString().trim();
+                    String plu = productosJTable.getModel().getValueAt(row, 6).toString().trim();
+                    String peso = productosJTable.getModel().getValueAt(row, 7).toString().trim();
+                    Producto productoEditable = new Producto(ID, ean, descripcion, precio, cantidad, areaID, plu, peso);
+
+                    System.out.println("Producto escogido: " + productoEditable.toString());
+                    ventanaAgregarEditar = new VentanaAgregarEditar(servicio, productoEditable);
+                }else
+                    JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar un producto de la tabla");
             }
         });
     }

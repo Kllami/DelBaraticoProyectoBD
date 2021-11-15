@@ -41,12 +41,12 @@ public class AreaDAO {
         return areasList;
    }
 
-    public List<Integer> areasIDS() throws SQLException {
-        List<Integer> areasIDsList = new ArrayList<Integer>();
-        String sql = "SELECT id_area FROM system.area";
+    public List<String> areasIDSNombres() throws SQLException {
+        List<String> areasIDsList = new ArrayList<>();
+        String sql = "SELECT id_area, descripcion FROM system.area";
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         while(resultSet.next()) {
-            areasIDsList.add(resultSet.getInt("id_area"));
+            areasIDsList.add(String.valueOf(resultSet.getInt("id_area")) + " - " + resultSet.getString("descripcion"));
         }
         resultSet.close();
         return areasIDsList;

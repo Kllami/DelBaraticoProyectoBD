@@ -17,26 +17,26 @@ public class SecoDAO {
         this.jdbcUtil = jdbcUtil;
     }
 
-    public void updateInventario(double cantidad, double idSeco) {
+    public void updateInventario(long cantidad, long idSeco) {
         String sql = "update system.seco set cantidad = " + cantidad + " where id_seco = %d";
         sql = String.format(sql, idSeco);
         jdbcUtil.executeQuery(sql);
     }
 
-    public Seco findById(double idSeco) throws SQLException {
+    public Seco findById(long idSeco) throws SQLException {
         Seco seco = null;
-        String sql = "SELECT * FROM system.seco where id_seco = %f";
+        String sql = "SELECT * FROM system.seco where id_seco = %d";
         sql = String.format(sql, idSeco);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
             /*AreaDAO areaDAO = new AreaDAO(jdbcUtil);
             Area area = areaDAO.findById(resultSet.getInt("area_id"));*/
-            seco = new Seco(resultSet.getDouble("id_seco"),
-                    resultSet.getDouble("ean"),
+            seco = new Seco(resultSet.getLong("id_seco"),
+                    resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getDouble("cantidad"),
-                    resultSet.getDouble("area_id"));
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
         }
         resultSet.close();
         return seco;
@@ -49,13 +49,12 @@ public class SecoDAO {
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
             Area area = areaDAO.findById(resultSet.getInt("area_id"));
-            Seco seco = new Seco(resultSet.getDouble("id_seco"),
-                    resultSet.getDouble("ean"),
+            Seco seco = new Seco(resultSet.getLong("id_seco"),
+                    resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getDouble("cantidad"),
-                    resultSet.getDouble("area_id"));
-            secosList.add(seco);
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
         }
         resultSet.close();
         return secosList;
@@ -69,49 +68,49 @@ public class SecoDAO {
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
-            Seco seco = new Seco(resultSet.getDouble("id_seco"),
-                    resultSet.getDouble("ean"),
+            Seco seco = new Seco(resultSet.getLong("id_seco"),
+                    resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getDouble("cantidad"),
-                    resultSet.getDouble("area_id"));
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
             secosList.add(seco);
         }
         resultSet.close();
         return secosList;
     }
 
-    public List<Seco> findSimilarPercentEAN(double ean) throws SQLException {
+    public List<Seco> findSimilarPercentEAN(long ean) throws SQLException {
         List<Seco> secosList = new ArrayList<>();
-        String sql = "SELECT system.seco.*, UTL_MATCH.edit_distance_similarity(%f, system.seco.ean) " +
+        String sql = "SELECT system.seco.*, UTL_MATCH.edit_distance_similarity(%d, system.seco.ean) " +
                 "AS SIMILARITY_PERCENT FROM system.seco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
         while(resultSet.next()) {
-            Seco seco = new Seco(resultSet.getDouble("id_seco"),
-                    resultSet.getDouble("ean"),
+            Seco seco = new Seco(resultSet.getLong("id_seco"),
+                    resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getDouble("cantidad"),
-                    resultSet.getDouble("area_id"));
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
             secosList.add(seco);
         }
         resultSet.close();
         return secosList;
     }
 
-    public Seco findByEAN(double ean) throws SQLException {
-        String sql = "SELECT * FROM system.seco where ean = %f";
+    public Seco findByEAN(long ean) throws SQLException {
+        String sql = "SELECT * FROM system.seco where ean = %d";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
-            Seco seco = new Seco(resultSet.getDouble("id_seco"),
-                    resultSet.getDouble("ean"),
+            Seco seco = new Seco(resultSet.getLong("id_seco"),
+                    resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
                     resultSet.getDouble("precio"),
-                    resultSet.getDouble("cantidad"),
-                    resultSet.getDouble("area_id"));
+                    resultSet.getLong("cantidad"),
+                    resultSet.getLong("area_id"));
             return seco;
         }
         resultSet.close();

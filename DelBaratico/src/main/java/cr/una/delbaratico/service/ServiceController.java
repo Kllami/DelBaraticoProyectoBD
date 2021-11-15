@@ -35,15 +35,15 @@ public class ServiceController {
         return isNumeric;
     }
 
-    public Seco findSecoById(double idSeco) {
+    public Seco findSecoById(long idSeco) {
         return this.modeloPrincipal.findSecoById(idSeco);
     }
 
-    public void updateInventarioFresco(double cantidad, double idSeco) {
-        this.modeloPrincipal.updateInventarioFresco(cantidad, idSeco);
+    public void updateInventarioFresco(double peso, long idSeco) {
+        this.modeloPrincipal.updateInventarioFresco(peso, idSeco);
     }
 
-    public void updateInventarioSeco(double cantidad, double idSeco){
+    public void updateInventarioSeco(long cantidad, long idSeco){
         this.modeloPrincipal.updateInventarioSeco(cantidad, idSeco);
     }
 
@@ -63,7 +63,7 @@ public class ServiceController {
         return this.modeloPrincipal.buscarSecosXDescripcion(descripcion);
     }
 
-    public List<Seco> buscarSecosXEAN(double EAN) {
+    public List<Seco> buscarSecosXEAN(long EAN) {
         return this.modeloPrincipal.buscarSecosXEAN(EAN);
     }
 
@@ -71,11 +71,11 @@ public class ServiceController {
         return this.modeloPrincipal.buscarFrescosXDescripcion(descripcion);
     }
 
-    public List<Fresco> buscarFrescosXEAN(double EAN) {
+    public List<Fresco> buscarFrescosXEAN(long EAN) {
         return this.modeloPrincipal.buscarFrescosXEAN(EAN);
     }
 
-    public List<Fresco> buscarFrescosXPLU(double PLU) {
+    public List<Fresco> buscarFrescosXPLU(long PLU) {
         return this.modeloPrincipal.buscarFrescosXPLU(PLU);
     }
 
@@ -187,19 +187,19 @@ public class ServiceController {
         return this.modeloPrincipal.addSeco(seco);
     }
 
-    public Seco findSecoXEAN(double ean){
+    public Seco findSecoXEAN(long ean){
         return this.modeloPrincipal.findSecoXEAN(ean);
     }
 
-    public Fresco findFrescoXEAN(double ean){
+    public Fresco findFrescoXEAN(long ean){
         return this.modeloPrincipal.findFrescoXEAN(ean);
     }
 
-    public Fresco findFrescoXPLU(double plu) {
+    public Fresco findFrescoXPLU(long plu) {
         return this.modeloPrincipal.findFrescoXPLU(plu);
     }
 
-    public List<Integer> areasIDS() { return this.modeloPrincipal.areasIDS();}
+    public List<String> areasIDSNombres() { return this.modeloPrincipal.areasIDSNombres();}
 
     public List<Factura> listaFacturas() {
         return this.modeloPrincipal.listaFacturas();

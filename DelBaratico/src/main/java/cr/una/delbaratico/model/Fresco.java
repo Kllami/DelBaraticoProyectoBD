@@ -3,14 +3,14 @@ package main.java.cr.una.delbaratico.model;
 
 public class Fresco {
 
-  private double idFresco;
-  private double plu;
+  private long idFresco;
+  private long plu;
   private double peso;
-  private double ean;
+  private long ean;
   private String descripcion;
   private double precio;
 
-  public Fresco(double idFresco, double plu, double peso, double ean, String descripcion, double precio) {
+  public Fresco(long idFresco, long plu, double peso, long ean, String descripcion, double precio) {
     this.idFresco = idFresco;
     this.plu = plu;
     this.peso = peso;
@@ -19,20 +19,20 @@ public class Fresco {
     this.precio = precio;
   }
 
-  public double getIdFresco() {
+  public long getIdFresco() {
     return idFresco;
   }
 
-  public void setIdFresco(int idFresco) {
+  public void setIdFresco(long idFresco) {
     this.idFresco = idFresco;
   }
 
 
-  public double getPlu() {
+  public long getPlu() {
     return plu;
   }
 
-  public void setPlu(int plu) {
+  public void setPlu(long plu) {
     this.plu = plu;
   }
 
@@ -45,14 +45,13 @@ public class Fresco {
   }
 
 
-  public double getEan() {
+  public long getEan() {
     return ean;
   }
 
-  public void setEan(Long ean) {
+  public void setEan(long ean) {
     this.ean = ean;
   }
-
 
   public String getDescripcion() {
     return descripcion;
@@ -61,7 +60,6 @@ public class Fresco {
   public void setDescripcion(String descripcion) {
     this.descripcion = descripcion;
   }
-
 
   public double getPrecio() {
     return precio;
