@@ -1,18 +1,18 @@
 package main.java.cr.una.delbaratico.view;
 
-import main.java.cr.una.delbaratico.model.Fresco;
-import main.java.cr.una.delbaratico.model.Producto;
-import main.java.cr.una.delbaratico.model.Seco;
 import main.java.cr.una.delbaratico.service.ServiceController;
-
-import javax.swing.*;
+import main.java.cr.una.delbaratico.model.Producto;
+import main.java.cr.una.delbaratico.model.Fresco;
+import main.java.cr.una.delbaratico.model.Seco;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.ArrayList;
+import java.awt.event.*;
 import java.util.Vector;
+import java.util.List;
+import javax.swing.*;
+import java.awt.*;
+
 
 public class InventarioView extends JFrame {
     private ServiceController servicio;
@@ -195,7 +195,7 @@ public class InventarioView extends JFrame {
                     panelPrincipal.validate();
                     panelPrincipal.repaint();
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    System.err.println(e.getMessage());
                 }
             }
 
@@ -206,7 +206,7 @@ public class InventarioView extends JFrame {
                     panelPrincipal.validate();
                     panelPrincipal.repaint();
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    System.err.println(e.getMessage());
                 }
             }
         });
@@ -278,6 +278,7 @@ public class InventarioView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                homeView.setVisible(true);
             }
         });
 
@@ -296,7 +297,6 @@ public class InventarioView extends JFrame {
                     String peso = productosJTable.getModel().getValueAt(row, 7).toString().trim();
                     Producto productoEditable = new Producto(ID, ean, descripcion, precio, cantidad, areaID, plu, peso);
 
-                    System.out.println("Producto escogido: " + productoEditable.toString());
                     ventanaEliminar = new VentanaEliminar(servicio, productoEditable);
                 }else if(row > 1)
                     JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar solo un producto de la tabla");

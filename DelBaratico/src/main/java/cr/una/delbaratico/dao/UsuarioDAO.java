@@ -28,7 +28,7 @@ public class UsuarioDAO {
             }
             return result;
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
         return result;
     }

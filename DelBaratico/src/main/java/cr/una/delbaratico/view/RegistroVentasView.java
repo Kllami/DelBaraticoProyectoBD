@@ -10,7 +10,7 @@ import java.sql.Date;
 import javax.swing.*;
 import java.awt.*;
 
-public class CajaView extends JFrame {
+public class RegistroVentasView extends JFrame {
     double precio = 0;
     ServiceController servicio;
     private JPanel panel1;
@@ -31,13 +31,14 @@ public class CajaView extends JFrame {
     private JMenuItem itemSalir;
     HomeView homeView;
 
-    CajaView(ServiceController servicio, HomeView homeView){
+    RegistroVentasView(ServiceController servicio, HomeView homeView){
         this.servicio = servicio;
         this.homeView = homeView;
-        this.panel1.setPreferredSize(new Dimension(900,500));
+        //this.panel1.setPreferredSize(new Dimension(900,500));
         this.setContentPane(panel1);
         this.pack();
         this.setVisible(true);
+        this.setTitle("Modulo de Registro de Ventas");
         this.setLocationRelativeTo(null);
         preciosList = new ArrayList<>();
         rellenarComboBox();
@@ -138,7 +139,8 @@ public class CajaView extends JFrame {
         salirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+                dispose();
+                homeView.setVisible(true);
             }
         });
 

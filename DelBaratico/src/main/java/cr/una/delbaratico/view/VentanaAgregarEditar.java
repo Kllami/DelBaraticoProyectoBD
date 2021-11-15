@@ -247,7 +247,7 @@ public class VentanaAgregarEditar extends JFrame{
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setTitle("Modulo de Inventario");
+        this.setTitle("Modulo de Edicion/Agregado");
         this.tipoProdComboBox.addItem("Seleccione...");
         this.tipoProdComboBox.addItem("Fresco");
         this.tipoProdComboBox.addItem("Seco");

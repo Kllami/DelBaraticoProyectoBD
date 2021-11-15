@@ -56,7 +56,7 @@ public class VentanaEliminar extends JFrame {
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        this.setTitle("Modulo de Inventario");
+        this.setTitle("Modulo Eliminar");
         this.setResizable(false);
         this.habilitarCampos();
     }
