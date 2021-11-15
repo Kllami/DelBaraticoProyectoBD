@@ -17,10 +17,10 @@ public class SecoDAO {
         this.jdbcUtil = jdbcUtil;
     }
 
-    public void updateInventario(long cantidad, long idSeco) {
+    public int updateInventario(long cantidad, long idSeco) {
         String sql = "update system.seco set cantidad = " + cantidad + " where id_seco = %d";
         sql = String.format(sql, idSeco);
-        jdbcUtil.executeQuery(sql);
+        return jdbcUtil.executeUpdate(sql);
     }
 
     public Seco findById(long idSeco) throws SQLException {
@@ -127,6 +127,12 @@ public class SecoDAO {
     public int updateSeco(Seco seco) {
         String sql = "UPDATE system.seco SET ean = %d, descripcion = '%s', precio = %f, cantidad = %d, area_id = %d WHERE id_seco = %d";
         sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId(), seco.getIdSeco());
+        return jdbcUtil.executeUpdate(sql);
+    }
+
+    public int eliminarSeco(Seco seco) {
+        String sql = "DELETE system.seco WHERE id_seco = %d";
+        sql = String.format(sql, seco.getIdSeco());
         return jdbcUtil.executeUpdate(sql);
     }
 }

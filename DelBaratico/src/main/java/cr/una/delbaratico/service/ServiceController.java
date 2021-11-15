@@ -55,12 +55,12 @@ public class ServiceController {
         return this.modeloPrincipal.findSecoById(idSeco);
     }
 
-    public void updateInventarioFresco(double peso, long idSeco) {
-        this.modeloPrincipal.updateInventarioFresco(peso, idSeco);
+    public int updateInventarioFresco(double peso, long idSeco) {
+        return this.modeloPrincipal.updateInventarioFresco(peso, idSeco);
     }
 
-    public void updateInventarioSeco(long cantidad, long idSeco){
-        this.modeloPrincipal.updateInventarioSeco(cantidad, idSeco);
+    public int updateInventarioSeco(long cantidad, long idSeco){
+        return this.modeloPrincipal.updateInventarioSeco(cantidad, idSeco);
     }
 
     public Fresco findFrescoById(double idFresco) {
@@ -227,5 +227,13 @@ public class ServiceController {
 
     public int updateSeco(Seco seco) {
         return this.modeloPrincipal.updateSeco(seco);
+    }
+
+    public int eliminarSeco(Seco seco) {
+        return this.modeloPrincipal.eliminarSeco(seco);
+    }
+
+    public int eliminarFresco(Long id) {
+        return this.modeloPrincipal.eliminarFresco(id);
     }
 }

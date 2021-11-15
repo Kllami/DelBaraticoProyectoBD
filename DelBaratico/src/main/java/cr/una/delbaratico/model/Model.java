@@ -70,8 +70,8 @@ public class Model extends Observable {
         return null;
     }
 
-    public void updateInventarioSeco(long cantidad, long idSeco){
-        this.secoDAO.updateInventario(cantidad, idSeco);
+    public int updateInventarioSeco(long cantidad, long idSeco){
+        return this.secoDAO.updateInventario(cantidad, idSeco);
     }
 
     public Fresco findFrescoById(double idFresco) {
@@ -83,8 +83,8 @@ public class Model extends Observable {
         return null;
     }
 
-    public void updateInventarioFresco(double peso, long idFresco) {
-        this.frescoDAO.updateInventario(peso, idFresco);
+    public int updateInventarioFresco(double peso, long idFresco) {
+        return this.frescoDAO.updateInventario(peso, idFresco);
     }
 
     public List<Caja> listaCajas() {
@@ -204,5 +204,13 @@ public class Model extends Observable {
 
     public int updateSeco(Seco seco) {
         return this.secoDAO.updateSeco(seco);
+    }
+
+    public int eliminarSeco(Seco seco) {
+        return this.secoDAO.eliminarSeco(seco);
+    }
+
+    public int eliminarFresco(Long id) {
+        return this.frescoDAO.eliminarFresco(id);
     }
 }

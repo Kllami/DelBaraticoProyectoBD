@@ -32,10 +32,10 @@ public class FrescoDAO {
         return fresco;
     }
 
-    public void updateInventario(double peso, long idFresco) {
+    public int updateInventario(double peso, long idFresco) {
         String sql = "update system.fresco set peso = " + peso + " where id_fresco = %d";
         sql = String.format(sql, idFresco);
-        jdbcUtil.executeQuery(sql);
+        return jdbcUtil.executeUpdate(sql);
     }
 
     public int updateFresco(Fresco fresco) {
@@ -160,6 +160,12 @@ public class FrescoDAO {
         String sql = "INSERT INTO system.fresco(plu, peso, ean, descripcion, precio) VALUES " +
                 "(%d, %f, %d, '%s', %f)";
         sql = String.format(sql, fresco.getPlu(), fresco.getPeso(), fresco.getEan(), fresco.getDescripcion(), fresco.getPrecio());
+        return jdbcUtil.executeUpdate(sql);
+    }
+
+    public int eliminarFresco(Long id) {
+        String sql = "DELETE system.fresco WHERE id_fresco = %d";
+        sql = String.format(sql, id);
         return jdbcUtil.executeUpdate(sql);
     }
 }

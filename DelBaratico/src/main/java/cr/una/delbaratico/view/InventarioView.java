@@ -7,6 +7,7 @@ import main.java.cr.una.delbaratico.service.ServiceController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -60,6 +61,18 @@ public class InventarioView extends JFrame {
         this.buscarJComboBox.setFocusable(true);
         this.buscarJComboBox.setRequestFocusEnabled(true);
         this.buscarJComboBox.requestFocus();
+
+        Color color = new Color(102,255,178);
+        this.agregarButton.setBackground(color);
+        this.agregarButton.setOpaque(true);
+
+        color = new Color(255,153,153);
+        this.eliminarButton.setBackground(color);
+        this.eliminarButton.setOpaque(true);
+
+        color = new Color(102,178,255);
+        this.editarButton.setBackground(color);
+        this.editarButton.setOpaque(true);
     }
 
     private void fillTabla(String valorBusqueda, String criterioBusqueda){
