@@ -1,12 +1,10 @@
 package main.java.cr.una.delbaratico.dao;
 
 import main.java.cr.una.delbaratico.model.Area;
-import main.java.cr.una.delbaratico.model.Fresco;
 import main.java.cr.una.delbaratico.model.Seco;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.ResultSet;
 import java.util.List;
 
 public class SecoDAO {

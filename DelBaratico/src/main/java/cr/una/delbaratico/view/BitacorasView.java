@@ -1,13 +1,16 @@
 package main.java.cr.una.delbaratico.view;
 
+import main.java.cr.una.delbaratico.service.ServiceController;
 import main.java.cr.una.delbaratico.dao.AuditoriaDAO;
 import main.java.cr.una.delbaratico.model.Auditoria;
-import main.java.cr.una.delbaratico.service.ServiceController;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.*;
+import java.awt.*;
+
 
 public class BitacorasView extends JFrame {
     private ServiceController servicio;
@@ -16,17 +19,33 @@ public class BitacorasView extends JFrame {
     private JMenuBar menuPrincipal;
     private JMenu menuArchivo;
     private JMenuItem itemSalir;
+    HomeView homeView;
 
-    public BitacorasView(ServiceController servicio) {
+    public BitacorasView(ServiceController servicio, HomeView homeView) {
         this.servicio = servicio;
+        this.homeView = homeView;
         this.panel1.setPreferredSize(new Dimension(900,500));
         this.setContentPane(panel1);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.ajustarMenus();
-        llenarTabla();
+        this.llenarTabla();
+        this.agregarListener();
+    }
+
+    private void agregarListener() {
+        this.addWindowListener(new WindowAdapter() {
+            //windowOpened METHOD WILL BE CALLED WHEN A JFRAME IS OPENED
+            public void windowOpened(WindowEvent evt) {
+                homeView.setVisible(false);
+            }
+
+            //windowClosing METHOD WILL BE CALLED WHEN A JFRAME IS CLOSING
+            public void windowClosing(WindowEvent evt) {
+                homeView.setVisible(true);
+            }
+        });
     }
 
     private void acomodarTabla(){

@@ -2,7 +2,6 @@ package main.java.cr.una.delbaratico.dao;
 
 import java.sql.*;
 
-
 public class JdbcUtil {
 
     private static final String DB_DRIVER = "oracle.jdbc.OracleDriver";

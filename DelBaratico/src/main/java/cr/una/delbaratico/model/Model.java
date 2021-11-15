@@ -1,14 +1,10 @@
 package main.java.cr.una.delbaratico.model;
 
 import main.java.cr.una.delbaratico.dao.*;
-
-import java.security.spec.ECField;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Observable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Observable;
 
 public class Model extends Observable {
 

@@ -1,6 +1,5 @@
 package main.java.cr.una.delbaratico.model;
 
-
 public class DetalleFresco {
 
   private int idDetalleFresco;

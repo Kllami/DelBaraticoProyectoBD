@@ -1,19 +1,12 @@
 package main.java.cr.una.delbaratico.service;
 
-import main.java.cr.una.delbaratico.dao.JdbcUtil;
 import main.java.cr.una.delbaratico.model.*;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.List;
 
 public class ServiceController {
 
     private Model modeloPrincipal;
-    private JdbcUtil util;
 
     public ServiceController(Model iniciarSesionModel) {
         this.modeloPrincipal = iniciarSesionModel;

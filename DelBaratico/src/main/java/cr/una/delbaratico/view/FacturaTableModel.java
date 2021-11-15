@@ -1,8 +1,8 @@
 package main.java.cr.una.delbaratico.view;
-import main.java.cr.una.delbaratico.model.Factura;
 
-import java.util.List;
+import main.java.cr.una.delbaratico.model.Factura;
 import javax.swing.table.AbstractTableModel;
+import java.util.List;
 
 public class FacturaTableModel extends AbstractTableModel{
 

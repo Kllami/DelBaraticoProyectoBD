@@ -1,6 +1,5 @@
 package main.java.cr.una.delbaratico.model;
 
-
 import java.sql.Date;
 
 public class Auditoria {
