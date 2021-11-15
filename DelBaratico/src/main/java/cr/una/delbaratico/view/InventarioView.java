@@ -8,9 +8,7 @@ import main.java.cr.una.delbaratico.service.ServiceController;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,9 +36,11 @@ public class InventarioView extends JFrame {
     List<Producto> todosProductosList;
     VentanaAgregarEditar ventanaAgregarEditar;
     VentanaEliminar ventanaEliminar;
+    HomeView homeView;
 
-    public InventarioView(ServiceController servicio) {
+    public InventarioView(ServiceController servicio, HomeView homeView) {
         this.servicio = servicio;
+        this.homeView = homeView;
         this.ajustarMenus();
         this.initComponents();
         this.iniciarListeners();
@@ -302,6 +302,18 @@ public class InventarioView extends JFrame {
                     JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar solo un producto de la tabla");
                 else
                     JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar un producto de la tabla");
+            }
+        });
+
+        this.addWindowListener(new WindowAdapter() {
+            //windowOpened METHOD WILL BE CALLED WHEN A JFRAME IS OPENED
+            public void windowOpened(WindowEvent evt) {
+                homeView.setVisible(false);
+            }
+
+            //windowClosing METHOD WILL BE CALLED WHEN A JFRAME IS CLOSING
+            public void windowClosing(WindowEvent evt) {
+                homeView.setVisible(true);
             }
         });
     }

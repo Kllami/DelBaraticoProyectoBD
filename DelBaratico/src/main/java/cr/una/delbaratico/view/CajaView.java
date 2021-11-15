@@ -2,10 +2,8 @@ package main.java.cr.una.delbaratico.view;
 
 import main.java.cr.una.delbaratico.service.ServiceController;
 import main.java.cr.una.delbaratico.model.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
+
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -31,9 +29,11 @@ public class CajaView extends JFrame {
     private JMenuBar menuPrincipal;
     private JMenu menuArchivo;
     private JMenuItem itemSalir;
+    HomeView homeView;
 
-    CajaView(ServiceController servicio){
+    CajaView(ServiceController servicio, HomeView homeView){
         this.servicio = servicio;
+        this.homeView = homeView;
         this.panel1.setPreferredSize(new Dimension(900,500));
         this.setContentPane(panel1);
         this.pack();
@@ -172,6 +172,18 @@ public class CajaView extends JFrame {
                 else if (textField3.getText().equals("")) {
                     JOptionPane.showMessageDialog(panel1, "Debe indicar el id del producto por agregar");
                 }
+            }
+        });
+
+        this.addWindowListener(new WindowAdapter() {
+            //windowOpened METHOD WILL BE CALLED WHEN A JFRAME IS OPENED
+            public void windowOpened(WindowEvent evt) {
+                homeView.setVisible(false);
+            }
+
+            //windowClosing METHOD WILL BE CALLED WHEN A JFRAME IS CLOSING
+            public void windowClosing(WindowEvent evt) {
+                homeView.setVisible(true);
             }
         });
     }

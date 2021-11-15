@@ -22,12 +22,14 @@ public class HomeView extends JFrame {
     private JMenuBar menuPrincipal;
     private JMenu menuArchivo;
     private JMenuItem itemSalir;
+    private static HomeView homeView;
 
     public HomeView(ServiceController servicio) {
         this.servicio = servicio;
         this.ajustarMenus();
         this.initComponents();
         this.iniciarListeners();
+        this.homeView = this;
     }
 
     public void initComponents(){
@@ -58,15 +60,21 @@ public class HomeView extends JFrame {
         this.inventarioViewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inventarioView = new InventarioView(servicio);
+                inventarioView = new InventarioView(servicio, homeView);
             }
         });
 
-        this.cajaViewButton.addActionListener(e -> { cajaView = new CajaView(servicio); });
+        this.cajaViewButton.addActionListener(e -> {
+            cajaView = new CajaView(servicio, homeView);
+        });
 
-        this.bitacorasViewButton.addActionListener( e -> { bitacorasView = new BitacorasView(servicio); } );
+        this.bitacorasViewButton.addActionListener( e -> {
+            bitacorasView = new BitacorasView(servicio, homeView);
+        } );
 
-        this.facturasViewButton.addActionListener(e -> { facturasView = new FacturasView(servicio); });
+        this.facturasViewButton.addActionListener(e -> {
+            facturasView = new FacturasView(servicio, homeView);
+        });
     }
 
     private void ajustarMenus() {
