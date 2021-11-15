@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class HomeView extends JFrame {
     private JButton cajaViewButton;
-    private JPanel panel1;
+    private JPanel panelPrincipal;
     private JButton facturasViewButton;
     private JButton bitacorasViewButton;
     private JButton inventarioViewButton;
@@ -31,13 +31,14 @@ public class HomeView extends JFrame {
     }
 
     public void initComponents(){
-        this.panel1.setPreferredSize(new Dimension(400,100));
-        this.setContentPane(panel1);
+        this.panelPrincipal.setPreferredSize(new Dimension(400,100));
+        this.setContentPane(panelPrincipal);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setTitle("DelBaratico Home");
+        this.setResizable(false);
         this.cajaViewButton.setText("Modulo de cajas");
         this.facturasViewButton.setText("Modulo de facturas");
         this.bitacorasViewButton.setText("Modulo de bitacoras");

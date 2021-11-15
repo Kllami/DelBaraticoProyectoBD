@@ -37,6 +37,7 @@ public class InventarioView extends JFrame {
     List<Fresco> frescosList;
     List<Producto> todosProductosList;
     VentanaAgregarEditar ventanaAgregarEditar;
+    VentanaEliminar ventanaEliminar;
 
     public InventarioView(ServiceController servicio) {
         this.servicio = servicio;
@@ -254,9 +255,10 @@ public class InventarioView extends JFrame {
                     String peso = productosJTable.getModel().getValueAt(row, 7).toString().trim();
                     Producto productoEditable = new Producto(ID, ean, descripcion, precio, cantidad, areaID, plu, peso);
 
-                    System.out.println("Producto escogido: " + productoEditable.toString());
                     ventanaAgregarEditar = new VentanaAgregarEditar(servicio, productoEditable);
-                }else
+                }else if(row > 1)
+                    JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar solo un producto de la tabla");
+                else
                     JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar un producto de la tabla");
             }
         });
@@ -265,6 +267,30 @@ public class InventarioView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+            }
+        });
+
+        eliminarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = productosJTable.getSelectedRow();
+                if(row>-1) {// If there is a selected row
+                    String ID = productosJTable.getModel().getValueAt(row, 0).toString().trim();
+                    String ean = productosJTable.getModel().getValueAt(row, 1).toString().trim();
+                    String descripcion = productosJTable.getModel().getValueAt(row, 2).toString().trim();
+                    String precio = productosJTable.getModel().getValueAt(row, 3).toString().trim();
+                    String cantidad = productosJTable.getModel().getValueAt(row, 4).toString().trim();
+                    String areaID = productosJTable.getModel().getValueAt(row, 5).toString().trim();
+                    String plu = productosJTable.getModel().getValueAt(row, 6).toString().trim();
+                    String peso = productosJTable.getModel().getValueAt(row, 7).toString().trim();
+                    Producto productoEditable = new Producto(ID, ean, descripcion, precio, cantidad, areaID, plu, peso);
+
+                    System.out.println("Producto escogido: " + productoEditable.toString());
+                    ventanaEliminar = new VentanaEliminar(servicio, productoEditable);
+                }else if(row > 1)
+                    JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar solo un producto de la tabla");
+                else
+                    JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar un producto de la tabla");
             }
         });
     }
