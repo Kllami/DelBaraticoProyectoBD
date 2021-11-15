@@ -1,11 +1,11 @@
 package main.java.cr.una.delbaratico.view;
 
 import main.java.cr.una.delbaratico.service.ServiceController;
-
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class HomeView extends JFrame {
     private JButton cajaViewButton;

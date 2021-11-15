@@ -1,13 +1,13 @@
 package main.java.cr.una.delbaratico.view;
 
+import main.java.cr.una.delbaratico.service.ServiceController;
 import main.java.cr.una.delbaratico.dao.AuditoriaDAO;
 import main.java.cr.una.delbaratico.model.Auditoria;
-import main.java.cr.una.delbaratico.service.ServiceController;
-
-import javax.swing.*;
-import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.*;
+import java.awt.*;
+
 
 public class BitacorasView extends JFrame {
     private ServiceController servicio;
@@ -21,7 +21,6 @@ public class BitacorasView extends JFrame {
         this.servicio = servicio;
         this.panel1.setPreferredSize(new Dimension(900,500));
         this.setContentPane(panel1);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);

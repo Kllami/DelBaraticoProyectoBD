@@ -3,10 +3,9 @@ package main.java.cr.una.delbaratico.view;
 import main.java.cr.una.delbaratico.service.ServiceController;
 import main.java.cr.una.delbaratico.model.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -27,7 +26,6 @@ public class CajaView extends JFrame {
     public JTextField pesoTextField;
     private JLabel pesoJLabel;
     private JButton consultarButton;
-    private Model modeloPrincipal;
     private Caja caja;
     private List preciosList;
     private JMenuBar menuPrincipal;
@@ -38,13 +36,30 @@ public class CajaView extends JFrame {
         this.servicio = servicio;
         this.panel1.setPreferredSize(new Dimension(900,500));
         this.setContentPane(panel1);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         preciosList = new ArrayList<>();
         rellenarComboBox();
+        this.ajustarMenus();
+        this.agregarListeners();
+    }
 
+    public void ajustarMenus(){
+        this.menuPrincipal = new JMenuBar();
+        this.menuPrincipal.add(this.menuArchivo = new JMenu("Archivo"));
+        this.menuArchivo.add(this.itemSalir = new JMenuItem("Salir"));
+        this.menuPrincipal.add(Box.createHorizontalGlue());
+        this.menuPrincipal.add(new JLabel("Nombre de usuario: " +
+                this.servicio.getUsuarioActual().getNombre() +
+                "  ||  Rol: " +
+                this.servicio.getUsuarioActual().getRol() +
+                "   ",
+                SwingConstants.RIGHT));
+        this.setJMenuBar(this.menuPrincipal);
+    }
+
+    public void agregarListeners(){
         secoCheckBox.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -158,7 +173,7 @@ public class CajaView extends JFrame {
                     JOptionPane.showMessageDialog(panel1, "Debe indicar el id del producto por agregar");
                 }
             }
-    });
+        });
     }
 
     public void rellenarComboBox () {

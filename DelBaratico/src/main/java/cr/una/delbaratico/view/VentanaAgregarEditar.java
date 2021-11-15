@@ -243,7 +243,6 @@ public class VentanaAgregarEditar extends JFrame{
     public void initComponents(){
         this.panelPrincipal.setPreferredSize(new Dimension(400,300));
         this.setContentPane(panelPrincipal);
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);

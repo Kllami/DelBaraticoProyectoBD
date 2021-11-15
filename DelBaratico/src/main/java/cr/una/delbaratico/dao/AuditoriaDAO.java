@@ -1,10 +1,9 @@
 package main.java.cr.una.delbaratico.dao;
 
 import main.java.cr.una.delbaratico.model.Auditoria;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.ResultSet;
 import java.util.List;
 
 public class AuditoriaDAO {

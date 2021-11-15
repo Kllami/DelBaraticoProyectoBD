@@ -32,7 +32,6 @@ public class InventarioView extends JFrame {
     private JMenuBar menuPrincipal;
     private JMenu menuArchivo;
     private JMenuItem itemSalir;
-    Vector<String> columnasTabla;
     DefaultTableModel defaultJTableModel;
     List<Seco> secosList;
     List<Fresco> frescosList;
@@ -49,7 +48,6 @@ public class InventarioView extends JFrame {
 
     public void initComponents(){
         this.setContentPane(panelPrincipal);
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);

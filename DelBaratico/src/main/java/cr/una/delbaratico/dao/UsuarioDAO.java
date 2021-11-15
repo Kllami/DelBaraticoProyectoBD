@@ -1,10 +1,9 @@
 package main.java.cr.una.delbaratico.dao;
 
 import main.java.cr.una.delbaratico.model.Usuario;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.ConsoleHandler;
+import java.sql.ResultSet;
+
 
 public class UsuarioDAO {
     private JdbcUtil jdbcUtil;
