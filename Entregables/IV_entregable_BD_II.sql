@@ -220,6 +220,22 @@ CREATE VIEW vista_producto_cuidado_personal AS SELECT id_seco, EAN, descripcion,
 CREATE VIEW vista_producto_mercancias AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM  system.seco WHERE area_id = 3;
 CREATE VIEW vista_producto_frescos AS SELECT id_fresco, PLU, EAN, descripcion, peso, precio FROM  system.fresco;
 
+grant select on system.area to gerente_abarrotes;
+grant select on system.area to gerente_cuidado_personal;
+grant select on system.area to gerente_frescos;
+grant select on system.area to gerente_mercancias;
+
+
+grant select on system.seco to gerente_abarrotes;
+grant select on system.seco to gerente_cuidado_personal;
+grant select on system.seco to gerente_frescos;
+grant select on system.seco to gerente_mercancias;
+
+grant select on system.fresco to gerente_abarrotes;
+grant select on system.fresco to gerente_cuidado_personal;
+grant select on system.fresco to gerente_frescos;
+grant select on system.fresco to gerente_mercancias;
+
 GRANT select, update on vista_producto_abarrotes to gerente_abarrotes;
 GRANT select, update on vista_producto_cuidado_personal to gerente_cuidado_personal;
 GRANT select, update on vista_producto_frescos to gerente_frescos;
