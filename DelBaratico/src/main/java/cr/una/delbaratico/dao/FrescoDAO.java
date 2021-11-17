@@ -55,7 +55,7 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
-                    resultSet.getDouble("peso"));
+                    resultSet.getDouble("precio"));
             frescosList.add(fresco);
         }
         resultSet.close();
@@ -75,7 +75,7 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
-                    resultSet.getDouble("peso"));
+                    resultSet.getDouble("precio"));
             frescosList.add(fresco);
         }
         resultSet.close();
@@ -95,7 +95,7 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
-                    resultSet.getDouble("peso"));
+                    resultSet.getDouble("precio"));
             frescosList.add(fresco);
         }
         resultSet.close();
@@ -115,7 +115,7 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
-                    resultSet.getDouble("peso"));
+                    resultSet.getDouble("precio"));
             frescosList.add(fresco);
         }
         resultSet.close();
@@ -132,7 +132,7 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
-                    resultSet.getDouble("peso"));
+                    resultSet.getDouble("precio"));
             return fresco;
         }
         resultSet.close();
@@ -149,7 +149,7 @@ public class FrescoDAO {
                     resultSet.getDouble("peso"),
                     resultSet.getLong("ean"),
                     resultSet.getString("descripcion"),
-                    resultSet.getDouble("peso"));
+                    resultSet.getDouble("precio"));
             return fresco;
         }
         resultSet.close();
