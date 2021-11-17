@@ -21,6 +21,24 @@ public class SecoDAO {
         return jdbcUtil.executeUpdate(sql);
     }
 
+    public int updateInventarioAbarrotes(long cantidad, long idSeco) {
+        String sql = "update system.vista_producto_abarrotes set cantidad = " + cantidad + " where id_seco = %d";
+        sql = String.format(sql, idSeco);
+        return jdbcUtil.executeUpdate(sql);
+    }
+
+    public int updateInventarioCuidadoPersonal(long cantidad, long idSeco) {
+        String sql = "update system.vista_producto_cuidado_personal set cantidad = " + cantidad + " where id_seco = %d";
+        sql = String.format(sql, idSeco);
+        return jdbcUtil.executeUpdate(sql);
+    }
+
+    public int updateInventarioMercancias(long cantidad, long idSeco) {
+        String sql = "update system.vista_producto_mercancias set cantidad = " + cantidad + " where id_seco = %d";
+        sql = String.format(sql, idSeco);
+        return jdbcUtil.executeUpdate(sql);
+    }
+
     public Seco findById(long idSeco) throws SQLException {
         Seco seco = null;
         String sql = "SELECT * FROM system.seco where id_seco = %d";
@@ -124,6 +142,24 @@ public class SecoDAO {
 
     public int updateSeco(Seco seco) {
         String sql = "UPDATE system.seco SET ean = %d, descripcion = '%s', precio = %f, cantidad = %d, area_id = %d WHERE id_seco = %d";
+        sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId(), seco.getIdSeco());
+        return jdbcUtil.executeUpdate(sql);
+    }
+
+    public int updateSecoAbarrotes(Seco seco) {
+        String sql = "UPDATE system.vista_producto_abarrotes SET ean = %d, descripcion = '%s', precio = %f, cantidad = %d, area_id = %d WHERE id_seco = %d";
+        sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId(), seco.getIdSeco());
+        return jdbcUtil.executeUpdate(sql);
+    }
+
+    public int updateSecoMercancias(Seco seco) {
+        String sql = "UPDATE system.vista_producto_mercancias SET ean = %d, descripcion = '%s', precio = %f, cantidad = %d, area_id = %d WHERE id_seco = %d";
+        sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId(), seco.getIdSeco());
+        return jdbcUtil.executeUpdate(sql);
+    }
+
+    public int updateSecoCiudadoPersonal(Seco seco) {
+        String sql = "UPDATE system.vista_producto_cuidado_personal SET ean = %d, descripcion = '%s', precio = %f, cantidad = %d, area_id = %d WHERE id_seco = %d";
         sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId(), seco.getIdSeco());
         return jdbcUtil.executeUpdate(sql);
     }

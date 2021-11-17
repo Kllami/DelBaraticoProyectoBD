@@ -216,6 +216,10 @@ grant select on system.seco to cajero;
 grant select on system.fresco to cajero;
 grant select on system.caja to cajero;
 
+grant insert on system.factura to cajero;
+grant insert on system.detalleFresco to cajero;
+grant insert on system.detalleSeco to cajero;
+
 PROMPT Asignacion de permisos para gerentes generales
 grant select, update, delete, insert on system.area to gerente_general;
 grant select, update, delete, insert on system.seco to gerente_general;
@@ -233,7 +237,6 @@ grant select on system.area to gerente_cuidado_personal;
 grant select on system.area to gerente_frescos;
 grant select on system.area to gerente_mercancias;
 
-
 grant select on system.seco to gerente_abarrotes;
 grant select on system.seco to gerente_cuidado_personal;
 grant select on system.seco to gerente_frescos;
@@ -243,6 +246,21 @@ grant select on system.fresco to gerente_abarrotes;
 grant select on system.fresco to gerente_cuidado_personal;
 grant select on system.fresco to gerente_frescos;
 grant select on system.fresco to gerente_mercancias;
+
+grant update on system.area to gerente_abarrotes;
+grant update on system.area to gerente_cuidado_personal;
+grant update on system.area to gerente_frescos;
+grant update on system.area to gerente_mercancias;
+
+grant update on system.seco to gerente_abarrotes;
+grant update on system.seco to gerente_cuidado_personal;
+grant update on system.seco to gerente_frescos;
+grant update on system.seco to gerente_mercancias;
+
+grant update on system.fresco to gerente_abarrotes;
+grant update on system.fresco to gerente_cuidado_personal;
+grant update on system.fresco to gerente_frescos;
+grant update on system.fresco to gerente_mercancias;
 
 GRANT select, update on vista_producto_abarrotes to gerente_abarrotes;
 GRANT select, update on vista_producto_cuidado_personal to gerente_cuidado_personal;

@@ -195,11 +195,31 @@ public class Model extends Observable {
     }
 
     public int updateFresco(Fresco fresco) {
+        if(this.usuarioDao.getUsuarioActual().getRol().equals("GERENTE_FRESCOS"))
+            return this.frescoDAO.updateFrescoVistaFrescos(fresco);
         return this.frescoDAO.updateFresco(fresco);
     }
 
     public int updateSeco(Seco seco) {
+        if(this.usuarioDao.getUsuarioActual().getRol().equals("GERENTE_CUIDADO_PERSONAL"))
+            return this.updateSecoCuidadoPersonal(seco);
+        if(this.usuarioDao.getUsuarioActual().getRol().equals("GERENTE_MERCANCIAS"))
+            return this.updateSecoMercancias(seco);
+        if(this.usuarioDao.getUsuarioActual().getRol().equals("GERENTE_ABARROTES"))
+            return this.updateSecoAbarrotes(seco);
         return this.secoDAO.updateSeco(seco);
+    }
+
+    public int updateSecoAbarrotes(Seco seco) {
+        return this.secoDAO.updateSecoAbarrotes(seco);
+    }
+
+    public int updateSecoMercancias(Seco seco) {
+        return this.secoDAO.updateSecoMercancias(seco);
+    }
+
+    public int updateSecoCuidadoPersonal(Seco seco) {
+        return this.secoDAO.updateSecoCiudadoPersonal(seco);
     }
 
     public int eliminarSeco(Seco seco) {
