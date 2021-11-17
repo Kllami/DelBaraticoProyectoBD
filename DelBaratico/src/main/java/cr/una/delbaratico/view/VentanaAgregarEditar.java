@@ -558,11 +558,13 @@ public class VentanaAgregarEditar extends JFrame{
                         JOptionPane.showMessageDialog(panelPrincipal, "El peso no puede ser negativo");
                     else if(Double.valueOf(peso)==0 && esGerenteNoGeneral())
                         JOptionPane.showMessageDialog(panelPrincipal, "Usted no tiene privilegios para eliminar un producto");
-                    else if(!esGerenteNoGeneral()){
+                    else if(Double.valueOf(peso)==0 && !esGerenteNoGeneral()){
                         if(this.servicio.eliminarFresco(Long.valueOf(fresco.getIdFresco())) == 0)
                             JOptionPane.showMessageDialog(this.panelPrincipal, "Hubo un problema al eliminar el producto");
-                        else
+                        else {
                             JOptionPane.showMessageDialog(this.panelPrincipal, "El producto fue eliminado exitosamente");
+                            dispose();
+                        }
                     }
                     else if(servicio.updateFresco(fresco) > 0) {
                         JOptionPane.showMessageDialog(panelPrincipal, "Producto editado");
@@ -583,11 +585,13 @@ public class VentanaAgregarEditar extends JFrame{
                         JOptionPane.showMessageDialog(panelPrincipal, "La cantidad no puede ser negativa");
                     else if(Long.valueOf(cantidad)==0 && esGerenteNoGeneral())
                         JOptionPane.showMessageDialog(panelPrincipal, "Usted no tiene privilegios para eliminar un producto");
-                    else if(!esGerenteNoGeneral())
+                    else if(Long.valueOf(cantidad)==0 && !esGerenteNoGeneral())
                         if(this.servicio.eliminarSeco(seco) == 0)
                             JOptionPane.showMessageDialog(this.panelPrincipal, "Hubo un problema al eliminar el producto");
-                        else
+                        else {
                             JOptionPane.showMessageDialog(this.panelPrincipal, "El producto fue eliminado exitosamente");
+                            dispose();
+                        }
                     else if(servicio.updateSeco(seco) > 0) {
                         JOptionPane.showMessageDialog(panelPrincipal, "Producto editado");
                         dispose();
