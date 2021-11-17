@@ -16,7 +16,7 @@ public class CajaDAO {
 
     public Caja findById(int idCaja) throws SQLException {
         Caja caja = null;
-        String sql = "SELECT * FROM caja where id_caja = %d";
+        String sql = "SELECT * FROM system.caja where id_caja = %d";
         sql = String.format(sql, idCaja);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
