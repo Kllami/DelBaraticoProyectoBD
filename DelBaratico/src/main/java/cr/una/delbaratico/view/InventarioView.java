@@ -71,6 +71,56 @@ public class InventarioView extends JFrame {
         color = new Color(102,178,255);
         this.editarButton.setBackground(color);
         this.editarButton.setOpaque(true);
+
+        this.aplicarPrivilegios();
+    }
+
+    public void aplicarPrivilegios(){
+        if(this.servicio.getUsuarioActual().getRol().equals("CAJERO")) {
+            this.agregarButton.setEnabled(false);
+            this.agregarButton.setVisible(false);
+
+            this.eliminarButton.setEnabled(false);
+            this.eliminarButton.setVisible(false);
+
+            this.editarButton.setEnabled(false);
+            this.editarButton.setVisible(false);
+        }else if(this.servicio.getUsuarioActual().getRol().equals("GERENTE_ABARROTES") ||
+                this.servicio.getUsuarioActual().getRol().equals("GERENTE_CUIDADO_PERSONAL") ||
+                this.servicio.getUsuarioActual().getRol().equals("GERENTE_MERCANCIAS") ||
+                this.servicio.getUsuarioActual().getRol().equals("GERENTE_FRESCOS")){
+            this.agregarButton.setEnabled(false);
+            this.agregarButton.setVisible(false);
+
+            this.eliminarButton.setEnabled(false);
+            this.eliminarButton.setVisible(false);
+        }
+    }
+
+    public boolean debeEditar(Producto productoEscogido){
+        boolean result = true;
+        if(productoEscogido.getID().equals("1")){
+            if(this.servicio.getUsuarioActual().getRol().equals("GERENTE_CUIDADO_PERSONAL") ||
+                    this.servicio.getUsuarioActual().getRol().equals("GERENTE_MERCANCIAS") ||
+                    this.servicio.getUsuarioActual().getRol().equals("GERENTE_FRESCOS"))
+                result = false;
+        }else if(productoEscogido.getID().equals("2")){
+            if(this.servicio.getUsuarioActual().getRol().equals("GERENTE_ABARROTES") ||
+                    this.servicio.getUsuarioActual().getRol().equals("GERENTE_MERCANCIAS") ||
+                    this.servicio.getUsuarioActual().getRol().equals("GERENTE_FRESCOS"))
+                result = false;
+        }else if(productoEscogido.getID().equals("3")) {
+            if(this.servicio.getUsuarioActual().getRol().equals("GERENTE_ABARROTES") ||
+                    this.servicio.getUsuarioActual().getRol().equals("GERENTE_CUIDADO_PERSONAL") ||
+                    this.servicio.getUsuarioActual().getRol().equals("GERENTE_FRESCOS"))
+                result = false;
+        }else if(!productoEscogido.getPlu().equals("NO APLICA")){
+            if(this.servicio.getUsuarioActual().getRol().equals("GERENTE_ABARROTES") ||
+                    this.servicio.getUsuarioActual().getRol().equals("GERENTE_CUIDADO_PERSONAL") ||
+                    this.servicio.getUsuarioActual().getRol().equals("GERENTE_MERCANCIAS"))
+                result = false;
+        }
+        return result;
     }
 
     private void fillTabla(String valorBusqueda, String criterioBusqueda){
@@ -298,7 +348,10 @@ public class InventarioView extends JFrame {
                     String peso = productosJTable.getModel().getValueAt(row, 7).toString().trim();
                     Producto productoEditable = new Producto(ID, ean, descripcion, precio, cantidad, areaID, plu, peso);
 
-                    ventanaEliminar = new VentanaEliminar(servicio, productoEditable);
+                    if(debeEditar(productoEditable))
+                        ventanaEliminar = new VentanaEliminar(servicio, productoEditable);
+                    else
+                        JOptionPane.showMessageDialog(panelPrincipal, "Usted no posee los privilegios para editar este producto,\n ya que se encuentra en otra area");
                 }else if(row > 1)
                     JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar solo un producto de la tabla");
                 else

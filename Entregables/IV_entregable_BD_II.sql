@@ -148,6 +148,14 @@ grant select on dba_role_privs to gerente_mercancias;
 grant select on dba_role_privs to gerente_frescos;
 grant select on dba_role_privs to gerente_general;
 grant select on dba_role_privs to sistemas;
+
+grant execute on UTL_MATCH to cajero;
+grant execute on UTL_MATCH to gerente_abarrotes;
+grant execute on UTL_MATCH to gerente_cuidado_personal;
+grant execute on UTL_MATCH to gerente_mercancias;
+grant execute on UTL_MATCH to gerente_frescos;
+grant execute on UTL_MATCH to gerente_general;
+grant execute on UTL_MATCH to sistemas;
  
 PROMPT Asignacion de permisos generales para cada rol
 grant connect, resource to cajero;

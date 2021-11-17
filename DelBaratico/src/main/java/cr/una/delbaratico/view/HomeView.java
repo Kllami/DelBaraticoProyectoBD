@@ -61,6 +61,15 @@ public class HomeView extends JFrame {
         this.inventarioViewButton.setBackground(color);
         this.inventarioViewButton.setText("Modulo de Inventario");
         this.inventarioViewButton.setOpaque(true);
+
+        this.limitarAplicarPrivilegios();
+    }
+
+    public void limitarAplicarPrivilegios(){
+        if(this.servicio.getUsuarioActual().getRol().equals("CAJERO")) {
+            this.bitacorasViewButton.setEnabled(false);
+            this.bitacorasViewButton.setVisible(false);
+        }
     }
 
     public void iniciarListeners(){
