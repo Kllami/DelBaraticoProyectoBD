@@ -149,12 +149,12 @@ grant select on dba_role_privs to gerente_frescos;
 grant select on dba_role_privs to gerente_general;
 grant select on dba_role_privs to sistemas;
 
-grant select on factura to gerente_abarrotes;
-grant select on factura to gerente_cuidado_personal;
-grant select on factura to gerente_mercancias;
-grant select on factura to gerente_frescos;
-grant select on factura to gerente_general;
-grant select on factura to sistemas;
+grant select on system.factura to gerente_abarrotes;
+grant select on system.factura to gerente_cuidado_personal;
+grant select on system.factura to gerente_mercancias;
+grant select on system.factura to gerente_frescos;
+grant select on system.factura to gerente_general;
+grant select on system.factura to sistemas;
 
 grant select on dba_audit_object to gerente_general;
 grant select on dba_audit_object to sistemas;
