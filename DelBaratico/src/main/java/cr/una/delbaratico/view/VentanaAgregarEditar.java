@@ -469,6 +469,7 @@ public class VentanaAgregarEditar extends JFrame{
         });
     }
 
+
     public void agregarProducto(String ean, String descripcion, String precio, String cantidad, String areaID, String plu, String peso, String mensajeIntroduzca){
         if (String.valueOf(tipoProdComboBox.getSelectedItem()).equals("Fresco")) {
             if (verificarValoresCorrectosFresco(ean, descripcion, precio, plu, peso, mensajeIntroduzca)){
@@ -478,7 +479,11 @@ public class VentanaAgregarEditar extends JFrame{
                 else {
                     fresco = new Fresco(-1, Long.valueOf(plu), Double.valueOf(peso), Long.valueOf(ean),
                             descripcion, Double.valueOf(precio));
-                    if (servicio.addFresco(fresco) > 0) { // Add Fresco
+                    if(Double.valueOf(peso)<0)
+                        JOptionPane.showMessageDialog(panelPrincipal, "El peso no puede ser negativo");
+                    else if(Double.valueOf(peso)==0)
+                        JOptionPane.showMessageDialog(panelPrincipal, "El peso no puede ser cero");
+                    else if (servicio.addFresco(fresco) > 0) { // Add Fresco
                         tipoProdComboBox.setSelectedItem("Seleccione...");
                         JOptionPane.showMessageDialog(panelPrincipal, "Producto agregado");
                         dispose();
@@ -493,6 +498,10 @@ public class VentanaAgregarEditar extends JFrame{
                 else {
                     seco = new Seco(-1, Long.valueOf(ean), descripcion, Double.valueOf(precio),
                             Long.valueOf(cantidad), Long.valueOf(areaID));
+                    if(Long.valueOf(cantidad)<0)
+                        JOptionPane.showMessageDialog(panelPrincipal, "La cantidad no puede ser negativa");
+                    else if(Long.valueOf(cantidad)==0)
+                        JOptionPane.showMessageDialog(panelPrincipal, "La cantidad no puede ser negativa");
                     if (servicio.addSeco(seco) > 0) { // Add Seco
                         tipoProdComboBox.setSelectedItem("Seleccione...");
                         JOptionPane.showMessageDialog(panelPrincipal, "Producto agregado");
@@ -504,6 +513,16 @@ public class VentanaAgregarEditar extends JFrame{
         }else{
             JOptionPane.showMessageDialog(panelPrincipal, "Debe especificar el tipo del producto");
         }
+    }
+
+    private boolean esGerenteNoGeneral() {
+        boolean result = false;
+        if(this.servicio.getUsuarioActual().getRol().equals("GERENTE_CUIDADO_PERSONAL") ||
+                this.servicio.getUsuarioActual().getRol().equals("GERENTE_MERCANCIAS") ||
+                this.servicio.getUsuarioActual().getRol().equals("GERENTE_FRESCOS") ||
+                this.servicio.getUsuarioActual().getRol().equals("GERENTE_ABARROTES"))
+            result = true;
+        return result;
     }
 
     public boolean editarCodigosCorrectosFresco(Producto producto, String ean, String plu){
@@ -534,7 +553,18 @@ public class VentanaAgregarEditar extends JFrame{
                 else {
                     fresco = new Fresco(Long.valueOf(this.productoEditable.getID()), Long.valueOf(plu), Double.valueOf(peso), Long.valueOf(ean),
                             descripcion, Double.valueOf(precio));
-                    if(servicio.updateFresco(fresco) > 0) {
+
+                    if(Double.valueOf(peso)<0)
+                        JOptionPane.showMessageDialog(panelPrincipal, "El peso no puede ser negativo");
+                    else if(Double.valueOf(peso)==0 && esGerenteNoGeneral())
+                        JOptionPane.showMessageDialog(panelPrincipal, "Usted no tiene privilegios para eliminar un producto");
+                    else if(!esGerenteNoGeneral()){
+                        if(this.servicio.eliminarFresco(Long.valueOf(fresco.getIdFresco())) == 0)
+                            JOptionPane.showMessageDialog(this.panelPrincipal, "Hubo un problema al eliminar el producto");
+                        else
+                            JOptionPane.showMessageDialog(this.panelPrincipal, "El producto fue eliminado exitosamente");
+                    }
+                    else if(servicio.updateFresco(fresco) > 0) {
                         JOptionPane.showMessageDialog(panelPrincipal, "Producto editado");
                         dispose();
                     }else
@@ -549,7 +579,16 @@ public class VentanaAgregarEditar extends JFrame{
                     seco = new Seco(Long.valueOf(this.productoEditable.getID()), Long.valueOf(ean), descripcion, Double.valueOf(precio),
                             Long.valueOf(cantidad), Long.valueOf(areaID));
 
-                    if(servicio.updateSeco(seco) > 0) {
+                    if(Long.valueOf(cantidad)<0)
+                        JOptionPane.showMessageDialog(panelPrincipal, "La cantidad no puede ser negativa");
+                    else if(Long.valueOf(cantidad)==0 && esGerenteNoGeneral())
+                        JOptionPane.showMessageDialog(panelPrincipal, "Usted no tiene privilegios para eliminar un producto");
+                    else if(!esGerenteNoGeneral())
+                        if(this.servicio.eliminarSeco(seco) == 0)
+                            JOptionPane.showMessageDialog(this.panelPrincipal, "Hubo un problema al eliminar el producto");
+                        else
+                            JOptionPane.showMessageDialog(this.panelPrincipal, "El producto fue eliminado exitosamente");
+                    else if(servicio.updateSeco(seco) > 0) {
                         JOptionPane.showMessageDialog(panelPrincipal, "Producto editado");
                         dispose();
                     } else

@@ -216,6 +216,10 @@ grant select on system.seco to cajero;
 grant select on system.fresco to cajero;
 grant select on system.caja to cajero;
 
+grant insert on system.factura to cajero;
+grant insert on system.detalleFresco to cajero;
+grant insert on system.detalleSeco to cajero;
+
 PROMPT Asignacion de permisos para gerentes generales
 grant select, update, delete, insert on system.area to gerente_general;
 grant select, update, delete, insert on system.seco to gerente_general;

@@ -69,6 +69,12 @@ public class HomeView extends JFrame {
         if(this.servicio.getUsuarioActual().getRol().equals("CAJERO")) {
             this.bitacorasViewButton.setEnabled(false);
             this.bitacorasViewButton.setVisible(false);
+
+            this.facturasViewButton.setEnabled(false);
+            this.facturasViewButton.setVisible(false);
+        } else if(this.servicio.getUsuarioActual().getRol().contains("GERENTE")) {
+            this.bitacorasViewButton.setEnabled(false);
+            this.bitacorasViewButton.setVisible(false);
         }
     }
 

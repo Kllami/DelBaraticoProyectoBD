@@ -38,6 +38,13 @@ public class FrescoDAO {
         return jdbcUtil.executeUpdate(sql);
     }
 
+    public int updateFrescoVistaFrescos(Fresco fresco) {
+        String sql = "UPDATE system.vista_producto_frescos SET plu = %d, peso = %f, ean = %d, descripcion = '%s', precio = %f WHERE id_fresco = %d";
+        sql = String.format(sql, fresco.getPlu(), fresco.getPeso(), fresco.getEan(), fresco.getDescripcion(), fresco.getPrecio(),
+                fresco.getIdFresco());
+        return jdbcUtil.executeUpdate(sql);
+    }
+
     public int updateFresco(Fresco fresco) {
         String sql = "UPDATE system.fresco SET plu = %d, peso = %f, ean = %d, descripcion = '%s', precio = %f WHERE id_fresco = %d";
         sql = String.format(sql, fresco.getPlu(), fresco.getPeso(), fresco.getEan(), fresco.getDescripcion(), fresco.getPrecio(),
