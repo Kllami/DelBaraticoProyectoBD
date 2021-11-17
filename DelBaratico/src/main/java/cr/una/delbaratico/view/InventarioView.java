@@ -99,17 +99,17 @@ public class InventarioView extends JFrame {
 
     public boolean debeEditar(Producto productoEscogido){
         boolean result = true;
-        if(productoEscogido.getID().equals("1")){
+        if(productoEscogido.getAreaId().equals("1")){
             if(this.servicio.getUsuarioActual().getRol().equals("GERENTE_CUIDADO_PERSONAL") ||
                     this.servicio.getUsuarioActual().getRol().equals("GERENTE_MERCANCIAS") ||
                     this.servicio.getUsuarioActual().getRol().equals("GERENTE_FRESCOS"))
                 result = false;
-        }else if(productoEscogido.getID().equals("2")){
+        }else if(productoEscogido.getAreaId().equals("2")){
             if(this.servicio.getUsuarioActual().getRol().equals("GERENTE_ABARROTES") ||
                     this.servicio.getUsuarioActual().getRol().equals("GERENTE_MERCANCIAS") ||
                     this.servicio.getUsuarioActual().getRol().equals("GERENTE_FRESCOS"))
                 result = false;
-        }else if(productoEscogido.getID().equals("3")) {
+        }else if(productoEscogido.getAreaId().equals("3")) {
             if(this.servicio.getUsuarioActual().getRol().equals("GERENTE_ABARROTES") ||
                     this.servicio.getUsuarioActual().getRol().equals("GERENTE_CUIDADO_PERSONAL") ||
                     this.servicio.getUsuarioActual().getRol().equals("GERENTE_FRESCOS"))
@@ -120,6 +120,7 @@ public class InventarioView extends JFrame {
                     this.servicio.getUsuarioActual().getRol().equals("GERENTE_MERCANCIAS"))
                 result = false;
         }
+        System.out.println("productoEscogido.getPlu(): " + productoEscogido.getPlu());
         return result;
     }
 
@@ -133,7 +134,6 @@ public class InventarioView extends JFrame {
             if(secoTemp!=null)
                 secosList.add(secoTemp);
             Fresco frescoTemp = this.servicio.findFrescoById(Long.valueOf(valorBusqueda));
-            System.out.println(frescoTemp.toString());
             this.frescosList = new ArrayList<>();
             if(frescoTemp!=null)
                 this.frescosList.add(frescoTemp);
@@ -317,7 +317,10 @@ public class InventarioView extends JFrame {
                     String peso = productosJTable.getModel().getValueAt(row, 7).toString().trim();
                     Producto productoEditable = new Producto(ID, ean, descripcion, precio, cantidad, areaID, plu, peso);
 
-                    ventanaAgregarEditar = new VentanaAgregarEditar(servicio, productoEditable);
+                    if(debeEditar(productoEditable))
+                        ventanaAgregarEditar = new VentanaAgregarEditar(servicio, productoEditable);
+                    else
+                        JOptionPane.showMessageDialog(panelPrincipal, "Usted no posee los privilegios para editar este producto,\n ya que se encuentra en otra area");
                 }else if(row > 1)
                     JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar solo un producto de la tabla");
                 else
@@ -348,10 +351,8 @@ public class InventarioView extends JFrame {
                     String peso = productosJTable.getModel().getValueAt(row, 7).toString().trim();
                     Producto productoEditable = new Producto(ID, ean, descripcion, precio, cantidad, areaID, plu, peso);
 
-                    if(debeEditar(productoEditable))
-                        ventanaEliminar = new VentanaEliminar(servicio, productoEditable);
-                    else
-                        JOptionPane.showMessageDialog(panelPrincipal, "Usted no posee los privilegios para editar este producto,\n ya que se encuentra en otra area");
+                    ventanaEliminar = new VentanaEliminar(servicio, productoEditable);
+
                 }else if(row > 1)
                     JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar solo un producto de la tabla");
                 else

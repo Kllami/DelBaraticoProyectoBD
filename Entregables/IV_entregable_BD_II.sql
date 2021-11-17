@@ -233,7 +233,6 @@ grant select on system.area to gerente_cuidado_personal;
 grant select on system.area to gerente_frescos;
 grant select on system.area to gerente_mercancias;
 
-
 grant select on system.seco to gerente_abarrotes;
 grant select on system.seco to gerente_cuidado_personal;
 grant select on system.seco to gerente_frescos;
@@ -243,6 +242,21 @@ grant select on system.fresco to gerente_abarrotes;
 grant select on system.fresco to gerente_cuidado_personal;
 grant select on system.fresco to gerente_frescos;
 grant select on system.fresco to gerente_mercancias;
+
+grant update on system.area to gerente_abarrotes;
+grant update on system.area to gerente_cuidado_personal;
+grant update on system.area to gerente_frescos;
+grant update on system.area to gerente_mercancias;
+
+grant update on system.seco to gerente_abarrotes;
+grant update on system.seco to gerente_cuidado_personal;
+grant update on system.seco to gerente_frescos;
+grant update on system.seco to gerente_mercancias;
+
+grant update on system.fresco to gerente_abarrotes;
+grant update on system.fresco to gerente_cuidado_personal;
+grant update on system.fresco to gerente_frescos;
+grant update on system.fresco to gerente_mercancias;
 
 GRANT select, update on vista_producto_abarrotes to gerente_abarrotes;
 GRANT select, update on vista_producto_cuidado_personal to gerente_cuidado_personal;
