@@ -156,6 +156,13 @@ grant select on system.factura to gerente_frescos;
 grant select on system.factura to gerente_general;
 grant select on system.factura to sistemas;
 
+grant select on system.caja to gerente_abarrotes;
+grant select on system.caja to gerente_cuidado_personal;
+grant select on system.caja to gerente_mercancias;
+grant select on system.caja to gerente_frescos;
+grant select on system.caja to gerente_general;
+grant select on system.caja to sistemas;
+
 grant select on dba_audit_object to gerente_general;
 grant select on dba_audit_object to sistemas;
 
