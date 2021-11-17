@@ -149,6 +149,16 @@ grant select on dba_role_privs to gerente_frescos;
 grant select on dba_role_privs to gerente_general;
 grant select on dba_role_privs to sistemas;
 
+grant select on factura to gerente_abarrotes;
+grant select on factura to gerente_cuidado_personal;
+grant select on factura to gerente_mercancias;
+grant select on factura to gerente_frescos;
+grant select on factura to gerente_general;
+grant select on factura to sistemas;
+
+grant select on dba_audit_object to gerente_general;
+grant select on dba_audit_object to sistemas;
+
 grant execute on UTL_MATCH to cajero;
 grant execute on UTL_MATCH to gerente_abarrotes;
 grant execute on UTL_MATCH to gerente_cuidado_personal;
@@ -157,7 +167,7 @@ grant execute on UTL_MATCH to gerente_frescos;
 grant execute on UTL_MATCH to gerente_general;
 grant execute on UTL_MATCH to sistemas;
  
-PROMPT Asignacion de permisos generales para cada rol
+PROMPT Asignacion de permisos para cada rol
 grant connect, resource to cajero;
 grant create session to cajero;
 grant select on system.factura to cajero;
@@ -165,6 +175,12 @@ grant insert on system.factura to cajero;
 grant select on system.fresco to cajero;
 grant select on system.seco to cajero;
 grant create any sequence to cajero;
+grant select on system.seco to cajero;
+grant select on system.fresco to cajero;
+grant select on system.caja to cajero;
+grant insert on system.factura to cajero;
+grant insert on system.detalleFresco to cajero;
+grant insert on system.detalleSeco to cajero;
 
 grant connect, resource to gerente_abarrotes;
 grant create session to gerente_abarrotes;
@@ -210,15 +226,6 @@ grant gerente_general to david_camacho_melendez;
 
 grant sistemas to diana_quiros_ugalde;
 grant sistemas to tatiana_torres_fernandez;
-
-PROMPT Asignacion de permisos para cajeros
-grant select on system.seco to cajero;
-grant select on system.fresco to cajero;
-grant select on system.caja to cajero;
-
-grant insert on system.factura to cajero;
-grant insert on system.detalleFresco to cajero;
-grant insert on system.detalleSeco to cajero;
 
 PROMPT Asignacion de permisos para gerentes generales
 grant select, update, delete, insert on system.area to gerente_general;

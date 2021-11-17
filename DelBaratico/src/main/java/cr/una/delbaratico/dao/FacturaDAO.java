@@ -17,7 +17,7 @@ public class FacturaDAO {
 
     public Factura findById(int idFactura) throws SQLException {
         Factura factura = null;
-        String sql = "SELECT * FROM factura where id_factura = %d";
+        String sql = "SELECT * FROM system.factura where id_factura = %d";
         sql = String.format(sql, idFactura);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
@@ -36,7 +36,7 @@ public class FacturaDAO {
 
     public List<Factura> findAll() throws SQLException {
         List<Factura> facturasList = new ArrayList<>();
-        String sql = "SELECT * FROM factura";
+        String sql = "SELECT * FROM system.factura";
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         CajaDAO cajaDAO = new CajaDAO(jdbcUtil);
         while(resultSet.next()) {
