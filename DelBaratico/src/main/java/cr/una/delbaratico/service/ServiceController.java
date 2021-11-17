@@ -56,7 +56,7 @@ public class ServiceController {
         return this.modeloPrincipal.updateInventarioSeco(cantidad, idSeco);
     }
 
-    public Fresco findFrescoById(double idFresco) {
+    public Fresco findFrescoById(long idFresco) {
         return this.modeloPrincipal.findFrescoById(idFresco);
     }
 
