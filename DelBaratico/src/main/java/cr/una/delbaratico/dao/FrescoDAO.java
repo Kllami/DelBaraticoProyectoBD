@@ -15,7 +15,7 @@ public class FrescoDAO {
         this.jdbcUtil = jdbcUtil;
     }
 
-    public Fresco findById(double idFresco) throws SQLException {
+    public Fresco findById(long idFresco) throws SQLException {
         Fresco fresco = null;
         String sql = "SELECT * FROM system.fresco where id_fresco = %d";
         sql = String.format(sql, idFresco);

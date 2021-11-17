@@ -70,7 +70,7 @@ public class Model extends Observable {
         return this.secoDAO.updateInventario(cantidad, idSeco);
     }
 
-    public Fresco findFrescoById(double idFresco) {
+    public Fresco findFrescoById(long idFresco) {
         try{
             return this.frescoDAO.findById(idFresco);
         }catch (Exception e){

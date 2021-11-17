@@ -82,7 +82,8 @@ public class InventarioView extends JFrame {
             this.secosList = new ArrayList<>();
             if(secoTemp!=null)
                 secosList.add(secoTemp);
-            Fresco frescoTemp = this.servicio.findFrescoById(Double.valueOf((valorBusqueda)));
+            Fresco frescoTemp = this.servicio.findFrescoById(Long.valueOf(valorBusqueda));
+            System.out.println(frescoTemp.toString());
             this.frescosList = new ArrayList<>();
             if(frescoTemp!=null)
                 this.frescosList.add(frescoTemp);
