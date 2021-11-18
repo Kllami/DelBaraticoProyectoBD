@@ -5,6 +5,7 @@ import main.java.cr.una.delbaratico.service.ServiceController;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class LoginView extends JFrame{
     private JPanel panelPrincipal;
     private JButton iniciarSesiónButton;
