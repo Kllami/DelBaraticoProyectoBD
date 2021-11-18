@@ -53,7 +53,8 @@ public class CajaView extends JFrame {
         agregarALaListaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(secoCheckBox.isSelected() && !textField3.getText().equals("")){
+
+                if(secoCheckBox.isSelected() && !textField3.getText().equals("") && servicio.esNumero2(textField3.getText())){
                     String c = textField3.getText();
                     assert c != null;
                     int sec = Integer.parseInt(c);
@@ -77,7 +78,8 @@ public class CajaView extends JFrame {
                         JOptionPane.showMessageDialog(panel1, "Este producto no esta registrado en el sistema");
                     }
                 }
-                else if(!secoCheckBox.isSelected() && !textField3.getText().equals("")){
+                else if(!secoCheckBox.isSelected() && !textField3.getText().equals("") && servicio.esNumero2(textField3.getText())){
+                   
                     String c = textField3.getText();
                     assert c != null;
                     int sec = Integer.parseInt(c);
@@ -102,6 +104,9 @@ public class CajaView extends JFrame {
                 }
                 else if (textField3.getText().equals("")) {
                     JOptionPane.showMessageDialog(panel1, "Debe indicar el id del producto por agregar");
+                }
+                else if (!servicio.esNumero(textField3.getText())) {
+                    JOptionPane.showMessageDialog(panel1, "El id del producto debe ser un numero");
                 }
             }
         });
