@@ -6,6 +6,10 @@ public class Main {
     public static LoginView iniciarSesionView;
 
     public static void main(String[] args) {
-        iniciarSesionView = new LoginView(new ServiceController(new Model()));
+        try {
+            iniciarSesionView = new LoginView(new ServiceController(new Model()));
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
     }
 }
