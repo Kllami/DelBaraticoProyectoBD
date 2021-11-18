@@ -80,7 +80,7 @@ public class RegistroVentasView extends JFrame {
         agregarALaListaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(secoCheckBox.isSelected() && !textField3.getText().equals("")){
+                if(secoCheckBox.isSelected() && !textField3.getText().equals("") && servicio.esNumero(textField3.getText())){
                     //Deshabilitar campo de peso
                     String c = textField3.getText();
                     assert c != null;
@@ -103,7 +103,7 @@ public class RegistroVentasView extends JFrame {
                         JOptionPane.showMessageDialog(panel1, "Este producto no esta registrado en el sistema");
                     }
                 }
-                else if(!secoCheckBox.isSelected() && !textField3.getText().equals("")){
+                else if(!secoCheckBox.isSelected() && !textField3.getText().equals("") && servicio.esNumero(textField3.getText())){
                     //Deshabilitar campo de peso
                     String c = textField3.getText();
                     assert c != null;
@@ -132,6 +132,9 @@ public class RegistroVentasView extends JFrame {
                 else if (textField3.getText().equals("")) {
                     JOptionPane.showMessageDialog(panel1, "Debe indicar el id del producto por agregar");
                 }
+                else if(!servicio.esNumero(textField3.getText())) {
+                    JOptionPane.showMessageDialog(panel1, "El id del producto solo puede contener numeros");
+                }
             }
         });
 
@@ -151,7 +154,7 @@ public class RegistroVentasView extends JFrame {
         consultarPrecioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(secoCheckBox.isSelected() && !textField3.getText().equals("")){
+                if(secoCheckBox.isSelected() && !textField3.getText().equals("") && servicio.esNumero(textField3.getText())){
                     String c = textField3.getText();
                     assert c != null;
                     int sec = Integer.parseInt(c);
@@ -177,6 +180,9 @@ public class RegistroVentasView extends JFrame {
                 }
                 else if (textField3.getText().equals("")) {
                     JOptionPane.showMessageDialog(panel1, "Debe indicar el id del producto por agregar");
+                }
+                else if(!servicio.esNumero(textField3.getText())) {
+                    JOptionPane.showMessageDialog(panel1, "El id del producto solo puede contener numeros");
                 }
             }
         });
