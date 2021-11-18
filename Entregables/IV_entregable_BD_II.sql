@@ -20,6 +20,7 @@ descripcion varchar2(30) not null,
 precio float not null,
 cantidad int not null,
 area_id int not null,
+esta_eliminado NUMBER(1,0),
 constraint seco_pk primary key(id_seco),
 constraint seco_uk_ean unique(ean),
 constraint area_fk_producto foreign key(area_id) references system.area(id_area)
@@ -32,6 +33,7 @@ peso float not null,
 ean number(13,0) not null,
 descripcion varchar2(30) not null,
 precio float not null,
+esta_eliminado NUMBER(1,0),
 constraint fresco_pk primary key(id_fresco),
 constraint fresco_uk_ean unique(ean)
 );
@@ -241,10 +243,10 @@ grant select, update, delete, insert on system.fresco to gerente_general;
 
 PROMPT Asignacion de permisos para gerentes de area
 
-CREATE VIEW vista_producto_abarrotes AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM system.seco WHERE area_id = 1;
-CREATE VIEW vista_producto_cuidado_personal AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM  system.seco WHERE area_id = 2;
-CREATE VIEW vista_producto_mercancias AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id FROM  system.seco WHERE area_id = 3;
-CREATE VIEW vista_producto_frescos AS SELECT id_fresco, PLU, EAN, descripcion, peso, precio FROM  system.fresco;
+CREATE VIEW vista_producto_abarrotes AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id, esta_eliminado FROM system.seco WHERE area_id = 1;
+CREATE VIEW vista_producto_cuidado_personal AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id, esta_eliminado FROM  system.seco WHERE area_id = 2;
+CREATE VIEW vista_producto_mercancias AS SELECT id_seco, EAN, descripcion, precio, cantidad, area_id, esta_eliminado FROM  system.seco WHERE area_id = 3;
+CREATE VIEW vista_producto_frescos AS SELECT id_fresco, PLU, EAN, descripcion, peso, precio, esta_eliminado FROM  system.fresco;
 
 grant select on system.area to gerente_abarrotes;
 grant select on system.area to gerente_cuidado_personal;
@@ -299,8 +301,8 @@ fecha date not null,
 constraint auditoria_pk primary key(id_auditoria)
 );
 
-PROMPT asignacion de permisos de seleccion al rol de sistemas
-PROMPT son los unicos con permiso de consulta a estas tablas
+PROMPT Asignacion de permisos de seleccion al rol de sistemas,
+PROMPT estos son los unicos con permiso de consulta a estas tablas
 
 grant select on system.auditoria to sistemas;
 --grant select on system.venta to sistemas;
@@ -446,18 +448,18 @@ insert into system.area(descripcion) values ('Mercancias');
 PROMPT SECOS
 --------------------------------------------------------------------------------------------------------------------------------------
 PROMPT Abarrotes
-insert into system.seco(ean, descripcion, precio, cantidad, area_id) values (1234567895246, 'Arroz', 1800, 10, 1);
-insert into system.seco(ean, descripcion, precio, cantidad, area_id) values (1234567745246, 'Frijol', 950, 10, 1);
+insert into system.seco(ean, descripcion, precio, cantidad, area_id, esta_eliminado) values (1234567895246, 'Arroz', 1800, 10, 1, 0);
+insert into system.seco(ean, descripcion, precio, cantidad, area_id, esta_eliminado) values (1234567745246, 'Frijol', 950, 10, 1, 0);
 PROMPT Cuidado personal
-insert into system.seco(ean, descripcion, precio, cantidad, area_id) values (1238527745246, 'Shampoo', 4850, 80, 2);
-insert into system.seco(ean, descripcion, precio, cantidad, area_id) values (1232587745246, 'Protex Avena', 1340, 35, 2);
+insert into system.seco(ean, descripcion, precio, cantidad, area_id, esta_eliminado) values (1238527745246, 'Shampoo', 4850, 80, 2, 0);
+insert into system.seco(ean, descripcion, precio, cantidad, area_id, esta_eliminado) values (1232587745246, 'Protex Avena', 1340, 35, 2, 0);
 PROMPT Mercancias
-insert into system.seco(ean, descripcion, precio, cantidad, area_id) values (1238527789646, 'Silla metal', 12500, 5, 3);
-insert into system.seco(ean, descripcion, precio, cantidad, area_id) values (1232587745123, 'Basurero', 3540, 10, 3);
+insert into system.seco(ean, descripcion, precio, cantidad, area_id, esta_eliminado) values (1238527789646, 'Silla metal', 12500, 5, 3, 0);
+insert into system.seco(ean, descripcion, precio, cantidad, area_id, esta_eliminado) values (1232587745123, 'Basurero', 3540, 10, 3, 0);
 -------------------------------------------------------------------------------------------------------------------------------------------
 PROMPT FRESCOS
-insert into system.fresco(plu, peso, ean, descripcion, precio) values (52634, 2.6, 1232784525123, 'Papaya', 950);
-insert into system.fresco(plu, peso, ean, descripcion, precio) values (52414, 3.5, 1232723625123, 'Melon', 1250);
+insert into system.fresco(plu, peso, ean, descripcion, precio, esta_eliminado) values (52634, 2.6, 1232784525123, 'Papaya', 950, 0);
+insert into system.fresco(plu, peso, ean, descripcion, precio, esta_eliminado) values (52414, 3.5, 1232723625123, 'Melon', 1250, 0);
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------------------------------------------------------------------

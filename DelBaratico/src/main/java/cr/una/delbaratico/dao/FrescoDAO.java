@@ -17,7 +17,7 @@ public class FrescoDAO {
 
     public Fresco findById(long idFresco) throws SQLException {
         Fresco fresco = null;
-        String sql = "SELECT * FROM system.fresco where id_fresco = %d";
+        String sql = "SELECT * FROM system.fresco WHERE id_fresco = %d AND esta_eliminado = 0";
         sql = String.format(sql, idFresco);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
@@ -33,20 +33,20 @@ public class FrescoDAO {
     }
 
     public int updateInventario(double peso, long idFresco) {
-        String sql = "update system.fresco set peso = " + peso + " where id_fresco = %d";
+        String sql = "UPDATE system.fresco set peso = " + peso + " WHERE id_fresco = %d AND esta_eliminado = 0";
         sql = String.format(sql, idFresco);
         return jdbcUtil.executeUpdate(sql);
     }
 
     public int updateFrescoVistaFrescos(Fresco fresco) {
-        String sql = "UPDATE system.vista_producto_frescos SET plu = %d, peso = %f, ean = %d, descripcion = '%s', precio = %f WHERE id_fresco = %d";
+        String sql = "UPDATE system.vista_producto_frescos SET plu = %d, peso = %f, ean = %d, descripcion = '%s', precio = %f WHERE id_fresco = %d AND esta_eliminado = 0";
         sql = String.format(sql, fresco.getPlu(), fresco.getPeso(), fresco.getEan(), fresco.getDescripcion(), fresco.getPrecio(),
                 fresco.getIdFresco());
         return jdbcUtil.executeUpdate(sql);
     }
 
     public int updateFresco(Fresco fresco) {
-        String sql = "UPDATE system.fresco SET plu = %d, peso = %f, ean = %d, descripcion = '%s', precio = %f WHERE id_fresco = %d";
+        String sql = "UPDATE system.fresco SET plu = %d, peso = %f, ean = %d, descripcion = '%s', precio = %f WHERE id_fresco = %d AND esta_eliminado = 0";
         sql = String.format(sql, fresco.getPlu(), fresco.getPeso(), fresco.getEan(), fresco.getDescripcion(), fresco.getPrecio(),
                 fresco.getIdFresco());
         return jdbcUtil.executeUpdate(sql);
@@ -54,7 +54,7 @@ public class FrescoDAO {
 
     public List<Fresco> findAll() throws SQLException {
         List<Fresco> frescosList = new ArrayList<>();
-        String sql = "SELECT * FROM system.fresco";
+        String sql = "SELECT * FROM system.fresco WHERE esta_eliminado = 0";
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         while(resultSet != null && resultSet.next()) {
             Fresco fresco = new Fresco(resultSet.getLong("id_fresco"),
@@ -72,7 +72,7 @@ public class FrescoDAO {
     public List<Fresco> findSimilarPercentDesc(String desripcion) throws SQLException {
         List<Fresco> frescosList = new ArrayList<>();
         String sql = "SELECT system.fresco.*, UTL_MATCH.edit_distance_similarity('%s', system.fresco.descripcion) " +
-                "AS SIMILARITY_PERCENT FROM system.fresco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
+                "AS SIMILARITY_PERCENT FROM system.fresco WHERE esta_eliminado = 0 ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, desripcion);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
@@ -92,7 +92,7 @@ public class FrescoDAO {
     public List<Fresco> findSimilarPercentEAN(long ean) throws SQLException {
         List<Fresco> frescosList = new ArrayList<>();
         String sql = "SELECT system.fresco.*, UTL_MATCH.edit_distance_similarity(%d, system.fresco.ean) " +
-                "AS SIMILARITY_PERCENT FROM system.fresco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
+                "AS SIMILARITY_PERCENT FROM system.fresco WHERE esta_eliminado = 0 ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
@@ -112,7 +112,7 @@ public class FrescoDAO {
     public List<Fresco> findSimilarPercentPLU(long plu) throws SQLException {
         List<Fresco> frescosList = new ArrayList<>();
         String sql = "SELECT system.fresco.*, UTL_MATCH.edit_distance_similarity(%d, system.fresco.plu) " +
-                "AS SIMILARITY_PERCENT FROM system.fresco ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
+                "AS SIMILARITY_PERCENT FROM system.fresco WHERE esta_eliminado = 0 ORDER BY SIMILARITY_PERCENT DESC FETCH FIRST 10 ROWS ONLY";
         sql = String.format(sql, plu);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         AreaDAO areaDAO = new AreaDAO(jdbcUtil);
@@ -130,7 +130,7 @@ public class FrescoDAO {
     }
 
     public Fresco findByEAN(long ean) throws SQLException {
-        String sql = "SELECT * FROM system.fresco where ean = %d";
+        String sql = "SELECT * FROM system.fresco where ean = %d AND esta_eliminado = 0";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
@@ -147,7 +147,7 @@ public class FrescoDAO {
     }
 
     public Fresco findByPLU(long plu) throws SQLException {
-        String sql = "SELECT * FROM system.fresco where plu = %d";
+        String sql = "SELECT * FROM system.fresco where plu = %d AND esta_eliminado = 0";
         sql = String.format(sql, plu);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
@@ -171,7 +171,7 @@ public class FrescoDAO {
     }
 
     public int eliminarFresco(Long id) {
-        String sql = "DELETE system.fresco WHERE id_fresco = %d";
+        String sql = "UPDATE system.fresco SET esta_eliminado = 1 WHERE id_fresco = %d AND esta_eliminado = 0";
         sql = String.format(sql, id);
         return jdbcUtil.executeUpdate(sql);
     }
