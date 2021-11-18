@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class BitacorasView extends JFrame {
     private ServiceController servicio;
-    private JPanel panel1;
+    private JPanel panelPrincipal;
     private JTable table1;
     private JMenuBar menuPrincipal;
     private JMenu menuArchivo;
@@ -24,8 +24,10 @@ public class BitacorasView extends JFrame {
     public BitacorasView(ServiceController servicio, HomeView homeView) {
         this.servicio = servicio;
         this.homeView = homeView;
-        this.panel1.setPreferredSize(new Dimension(900,500));
-        this.setContentPane(panel1);
+        this.panelPrincipal.setPreferredSize(new Dimension(900,500));
+        Color color = new Color(255,204, 153);
+        this.panelPrincipal.setBackground(color);
+        this.setContentPane(panelPrincipal);
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);

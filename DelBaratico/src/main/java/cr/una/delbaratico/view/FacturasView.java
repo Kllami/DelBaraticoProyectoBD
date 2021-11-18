@@ -8,7 +8,7 @@ import java.awt.event.WindowEvent;
 
 public class FacturasView extends JFrame {
     private JTable table1;
-    private JPanel panel1;
+    private JPanel panelPrincipal;
     private ServiceController servicio;
     private JMenuBar menuPrincipal;
     private JMenu menuArchivo;
@@ -19,8 +19,10 @@ public class FacturasView extends JFrame {
         this.servicio = servicio;
         this.homeView = homeView;
         this.table1.setModel(new FacturaTableModel(servicio.listaFacturas()));
-        this.panel1.setPreferredSize(new Dimension(900,500));
-        this.setContentPane(panel1);
+        this.panelPrincipal.setPreferredSize(new Dimension(900,500));
+        Color color = new Color(153,255,204);
+        this.panelPrincipal.setBackground(color);
+        this.setContentPane(panelPrincipal);
         this.setTitle("Modulo de Facturas");
         this.pack();
         this.setLocationRelativeTo(null);
