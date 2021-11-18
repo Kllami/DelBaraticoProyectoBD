@@ -23,6 +23,7 @@ public class RegistroVentasView extends JFrame {
     private JButton consultarPrecioButton;
     public JTextField pesoTextField;
     private JLabel pesoJLabel;
+    private JPanel panel2;
     private JButton consultarButton;
     private Caja caja;
     private List preciosList;
@@ -35,6 +36,9 @@ public class RegistroVentasView extends JFrame {
         this.servicio = servicio;
         this.homeView = homeView;
         //this.panel1.setPreferredSize(new Dimension(900,500));
+        Color color = new Color(255,255,153);
+        this.panel2.setVisible(true);
+        this.panel2.setBackground(color);
         this.setContentPane(panel1);
         this.pack();
         this.setVisible(true);

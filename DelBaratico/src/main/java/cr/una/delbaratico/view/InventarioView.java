@@ -47,6 +47,8 @@ public class InventarioView extends JFrame {
     }
 
     public void initComponents(){
+        Color color = new Color(153,153, 255);
+        this.panelPrincipal.setBackground(color);
         this.setContentPane(panelPrincipal);
         this.pack();
         this.setVisible(true);
@@ -60,7 +62,7 @@ public class InventarioView extends JFrame {
         this.buscarJComboBox.setRequestFocusEnabled(true);
         this.buscarJComboBox.requestFocus();
 
-        Color color = new Color(102,255,178);
+        color = new Color(102,255,178);
         this.agregarButton.setBackground(color);
         this.agregarButton.setOpaque(true);
 
