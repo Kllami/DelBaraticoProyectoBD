@@ -8,7 +8,7 @@ import java.awt.*;
 
 
 public class HomeView extends JFrame {
-    private JButton cajaViewButton;
+    private JButton registroVentasViewButton;
     private JPanel panelPrincipal;
     private JButton facturasViewButton;
     private JButton bitacorasViewButton;
@@ -43,9 +43,9 @@ public class HomeView extends JFrame {
         this.setResizable(false);
 
         Color color = new Color(255,255,153);
-        this.cajaViewButton.setBackground(color);
-        this.cajaViewButton.setText("Modulo de Registro de Ventas");
-        this.cajaViewButton.setOpaque(true);
+        this.registroVentasViewButton.setBackground(color);
+        this.registroVentasViewButton.setText("Modulo de Registro de Ventas");
+        this.registroVentasViewButton.setOpaque(true);
 
         color = new Color(153,255,204);
         this.facturasViewButton.setBackground(color);
@@ -75,6 +75,9 @@ public class HomeView extends JFrame {
         } else if(this.servicio.getUsuarioActual().getRol().contains("GERENTE")) {
             this.bitacorasViewButton.setEnabled(false);
             this.bitacorasViewButton.setVisible(false);
+
+            this.registroVentasViewButton.setEnabled(false);
+            this.registroVentasViewButton.setVisible(false);
         }
     }
 
@@ -93,7 +96,7 @@ public class HomeView extends JFrame {
             }
         });
 
-        this.cajaViewButton.addActionListener(e -> {
+        this.registroVentasViewButton.addActionListener(e -> {
             registroVentasView = new RegistroVentasView(servicio, homeView);
         });
 
