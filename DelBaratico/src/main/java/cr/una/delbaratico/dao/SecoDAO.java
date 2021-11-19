@@ -117,7 +117,7 @@ public class SecoDAO {
     }
 
     public Seco findByEAN(long ean) throws SQLException {
-        String sql = "SELECT * FROM system.seco WHERE ean = %d WHERE esta_eliminado = 0";
+        String sql = "SELECT * FROM system.seco WHERE ean = %d AND esta_eliminado = 0";
         sql = String.format(sql, ean);
         ResultSet resultSet = jdbcUtil.executeQuery(sql);
         if(resultSet.next()) {
