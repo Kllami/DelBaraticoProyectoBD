@@ -14,6 +14,17 @@ public class JdbcUtil {
     private static Statement statement;
     private static ResultSet resultSet;
 
+    public static Connection getDBConnection() {
+        String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+        try {
+            Class.forName(DB_DRIVER);
+            return DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+        } catch (Exception e) {
+            System.err.println(" - " + methodName + " - " + e.getMessage());
+        }
+        return null;
+    }
+
     private JdbcUtil(String DB_USER, String DB_PASSWORD) {
         String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
 
@@ -54,17 +65,6 @@ public class JdbcUtil {
         } catch (Exception e) {
             System.err.println(methodName + " - " + e.getMessage());
         }
-    }
-
-    public static Connection getDBConnection() {
-        String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
-        try {
-            Class.forName(DB_DRIVER);
-            return DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-        } catch (Exception e) {
-            System.err.println(" - " + methodName + " - " + e.getMessage());
-        }
-        return null;
     }
 
     public static void closeConnection() {

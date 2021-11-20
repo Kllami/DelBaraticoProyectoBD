@@ -4,6 +4,8 @@ import main.java.cr.una.delbaratico.service.ServiceController;
 import main.java.cr.una.delbaratico.dao.AuditoriaDAO;
 import main.java.cr.una.delbaratico.model.Auditoria;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
@@ -46,6 +48,13 @@ public class BitacorasView extends JFrame {
             //windowClosing METHOD WILL BE CALLED WHEN A JFRAME IS CLOSING
             public void windowClosing(WindowEvent evt) {
                 homeView.setVisible(true);
+            }
+        });
+        this.itemSalir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                System.exit(0);
             }
         });
     }

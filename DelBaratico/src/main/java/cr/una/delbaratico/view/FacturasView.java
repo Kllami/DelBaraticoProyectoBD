@@ -3,6 +3,8 @@ package main.java.cr.una.delbaratico.view;
 import main.java.cr.una.delbaratico.service.ServiceController;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -41,6 +43,13 @@ public class FacturasView extends JFrame {
             //windowClosing METHOD WILL BE CALLED WHEN A JFRAME IS CLOSING
             public void windowClosing(WindowEvent evt) {
                 homeView.setVisible(true);
+            }
+        });
+        this.itemSalir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                System.exit(0);
             }
         });
     }

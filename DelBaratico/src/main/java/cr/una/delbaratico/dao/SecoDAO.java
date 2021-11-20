@@ -134,8 +134,8 @@ public class SecoDAO {
     }
 
     public int add(Seco seco) {
-        String sql = "INSERT INTO system.seco(ean, descripcion, precio, cantidad, area_id) VALUES " +
-                "(%d, '%s', %f, %d, %d)";
+        String sql = "INSERT INTO system.seco(ean, descripcion, precio, cantidad, area_id, esta_eliminado) VALUES " +
+                "(%d, '%s', %f, %d, %d, 0)";
         sql = String.format(sql, seco.getEan(), seco.getDescripcion(), seco.getPrecio(), seco.getCantidad(), seco.getAreaId());
         return jdbcUtil.executeUpdate(sql);
     }

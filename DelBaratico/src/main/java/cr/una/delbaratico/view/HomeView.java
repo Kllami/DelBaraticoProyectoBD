@@ -85,6 +85,7 @@ public class HomeView extends JFrame {
         this.itemSalir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 System.exit(0);
             }
         });
