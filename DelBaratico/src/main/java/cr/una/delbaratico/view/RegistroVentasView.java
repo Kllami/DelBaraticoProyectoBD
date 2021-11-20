@@ -4,6 +4,7 @@ import main.java.cr.una.delbaratico.service.ServiceController;
 import main.java.cr.una.delbaratico.model.*;
 
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -24,9 +25,12 @@ public class RegistroVentasView extends JFrame {
     public JTextField pesoTextField;
     private JLabel pesoJLabel;
     private JPanel panel2;
+    private JButton visualizarCarritoDeComprasButton;
     private JButton consultarButton;
     private Caja caja;
-    private List preciosList;
+    private List preciosList = new ArrayList<>();;
+    private List<Seco> secosList = new ArrayList<>();;
+    private List<Fresco> frescosList = new ArrayList<>();;
     private JMenuBar menuPrincipal;
     private JMenu menuArchivo;
     private JMenuItem itemSalir;
@@ -48,6 +52,28 @@ public class RegistroVentasView extends JFrame {
         rellenarComboBox();
         this.ajustarMenus();
         this.agregarListeners();
+        visualizarCarritoDeComprasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String res = carritoToString(secosList, frescosList);
+                JOptionPane.showMessageDialog(panel1, res);
+            }
+        });
+    }
+
+    String carritoToString(List<Seco> secos, List<Fresco> frescos){
+        String result = "";
+        for(int index = 0; index < secos.size(); index++){
+            result = "\n" + result + secos.get(index).getDescripcion() + " Cantidad: 1" + "\n";
+
+        }
+
+        for(int index = 0; index < frescos.size(); index++){
+            result = "\n" + result + frescos.get(index).getDescripcion() + " Peso: 1" + "\n";
+
+        }
+        return result;
+
     }
 
     public void ajustarMenus(){
@@ -94,21 +120,18 @@ public class RegistroVentasView extends JFrame {
                     assert c != null;
                     int sec = Integer.parseInt(c);
                     Seco seco;
-                    try {
 
-                        seco = servicio.findSecoById(sec);
-                        if(seco.getCantidad() > 0){
-                            preciosList.add(seco.getPrecio());
-                            servicio.updateInventarioSeco(seco.getCantidad() - 1, seco.getIdSeco());
-                            secoCheckBox.setSelected(false);
-                            textField3.setText("");
-                        }
-                        else
-                        {
-                            JOptionPane.showMessageDialog(panel1 , "No hay mas productos de este tipo en inventario");
-                        }
-                    } catch (NullPointerException nu){
-                        JOptionPane.showMessageDialog(panel1, "Este producto no esta registrado en el sistema");
+                    seco = servicio.findSecoById(sec);
+                    if(seco.getCantidad() > 0){
+                        preciosList.add(seco.getPrecio());
+                        secosList.add(seco);
+                        servicio.updateInventarioSeco(seco.getCantidad() - 1, seco.getIdSeco());
+                        secoCheckBox.setSelected(false);
+                        textField3.setText("");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(panel1 , "No hay mas productos de este tipo en inventario");
                     }
                 }
                 else if(!secoCheckBox.isSelected() && !textField3.getText().equals("") && servicio.esNumero(textField3.getText())){
@@ -124,6 +147,7 @@ public class RegistroVentasView extends JFrame {
                             pesoFresco = Double.parseDouble(pesoTextField.getText());
                             if(fresco.getPeso() > 0) {
                                 preciosList.add(fresco.getPrecio());
+                                frescosList.add(fresco);
                                 servicio.updateInventarioFresco(fresco.getPeso() - pesoFresco, fresco.getIdFresco());
                                 secoCheckBox.setSelected(false);
                                 textField3.setText("");
