@@ -19,7 +19,7 @@ public class RegistroVentasView extends JFrame {
     private JCheckBox secoCheckBox;
     private JTextField textField3;
     private JButton agregarALaListaButton;
-    private JButton salirButton;
+    private JButton atrasButton;
     private JButton consultarPrecioButton;
     public JTextField pesoTextField;
     private JLabel pesoJLabel;
@@ -65,6 +65,14 @@ public class RegistroVentasView extends JFrame {
     }
 
     public void agregarListeners(){
+        this.itemSalir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                System.exit(0);
+            }
+        });
+
         secoCheckBox.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -143,7 +151,7 @@ public class RegistroVentasView extends JFrame {
             registrarVenta();
         });
 
-        salirButton.addActionListener(new ActionListener() {
+        atrasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -231,5 +239,9 @@ public class RegistroVentasView extends JFrame {
         else{
             JOptionPane.showMessageDialog(panel1, "Debe ingresar al menos un artículo");
         }
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

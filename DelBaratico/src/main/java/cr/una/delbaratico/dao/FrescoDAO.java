@@ -164,8 +164,8 @@ public class FrescoDAO {
     }
 
     public int add(Fresco fresco) {
-        String sql = "INSERT INTO system.fresco(plu, peso, ean, descripcion, precio) VALUES " +
-                "(%d, %f, %d, '%s', %f)";
+        String sql = "INSERT INTO system.fresco(plu, peso, ean, descripcion, precio, esta_eliminado) VALUES " +
+                "(%d, %f, %d, '%s', %f, 0)";
         sql = String.format(sql, fresco.getPlu(), fresco.getPeso(), fresco.getEan(), fresco.getDescripcion(), fresco.getPrecio());
         return jdbcUtil.executeUpdate(sql);
     }
